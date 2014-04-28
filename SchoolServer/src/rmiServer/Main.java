@@ -4,11 +4,11 @@
  */
 package rmiServer;
 
-import dataBaseFunctions.DataBase;
-import implementation.ServerFunctions;
+import entityClasses.Asignatura;
 import java.rmi.RemoteException;
-import java.rmi.registry.Registry;
-import java.sql.ResultSet;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import sessionBeans.*;
 
 /**
  *
@@ -20,27 +20,11 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws RemoteException {
-        DataBase sql = new DataBase("botis_sd","botis_labsd","pelaorico","botis.cl");
-        sql.startConnection();
-        sql.run("INSERT INTO `USUARIO` (`usuario`, `password`) VALUES ('alfredoavalos', 'asdfasdf');");
-        ResultSet res = sql.query("Select * from USUARIO");
-        try{
-        while (res.next())
-{
-   System.out.println("usuario="+res.getObject("usuario")+", pass="+res.getObject("password"));
-}
-res.close();
-        }catch(Exception e){
-            System.out.println(":(");
-        }
-        sql.disconnect();
-        
-        Registry registry;
-        registry = connection.getRegistry();
-        ServerFunctions sf = new ServerFunctions();
-        registry.rebind("IMP", sf);
-        System.out.println("conectado...");
-        //connection.stop();
-        // TODO code application logic here
-    }
+        Asignatura calculo = new Asignatura();
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
+        AsignaturaJpaController calculoController = new AsignaturaJpaController(factory);
+        calculo.setNombre("Calculo");
+        calculo.setRut("17032");
+        calculoController.create(calculo);
+       }
 }

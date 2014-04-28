@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-  <persistence-unit name="botis_sd?zeroDateTimeBehavior=convertToNullPU" transaction-type="RESOURCE_LOCAL">
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="SchoolServerPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>viewServer.Asistencia</class>
+    <class>dataBaseFunctions.Anotacion</class>
+    <class>dataBaseFunctions.AsistenciaAsignatura</class>
+    <class>dataBaseFunctions.Asignatura</class>
+    <class>dataBaseFunctions.Prueba</class>
+    <class>dataBaseFunctions.Mensaje</class>
+    <class>dataBaseFunctions.Usuario</class>
+    <class>entityClasses.Asistencia</class>
+    <class>entityClasses.Anotacion</class>
+    <class>entityClasses.Prueba</class>
+    <class>entityClasses.AsistenciaAsignatura</class>
+    <class>entityClasses.Usuario</class>
+    <class>entityClasses.Mensaje</class>
+    <class>entityClasses.Asignatura</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://botis.cl:3306/botis_sd?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.password" value="pelaorico"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="botis_labsd"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="pelaorico"/>
     </properties>
   </persistence-unit>
 </persistence>
