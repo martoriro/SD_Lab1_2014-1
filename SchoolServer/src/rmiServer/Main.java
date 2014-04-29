@@ -4,6 +4,7 @@
  */
 package rmiServer;
 
+import entityClasses.Anotacion;
 import entityClasses.Asignatura;
 import entityClasses.Prueba;
 import java.rmi.RemoteException;
@@ -32,6 +33,7 @@ public class Main {
         */
         
         //Funcionalidad ver notas del alumno
+        System.out.println("FUNCIONALIDAD QUE MUESTRA TODAS LAS NOTAS");
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         PruebaJpaController notasController = new PruebaJpaController(factory);
         
@@ -41,5 +43,29 @@ public class Main {
             System.out.println("Id asignatura: " + pruebas.get(i).getIdAsignatura() + ", Nota: " + pruebas.get(i).getNota());
         }
         
+        //Funcionalidad Notas del alumno por asignatura
+        System.out.println("FUNCIONALIDAD QUE FILTRA POR ALUMNO Y ASIGNATURA");
+        System.out.println("CASO RAMO 2 Y NOTAS");
+        List<Prueba> PruebasAsignaturas;
+        PruebasAsignaturas = notasController.showNotesForAsignature("17409487k", 2);
+        for (int i = 0; i < PruebasAsignaturas.size(); i++) {
+            System.out.println("Id asignatura: " + PruebasAsignaturas.get(i).getIdAsignatura() + ", Nota: " + PruebasAsignaturas.get(i).getNota());
+        }
+        System.out.println("CASO RAMO 4 Y NOTAS");
+        PruebasAsignaturas = notasController.showNotesForAsignature("17409487k", 4);
+        for (int i = 0; i < PruebasAsignaturas.size(); i++) {
+            System.out.println("Id asignatura: " + PruebasAsignaturas.get(i).getIdAsignatura() + ", Nota: " + PruebasAsignaturas.get(i).getNota());
+        }
+        
+        //Funcionalidad que permite al usuario aluimno ver sus anotaciones
+         //Funcionalidad que permite al usuario aluimno ver sus anotaciones
+        System.out.println("FUNCIONALIDAD QUE PERMITE AL ALUMNO VER SUS ANOTACIONES");
+        AnotacionJpaController anotacionesController = new AnotacionJpaController(factory);
+        
+        List<Anotacion> anotaciones;
+        anotaciones = anotacionesController.showAnotations("17409487k");
+        for (int i = 0; i < anotaciones.size(); i++) {
+            System.out.println("Id anotacion: " + anotaciones.get(i).getIdAnotacion()+ ", Contenido: " + anotaciones.get(i).getContenido());
+        }
        }
 }

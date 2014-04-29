@@ -32,11 +32,24 @@ public class PruebaJpaController implements Serializable {
         return emf.createEntityManager();
     }
     
+    //Funcionalidades
+    //Busca por alumno
     public List<Prueba> showNotes(String rutAlumno){
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Prueba.findByRut").
                 setParameter("rut", rutAlumno);
+        
+        return query.getResultList();
+    }
+    
+    //Busca por alumno y asignatura
+    public List<Prueba> showNotesForAsignature(String rutAlumno, int idAsignatura){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByRutAndIdAsignatura").
+                setParameter("rut", rutAlumno).
+                setParameter("idAsignatura", idAsignatura);
         
         return query.getResultList();
     }
