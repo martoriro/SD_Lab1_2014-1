@@ -31,6 +31,15 @@ public class PruebaJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+    
+    public List<Prueba> showNotes(String rutAlumno){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByRut").
+                setParameter("rut", rutAlumno);
+        
+        return query.getResultList();
+    }
 
     public void create(Prueba prueba) {
         EntityManager em = null;
