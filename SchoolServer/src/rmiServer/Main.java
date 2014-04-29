@@ -8,6 +8,7 @@ import entityClasses.Anotacion;
 import entityClasses.Asignatura;
 import entityClasses.Prueba;
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -35,10 +36,10 @@ public class Main {
         //Funcionalidad ver notas del alumno
         System.out.println("FUNCIONALIDAD QUE MUESTRA TODAS LAS NOTAS");
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
-        PruebaJpaController notasController = new PruebaJpaController(factory);
+        PruebaJpaController pruebasController = new PruebaJpaController(factory);
         
         List<Prueba> pruebas;
-        pruebas = notasController.showNotes("17409487k");
+        pruebas = pruebasController.showNotes("17409487k");
         for (int i = 0; i < pruebas.size(); i++) {
             System.out.println("Id asignatura: " + pruebas.get(i).getIdAsignatura() + ", Nota: " + pruebas.get(i).getNota());
         }
@@ -47,12 +48,12 @@ public class Main {
         System.out.println("FUNCIONALIDAD QUE FILTRA POR ALUMNO Y ASIGNATURA");
         System.out.println("CASO RAMO 2 Y NOTAS");
         List<Prueba> PruebasAsignaturas;
-        PruebasAsignaturas = notasController.showNotesForAsignature("17409487k", 2);
+        PruebasAsignaturas = pruebasController.showNotesForAsignature("17409487k", 2);
         for (int i = 0; i < PruebasAsignaturas.size(); i++) {
             System.out.println("Id asignatura: " + PruebasAsignaturas.get(i).getIdAsignatura() + ", Nota: " + PruebasAsignaturas.get(i).getNota());
         }
         System.out.println("CASO RAMO 4 Y NOTAS");
-        PruebasAsignaturas = notasController.showNotesForAsignature("17409487k", 4);
+        PruebasAsignaturas = pruebasController.showNotesForAsignature("17409487k", 4);
         for (int i = 0; i < PruebasAsignaturas.size(); i++) {
             System.out.println("Id asignatura: " + PruebasAsignaturas.get(i).getIdAsignatura() + ", Nota: " + PruebasAsignaturas.get(i).getNota());
         }
@@ -67,5 +68,13 @@ public class Main {
         for (int i = 0; i < anotaciones.size(); i++) {
             System.out.println("Id anotacion: " + anotaciones.get(i).getIdAnotacion()+ ", Contenido: " + anotaciones.get(i).getContenido());
         }
+        
+        //Funcionalidad para agregar notas de los alumnos
+        System.out.println("FUNCIONALIDAD QUE PERMITE INSETAR NOTAS DE LOS ALUMNOS");
+        
+        Prueba nuevaPrueba = new Prueba(Integer.SIZE, 2, "17409487k", null);
+        nuevaPrueba.setNota(33);
+        //pruebasController.create(nuevaPrueba);
+        
        }
 }
