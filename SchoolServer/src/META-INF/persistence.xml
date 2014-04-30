@@ -9,6 +9,13 @@
     <class>entityClasses.Mensaje</class>
     <class>entityClasses.Prueba</class>
     <class>entityClasses.Usuario</class>
+    <class>entityClass.Anotacion</class>
+    <class>entityClass.Asistencia</class>
+    <class>entityClass.Mensaje</class>
+    <class>entityClass.Prueba</class>
+    <class>entityClass.Usuario</class>
+    <class>entityClass.Asignatura</class>
+    <class>entityClass.UsuarioAsignatura</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://botis.cl:3306/botis_sd?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="pelaorico"/>

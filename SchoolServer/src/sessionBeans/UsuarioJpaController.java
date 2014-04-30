@@ -6,7 +6,7 @@
 
 package sessionBeans;
 
-import entityClasses.Usuario;
+import entityClass.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,7 +20,7 @@ import sessionBeans.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 public class UsuarioJpaController implements Serializable {
 

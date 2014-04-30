@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package entityClasses;
+package entityClass;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 @Entity
 @Table(name = "PRUEBA")
@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Prueba.findByIdPrueba", query = "SELECT p FROM Prueba p WHERE p.idPrueba = :idPrueba"),
     @NamedQuery(name = "Prueba.findByIdAsignatura", query = "SELECT p FROM Prueba p WHERE p.idAsignatura = :idAsignatura"),
     @NamedQuery(name = "Prueba.findByRut", query = "SELECT p FROM Prueba p WHERE p.rut = :rut"),
-    @NamedQuery(name = "Prueba.findByRutAndIdAsignatura", query = "SELECT p FROM Prueba p WHERE p.rut = :rut and p.idAsignatura = :idAsignatura"),
     @NamedQuery(name = "Prueba.findByNota", query = "SELECT p FROM Prueba p WHERE p.nota = :nota"),
     @NamedQuery(name = "Prueba.findByFecha", query = "SELECT p FROM Prueba p WHERE p.fecha = :fecha")})
 public class Prueba implements Serializable {
@@ -43,17 +42,14 @@ public class Prueba implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_PRUEBA")
     private Integer idPrueba;
-    @Basic(optional = false)
     @Column(name = "ID_ASIGNATURA")
-    private int idAsignatura;
-    @Basic(optional = false)
+    private Integer idAsignatura;
     @Column(name = "RUT")
     private String rut;
     @Column(name = "NOTA")
     private Integer nota;
-    @Basic(optional = false)
     @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
 
     public Prueba() {
@@ -61,13 +57,6 @@ public class Prueba implements Serializable {
 
     public Prueba(Integer idPrueba) {
         this.idPrueba = idPrueba;
-    }
-
-    public Prueba(Integer idPrueba, int idAsignatura, String rut, Date fecha) {
-        this.idPrueba = idPrueba;
-        this.idAsignatura = idAsignatura;
-        this.rut = rut;
-        this.fecha = fecha;
     }
 
     public Integer getIdPrueba() {
@@ -78,11 +67,11 @@ public class Prueba implements Serializable {
         this.idPrueba = idPrueba;
     }
 
-    public int getIdAsignatura() {
+    public Integer getIdAsignatura() {
         return idAsignatura;
     }
 
-    public void setIdAsignatura(int idAsignatura) {
+    public void setIdAsignatura(Integer idAsignatura) {
         this.idAsignatura = idAsignatura;
     }
 
@@ -132,7 +121,7 @@ public class Prueba implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Prueba[ idPrueba=" + idPrueba + " ]";
+        return "entityClass.Prueba[ idPrueba=" + idPrueba + " ]";
     }
     
 }

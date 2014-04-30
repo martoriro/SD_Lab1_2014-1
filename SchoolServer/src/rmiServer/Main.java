@@ -4,15 +4,15 @@
  */
 package rmiServer;
 
-import entityClasses.Anotacion;
-import entityClasses.Asignatura;
-import entityClasses.Prueba;
+import entityClass.Usuario;
+import static entityClass.Usuario_.edad;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import sessionBeans.*;
+import sessionBeans.UsuarioJpaController;
+//import sessionBeans.*;
 
 /**
  *
@@ -23,19 +23,19 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws RemoteException {
-        /*
-        Asignatura calculo = new Asignatura();
+    public static void main(String[] args) throws RemoteException, Exception {
+       
+        System.out.println("ADMINISTRADOR: CRUD USUARIOS");
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
-        AsignaturaJpaController calculoController = new AsignaturaJpaController(factory);
-        calculo.setNombre("calculo");
-        calculo.setRut("17032");
-        calculoController.create(calculo);
-        */
+        UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
         
+        Usuario nuevoUsuario = new Usuario("17409487g", "123", "Joel", 23, "alumno", "Avalos", "Pincheira");
+        //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
+
+       
         //Funcionalidad ver notas del alumno
         System.out.println("FUNCIONALIDAD QUE MUESTRA TODAS LAS NOTAS");
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
+        /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         PruebaJpaController pruebasController = new PruebaJpaController(factory);
         
         List<Prueba> pruebas;
@@ -75,6 +75,7 @@ public class Main {
         Prueba nuevaPrueba = new Prueba(Integer.SIZE, 2, "17409487k", null);
         nuevaPrueba.setNota(33);
         //pruebasController.create(nuevaPrueba);
-        
+        */
+        System.out.println("FIN");
        }
 }

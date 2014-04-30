@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package entityClasses;
+package entityClass;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,11 +18,13 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 @Entity
 @Table(name = "MENSAJE")
@@ -29,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Mensaje.findAll", query = "SELECT m FROM Mensaje m"),
     @NamedQuery(name = "Mensaje.findByIdMensaje", query = "SELECT m FROM Mensaje m WHERE m.idMensaje = :idMensaje"),
-    @NamedQuery(name = "Mensaje.findByRut", query = "SELECT m FROM Mensaje m WHERE m.rut = :rut")})
+    @NamedQuery(name = "Mensaje.findByAsunto", query = "SELECT m FROM Mensaje m WHERE m.asunto = :asunto"),
+    @NamedQuery(name = "Mensaje.findByTipo", query = "SELECT m FROM Mensaje m WHERE m.tipo = :tipo"),
+    @NamedQuery(name = "Mensaje.findByFecha", query = "SELECT m FROM Mensaje m WHERE m.fecha = :fecha")})
 public class Mensaje implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,32 +42,22 @@ public class Mensaje implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_MENSAJE")
     private Integer idMensaje;
-    @Basic(optional = false)
-    @Column(name = "RUT")
-    private String rut;
-    @Lob
-    @Column(name = "TITULO")
-    private String titulo;
+    @Column(name = "ASUNTO")
+    private String asunto;
     @Lob
     @Column(name = "CONTENIDO")
     private String contenido;
-    @Lob
-    @Column(name = "EMISOR")
-    private String emisor;
-    @Lob
-    @Column(name = "RECEPTOR")
-    private String receptor;
+    @Column(name = "TIPO")
+    private String tipo;
+    @Column(name = "FECHA")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
 
     public Mensaje() {
     }
 
     public Mensaje(Integer idMensaje) {
         this.idMensaje = idMensaje;
-    }
-
-    public Mensaje(Integer idMensaje, String rut) {
-        this.idMensaje = idMensaje;
-        this.rut = rut;
     }
 
     public Integer getIdMensaje() {
@@ -73,20 +68,12 @@ public class Mensaje implements Serializable {
         this.idMensaje = idMensaje;
     }
 
-    public String getRut() {
-        return rut;
+    public String getAsunto() {
+        return asunto;
     }
 
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
     }
 
     public String getContenido() {
@@ -97,20 +84,20 @@ public class Mensaje implements Serializable {
         this.contenido = contenido;
     }
 
-    public String getEmisor() {
-        return emisor;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setEmisor(String emisor) {
-        this.emisor = emisor;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public String getReceptor() {
-        return receptor;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setReceptor(String receptor) {
-        this.receptor = receptor;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     @Override
@@ -135,7 +122,7 @@ public class Mensaje implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Mensaje[ idMensaje=" + idMensaje + " ]";
+        return "entityClass.Mensaje[ idMensaje=" + idMensaje + " ]";
     }
     
 }

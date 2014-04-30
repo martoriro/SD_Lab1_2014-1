@@ -6,7 +6,7 @@
 
 package sessionBeans;
 
-import entityClasses.Anotacion;
+import entityClass.Anotacion;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,7 +19,7 @@ import sessionBeans.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 public class AnotacionJpaController implements Serializable {
 
@@ -30,16 +30,6 @@ public class AnotacionJpaController implements Serializable {
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
-    }
-    
-    //Funcionalidad que muestra las anotaciones
-    public List<Anotacion> showAnotations(String rutAlumno){
-        EntityManager em = getEntityManager();
-        Query query;
-        query = em.createNamedQuery("Anotacion.findByRut").
-                setParameter("rut", rutAlumno);
-        
-        return query.getResultList();
     }
 
     public void create(Anotacion anotacion) {

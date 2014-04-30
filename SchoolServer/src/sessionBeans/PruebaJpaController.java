@@ -6,7 +6,7 @@
 
 package sessionBeans;
 
-import entityClasses.Prueba;
+import entityClass.Prueba;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,7 +19,7 @@ import sessionBeans.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 public class PruebaJpaController implements Serializable {
 
@@ -30,28 +30,6 @@ public class PruebaJpaController implements Serializable {
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
-    }
-    
-    //Funcionalidades
-    //Busca por alumno
-    public List<Prueba> showNotes(String rutAlumno){
-        EntityManager em = getEntityManager();
-        Query query;
-        query = em.createNamedQuery("Prueba.findByRut").
-                setParameter("rut", rutAlumno);
-        
-        return query.getResultList();
-    }
-    
-    //Busca por alumno y asignatura
-    public List<Prueba> showNotesForAsignature(String rutAlumno, int idAsignatura){
-        EntityManager em = getEntityManager();
-        Query query;
-        query = em.createNamedQuery("Prueba.findByRutAndIdAsignatura").
-                setParameter("rut", rutAlumno).
-                setParameter("idAsignatura", idAsignatura);
-        
-        return query.getResultList();
     }
 
     public void create(Prueba prueba) {

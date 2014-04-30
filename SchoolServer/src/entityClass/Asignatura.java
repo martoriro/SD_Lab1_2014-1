@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package entityClasses;
+package entityClass;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -21,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 @Entity
 @Table(name = "ASIGNATURA")
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Asignatura.findAll", query = "SELECT a FROM Asignatura a"),
     @NamedQuery(name = "Asignatura.findByIdAsignatura", query = "SELECT a FROM Asignatura a WHERE a.idAsignatura = :idAsignatura"),
-    @NamedQuery(name = "Asignatura.findByRut", query = "SELECT a FROM Asignatura a WHERE a.rut = :rut")})
+    @NamedQuery(name = "Asignatura.findByNombre", query = "SELECT a FROM Asignatura a WHERE a.nombre = :nombre")})
 public class Asignatura implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,9 +36,7 @@ public class Asignatura implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ASIGNATURA")
     private Integer idAsignatura;
-    @Column(name = "RUT")
-    private String rut;
-    @Lob
+    @Basic(optional = false)
     @Column(name = "NOMBRE")
     private String nombre;
 
@@ -50,20 +47,17 @@ public class Asignatura implements Serializable {
         this.idAsignatura = idAsignatura;
     }
 
+    public Asignatura(Integer idAsignatura, String nombre) {
+        this.idAsignatura = idAsignatura;
+        this.nombre = nombre;
+    }
+
     public Integer getIdAsignatura() {
         return idAsignatura;
     }
 
     public void setIdAsignatura(Integer idAsignatura) {
         this.idAsignatura = idAsignatura;
-    }
-
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
     }
 
     public String getNombre() {
@@ -96,7 +90,7 @@ public class Asignatura implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Asignatura[ idAsignatura=" + idAsignatura + " ]";
+        return "entityClass.Asignatura[ idAsignatura=" + idAsignatura + " ]";
     }
     
 }

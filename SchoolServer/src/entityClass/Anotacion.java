@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package entityClasses;
+package entityClass;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 @Entity
 @Table(name = "ANOTACION")
@@ -32,8 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Anotacion.findAll", query = "SELECT a FROM Anotacion a"),
     @NamedQuery(name = "Anotacion.findByIdAnotacion", query = "SELECT a FROM Anotacion a WHERE a.idAnotacion = :idAnotacion"),
-    @NamedQuery(name = "Anotacion.findByRut", query = "SELECT a FROM Anotacion a WHERE a.rut = :rut"),
-    @NamedQuery(name = "Anotacion.findByFecha", query = "SELECT a FROM Anotacion a WHERE a.fecha = :fecha")})
+    @NamedQuery(name = "Anotacion.findByFecha", query = "SELECT a FROM Anotacion a WHERE a.fecha = :fecha"),
+    @NamedQuery(name = "Anotacion.findByRutProfesor", query = "SELECT a FROM Anotacion a WHERE a.rutProfesor = :rutProfesor"),
+    @NamedQuery(name = "Anotacion.findByTipoAnotacion", query = "SELECT a FROM Anotacion a WHERE a.tipoAnotacion = :tipoAnotacion"),
+    @NamedQuery(name = "Anotacion.findByRutAlumno", query = "SELECT a FROM Anotacion a WHERE a.rutAlumno = :rutAlumno")})
 public class Anotacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,16 +43,18 @@ public class Anotacion implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ANOTACION")
     private Integer idAnotacion;
-    @Basic(optional = false)
-    @Column(name = "RUT")
-    private String rut;
     @Lob
     @Column(name = "CONTENIDO")
     private String contenido;
-    @Basic(optional = false)
     @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Column(name = "RUT_PROFESOR")
+    private String rutProfesor;
+    @Column(name = "TIPO_ANOTACION")
+    private String tipoAnotacion;
+    @Column(name = "RUT_ALUMNO")
+    private String rutAlumno;
 
     public Anotacion() {
     }
@@ -59,26 +63,12 @@ public class Anotacion implements Serializable {
         this.idAnotacion = idAnotacion;
     }
 
-    public Anotacion(Integer idAnotacion, String rut, Date fecha) {
-        this.idAnotacion = idAnotacion;
-        this.rut = rut;
-        this.fecha = fecha;
-    }
-
     public Integer getIdAnotacion() {
         return idAnotacion;
     }
 
     public void setIdAnotacion(Integer idAnotacion) {
         this.idAnotacion = idAnotacion;
-    }
-
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
     }
 
     public String getContenido() {
@@ -95,6 +85,30 @@ public class Anotacion implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getRutProfesor() {
+        return rutProfesor;
+    }
+
+    public void setRutProfesor(String rutProfesor) {
+        this.rutProfesor = rutProfesor;
+    }
+
+    public String getTipoAnotacion() {
+        return tipoAnotacion;
+    }
+
+    public void setTipoAnotacion(String tipoAnotacion) {
+        this.tipoAnotacion = tipoAnotacion;
+    }
+
+    public String getRutAlumno() {
+        return rutAlumno;
+    }
+
+    public void setRutAlumno(String rutAlumno) {
+        this.rutAlumno = rutAlumno;
     }
 
     @Override
@@ -119,7 +133,7 @@ public class Anotacion implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Anotacion[ idAnotacion=" + idAnotacion + " ]";
+        return "entityClass.Anotacion[ idAnotacion=" + idAnotacion + " ]";
     }
     
 }

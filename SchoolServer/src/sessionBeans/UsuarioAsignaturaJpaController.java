@@ -6,8 +6,7 @@
 
 package sessionBeans;
 
-import entityClasses.AsistenciaAsignatura;
-import entityClasses.AsistenciaAsignaturaPK;
+import entityClass.UsuarioAsignatura;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -17,15 +16,14 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import sessionBeans.exceptions.NonexistentEntityException;
-import sessionBeans.exceptions.PreexistingEntityException;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
-public class AsistenciaAsignaturaJpaController implements Serializable {
+public class UsuarioAsignaturaJpaController implements Serializable {
 
-    public AsistenciaAsignaturaJpaController(EntityManagerFactory emf) {
+    public UsuarioAsignaturaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -34,21 +32,13 @@ public class AsistenciaAsignaturaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(AsistenciaAsignatura asistenciaAsignatura) throws PreexistingEntityException, Exception {
-        if (asistenciaAsignatura.getAsistenciaAsignaturaPK() == null) {
-            asistenciaAsignatura.setAsistenciaAsignaturaPK(new AsistenciaAsignaturaPK());
-        }
+    public void create(UsuarioAsignatura usuarioAsignatura) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(asistenciaAsignatura);
+            em.persist(usuarioAsignatura);
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findAsistenciaAsignatura(asistenciaAsignatura.getAsistenciaAsignaturaPK()) != null) {
-                throw new PreexistingEntityException("AsistenciaAsignatura " + asistenciaAsignatura + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -56,19 +46,19 @@ public class AsistenciaAsignaturaJpaController implements Serializable {
         }
     }
 
-    public void edit(AsistenciaAsignatura asistenciaAsignatura) throws NonexistentEntityException, Exception {
+    public void edit(UsuarioAsignatura usuarioAsignatura) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            asistenciaAsignatura = em.merge(asistenciaAsignatura);
+            usuarioAsignatura = em.merge(usuarioAsignatura);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                AsistenciaAsignaturaPK id = asistenciaAsignatura.getAsistenciaAsignaturaPK();
-                if (findAsistenciaAsignatura(id) == null) {
-                    throw new NonexistentEntityException("The asistenciaAsignatura with id " + id + " no longer exists.");
+                Integer id = usuarioAsignatura.getIdUsuarioAsignatura();
+                if (findUsuarioAsignatura(id) == null) {
+                    throw new NonexistentEntityException("The usuarioAsignatura with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -79,19 +69,19 @@ public class AsistenciaAsignaturaJpaController implements Serializable {
         }
     }
 
-    public void destroy(AsistenciaAsignaturaPK id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            AsistenciaAsignatura asistenciaAsignatura;
+            UsuarioAsignatura usuarioAsignatura;
             try {
-                asistenciaAsignatura = em.getReference(AsistenciaAsignatura.class, id);
-                asistenciaAsignatura.getAsistenciaAsignaturaPK();
+                usuarioAsignatura = em.getReference(UsuarioAsignatura.class, id);
+                usuarioAsignatura.getIdUsuarioAsignatura();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The asistenciaAsignatura with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The usuarioAsignatura with id " + id + " no longer exists.", enfe);
             }
-            em.remove(asistenciaAsignatura);
+            em.remove(usuarioAsignatura);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -100,19 +90,19 @@ public class AsistenciaAsignaturaJpaController implements Serializable {
         }
     }
 
-    public List<AsistenciaAsignatura> findAsistenciaAsignaturaEntities() {
-        return findAsistenciaAsignaturaEntities(true, -1, -1);
+    public List<UsuarioAsignatura> findUsuarioAsignaturaEntities() {
+        return findUsuarioAsignaturaEntities(true, -1, -1);
     }
 
-    public List<AsistenciaAsignatura> findAsistenciaAsignaturaEntities(int maxResults, int firstResult) {
-        return findAsistenciaAsignaturaEntities(false, maxResults, firstResult);
+    public List<UsuarioAsignatura> findUsuarioAsignaturaEntities(int maxResults, int firstResult) {
+        return findUsuarioAsignaturaEntities(false, maxResults, firstResult);
     }
 
-    private List<AsistenciaAsignatura> findAsistenciaAsignaturaEntities(boolean all, int maxResults, int firstResult) {
+    private List<UsuarioAsignatura> findUsuarioAsignaturaEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(AsistenciaAsignatura.class));
+            cq.select(cq.from(UsuarioAsignatura.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -124,20 +114,20 @@ public class AsistenciaAsignaturaJpaController implements Serializable {
         }
     }
 
-    public AsistenciaAsignatura findAsistenciaAsignatura(AsistenciaAsignaturaPK id) {
+    public UsuarioAsignatura findUsuarioAsignatura(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(AsistenciaAsignatura.class, id);
+            return em.find(UsuarioAsignatura.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAsistenciaAsignaturaCount() {
+    public int getUsuarioAsignaturaCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<AsistenciaAsignatura> rt = cq.from(AsistenciaAsignatura.class);
+            Root<UsuarioAsignatura> rt = cq.from(UsuarioAsignatura.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

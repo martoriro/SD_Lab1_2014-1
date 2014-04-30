@@ -6,7 +6,7 @@
 
 package sessionBeans;
 
-import entityClasses.Asignatura;
+import entityClass.Asignatura;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,7 +19,7 @@ import sessionBeans.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 public class AsignaturaJpaController implements Serializable {
 

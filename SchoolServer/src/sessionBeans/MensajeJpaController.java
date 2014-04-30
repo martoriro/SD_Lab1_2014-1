@@ -6,7 +6,7 @@
 
 package sessionBeans;
 
-import entityClasses.Mensaje;
+import entityClass.Mensaje;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -19,7 +19,7 @@ import sessionBeans.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 public class MensajeJpaController implements Serializable {
 

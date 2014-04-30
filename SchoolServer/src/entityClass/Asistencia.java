@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package entityClasses;
+package entityClass;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Martín
+ * @author Joel
  */
 @Entity
 @Table(name = "ASISTENCIA")
@@ -31,8 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Asistencia.findAll", query = "SELECT a FROM Asistencia a"),
     @NamedQuery(name = "Asistencia.findByIdAsistencia", query = "SELECT a FROM Asistencia a WHERE a.idAsistencia = :idAsistencia"),
+    @NamedQuery(name = "Asistencia.findByIdAsignatura", query = "SELECT a FROM Asistencia a WHERE a.idAsignatura = :idAsignatura"),
     @NamedQuery(name = "Asistencia.findByRut", query = "SELECT a FROM Asistencia a WHERE a.rut = :rut"),
-    @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha")})
+    @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha"),
+    @NamedQuery(name = "Asistencia.findByEstado", query = "SELECT a FROM Asistencia a WHERE a.estado = :estado")})
 public class Asistencia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,12 +42,16 @@ public class Asistencia implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID_ASISTENCIA")
     private Integer idAsistencia;
+    @Column(name = "ID_ASIGNATURA")
+    private Integer idAsignatura;
     @Column(name = "RUT")
     private String rut;
-    @Basic(optional = false)
     @Column(name = "FECHA")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Basic(optional = false)
+    @Column(name = "ESTADO")
+    private int estado;
 
     public Asistencia() {
     }
@@ -54,9 +60,9 @@ public class Asistencia implements Serializable {
         this.idAsistencia = idAsistencia;
     }
 
-    public Asistencia(Integer idAsistencia, Date fecha) {
+    public Asistencia(Integer idAsistencia, int estado) {
         this.idAsistencia = idAsistencia;
-        this.fecha = fecha;
+        this.estado = estado;
     }
 
     public Integer getIdAsistencia() {
@@ -65,6 +71,14 @@ public class Asistencia implements Serializable {
 
     public void setIdAsistencia(Integer idAsistencia) {
         this.idAsistencia = idAsistencia;
+    }
+
+    public Integer getIdAsignatura() {
+        return idAsignatura;
+    }
+
+    public void setIdAsignatura(Integer idAsignatura) {
+        this.idAsignatura = idAsignatura;
     }
 
     public String getRut() {
@@ -81,6 +95,14 @@ public class Asistencia implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     @Override
@@ -105,7 +127,7 @@ public class Asistencia implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Asistencia[ idAsistencia=" + idAsistencia + " ]";
+        return "entityClass.Asistencia[ idAsistencia=" + idAsistencia + " ]";
     }
     
 }
