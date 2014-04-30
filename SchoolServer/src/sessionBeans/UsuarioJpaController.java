@@ -33,6 +33,16 @@ public class UsuarioJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+    public List<Usuario> buscarUsuario(String rut){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Usuario.findByRut").
+                setParameter("rut", rut);
+        
+        return query.getResultList();
+    }
+            
+            
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {

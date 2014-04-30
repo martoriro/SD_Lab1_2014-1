@@ -38,6 +38,13 @@ public class MainJoel {
         nuevoUsuario.setNombre("JoelEditado");
         //usuarioController.edit(nuevoUsuario); //Comentado para no editar  a cada rato
        
+        System.out.println("BUSCAR POR RUT Y MUESTRA DATOS");
+        List<Usuario> usuarios;
+        usuarios = usuarioController.buscarUsuario("17409487k");
+        
+        for (int i = 0; i < usuarios.size(); i++) {
+            System.out.println("Rut: " + usuarios.get(i).getRut() + ", Nombre: " + usuarios.get(i).getNombre());
+        }
         //Funcionalidad ver notas del alumno
         System.out.println("FUNCIONALIDAD QUE MUESTRA TODAS LAS NOTAS");
         /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
