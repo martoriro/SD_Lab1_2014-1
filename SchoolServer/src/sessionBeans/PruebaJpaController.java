@@ -32,6 +32,37 @@ public class PruebaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+        //calcula el promedio general de un alumno
+    public float promedioGeneralAlumno(String rut){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByRut").setParameter("rut", rut);
+        return sacaPromedio(query.getResultList());
+        
+    }
+    
+    //saca el promedio de notas de una lista de Pruebas
+    public float sacaPromedio(List<Prueba> p){
+        int cant = p.size();
+        float prom = 0;
+        float sum = 0;
+        for(int i = 0; i< cant; i++){
+            sum += p.get(i).getNota();            
+        }
+        prom = sum/cant;
+        return prom;
+    }
+    
+    //identifica las notas de un alumno de una asignatura
+    public float sacaPromedioRamo(String rut , int id_asignatura){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByRutIdAsignatura").
+                setParameter("rut", rut).
+                setParameter("idAsignatura", id_asignatura);
+        return sacaPromedio(query.getResultList());            
+    }
+    
     public void create(Prueba prueba) {
         EntityManager em = null;
         try {
