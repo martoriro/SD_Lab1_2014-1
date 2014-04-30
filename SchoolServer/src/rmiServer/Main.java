@@ -31,7 +31,12 @@ public class Main {
         
         Usuario nuevoUsuario = new Usuario("17409487g", "123", "Joel", 23, "alumno", "Avalos", "Pincheira");
         //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
-
+        //Eliminar usuario
+        //usuarioController.destroy("17409487k");
+        
+        //Editar usuario
+        nuevoUsuario.setNombre("JoelEditado");
+        //usuarioController.edit(nuevoUsuario); //Comentado para no editar  a cada rato
        
         //Funcionalidad ver notas del alumno
         System.out.println("FUNCIONALIDAD QUE MUESTRA TODAS LAS NOTAS");
