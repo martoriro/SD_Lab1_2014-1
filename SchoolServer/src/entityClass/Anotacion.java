@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Anotacion.findByFecha", query = "SELECT a FROM Anotacion a WHERE a.fecha = :fecha"),
     @NamedQuery(name = "Anotacion.findByRutProfesor", query = "SELECT a FROM Anotacion a WHERE a.rutProfesor = :rutProfesor"),
     @NamedQuery(name = "Anotacion.findByTipoAnotacion", query = "SELECT a FROM Anotacion a WHERE a.tipoAnotacion = :tipoAnotacion"),
-    @NamedQuery(name = "Anotacion.findByRutAlumno", query = "SELECT a FROM Anotacion a WHERE a.rutAlumno = :rutAlumno")})
+    @NamedQuery(name = "Anotacion.findByRutAlumno", query = "SELECT a FROM Anotacion a WHERE a.rutAlumno = :rutAlumno"),
+    @NamedQuery(name = "Anotacion.findByRutAlumnoAndAnotacion", query = "SELECT a FROM Anotacion a WHERE a.rutAlumno = :rutAlumno and a.tipoAnotacion = :tipoAnotacion")})
 public class Anotacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
