@@ -26,10 +26,10 @@ public class MainMartin {
     public static void main(String[] args) throws RemoteException, Exception {
         System.out.println("ADMINISTRADOR: CRUD USUARIOS");
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
-        UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
-        UsuarioAsignaturaJpaController asistencia = new UsuarioAsignaturaJpaController(factory);
+        AsistenciaJpaController asistencia = new AsistenciaJpaController(factory);
         
-        
+        List<Asistencia> asistencias = asistencia.findAsistenciaPorDia("176032502", java.sql.Date.valueOf("2014-04-30"));
+        //System.out.println(asistencias.);
         
         //Usuario nuevoUsuario = new Usuario("17409487g", "123", "Joel", 23, "alumno", "Avalos", "Pincheira");
         //Usuario nUser2 = new Usuario("176032502", "123", "M", 23, "profesor", "Gonzalez", "Sotomayor");

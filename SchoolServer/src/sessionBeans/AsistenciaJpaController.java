@@ -8,11 +8,12 @@ package sessionBeans;
 
 import entityClass.Asistencia;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import sessionBeans.exceptions.NonexistentEntityException;
@@ -123,14 +124,13 @@ public class AsistenciaJpaController implements Serializable {
         }
     }
     
-    public List<Asistencia> findAsistenciaPorDia(String rut, String fecha){
+    public List<Asistencia> findAsistenciaPorDia(String rut, Date fecha){
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Asistencia.findAlumnosByAsignaturaAndDia").
                 setParameter("rut", rut).
                 setParameter("fecha", fecha);
-        List<Asistencia> asistencias = query.getResultList();
-        return asistencias;
+        return query.getResultList();
     }
 
     public int getAsistenciaCount() {
