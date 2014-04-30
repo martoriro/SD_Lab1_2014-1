@@ -33,12 +33,22 @@ public class AnotacionJpaController implements Serializable {
     }
     
     //Listar anotaciones pr rut y tipo
-    List<Anotacion> filtrarAnotaciones(String rut, String tipo){
+    public List<Anotacion> filtrarAnotaciones(String rut, String tipo){
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Anotacion.findByRutAlumnoAndAnotacion").
                 setParameter("rutAlumno", rut).
                 setParameter("tipoAnotacion", tipo);
+        
+        return query.getResultList();
+    }
+    
+    public List<Anotacion> buscarAnotaciones(String rut){
+        EntityManager em = getEntityManager();
+        Query query;
+        
+        query = em.createNamedQuery("Anotacion.findByRutAlumno").
+                setParameter("rutAlumno", rut);
         
         return query.getResultList();
     }

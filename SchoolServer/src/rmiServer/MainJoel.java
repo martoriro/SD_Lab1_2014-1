@@ -4,6 +4,7 @@
  */
 package rmiServer;
 
+import entityClass.Anotacion;
 import entityClass.Usuario;
 import static entityClass.Usuario_.edad;
 import java.rmi.RemoteException;
@@ -11,6 +12,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import sessionBeans.AnotacionJpaController;
 import sessionBeans.UsuarioJpaController;
 //import sessionBeans.*;
 
@@ -44,6 +46,15 @@ public class MainJoel {
         
         for (int i = 0; i < usuarios.size(); i++) {
             System.out.println("Rut: " + usuarios.get(i).getRut() + ", Nombre: " + usuarios.get(i).getNombre());
+        }
+        
+        System.out.println("Ver mis anotaciones");
+        AnotacionJpaController anotacionController = new AnotacionJpaController(factory);
+        List<Anotacion> anotaciones;
+        anotaciones = anotacionController.buscarAnotaciones("17409487k");
+        
+        for (int i = 0; i < anotaciones.size(); i++) {
+            System.out.println("Rut: " + anotaciones.get(i).getRutAlumno()+ ", Contenido: " + anotaciones.get(i).getContenido());
         }
         //Funcionalidad ver notas del alumno
         System.out.println("FUNCIONALIDAD QUE MUESTRA TODAS LAS NOTAS");
