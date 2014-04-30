@@ -122,6 +122,16 @@ public class AsistenciaJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Asistencia> findAsistenciaPorDia(String rut, String fecha){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Asistencia.findAlumnosByAsignaturaAndDia").
+                setParameter("rut", rut).
+                setParameter("fecha", fecha);
+        List<Asistencia> asistencias = query.getResultList();
+        return asistencias;
+    }
 
     public int getAsistenciaCount() {
         EntityManager em = getEntityManager();
