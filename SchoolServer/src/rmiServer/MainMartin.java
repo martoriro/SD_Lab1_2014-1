@@ -18,7 +18,7 @@ import sessionBeans.UsuarioJpaController;
  *
  * @author Gustavo Salvo Lara
  */
-public class Main {
+public class MainMartin {
     static private RmiConnection connection = new RmiConnection();
     /**
      * @param args the command line arguments
