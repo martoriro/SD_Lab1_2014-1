@@ -72,6 +72,15 @@ public class PruebaJpaController implements Serializable {
         return query.getResultList();
     }
     
+    //Obtiene la lista de notas segun el alumno y la asignatura
+    public List<Prueba> notasPorAsignatura(String rut, int id){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByRutIdAsignatura").
+                setParameter("rut", rut).
+                setParameter("idAsignatura", id);
+        return query.getResultList();
+    }
     
     public void create(Prueba prueba) {
         EntityManager em = null;

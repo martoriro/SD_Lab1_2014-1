@@ -4,6 +4,8 @@
  */
 package rmiServer;
 
+import encriptador.MD5;
+import encriptador.MD5;
 import entityClass.Anotacion;
 import entityClass.Mensaje;
 import entityClass.Prueba;
@@ -31,6 +33,13 @@ public class MainJoel {
      */
     public static void main(String[] args) throws RemoteException, Exception {
        
+        System.out.println("FUNCIONALIDAD QUE ECRIPTA EN MD5");
+        String password = "123";
+        String passwordEncriptada;
+        MD5 instancia = new MD5();
+        passwordEncriptada = instancia.encriptar(password);
+        System.out.println("PASSWORD ENCRIPTADA ES: " + passwordEncriptada);
+        
         System.out.println("ADMINISTRADOR: CRUD USUARIOS");
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
@@ -80,48 +89,16 @@ public class MainJoel {
             System.out.println("Asunto: " + mensajeRecibido.get(i).getAsunto()+ ", Contenido: " + mensajeRecibido.get(i).getContenido()+ ", Fecha: " + mensajeRecibido.get(i).getFecha());
         }
         
+        System.out.println("FUNCIONALIDAD QUE PERMITE OBTENER LAS NOTAS DE UNA ASIGNATURA");
+        List<Prueba> listaNotasAsignatura;
+        listaNotasAsignatura = pruebaController.notasPorAsignatura("177402168", 2);
         
-        /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
-        PruebaJpaController pruebasController = new PruebaJpaController(factory);
-        
-        List<Prueba> pruebas;
-        pruebas = pruebasController.showNotes("17409487k");
-        for (int i = 0; i < pruebas.size(); i++) {
-            System.out.println("Id asignatura: " + pruebas.get(i).getIdAsignatura() + ", Nota: " + pruebas.get(i).getNota());
+        for (int i = 0; i < listaNotasAsignatura.size(); i++) {
+            System.out.println("Rut: " + listaNotasAsignatura.get(i).getRut()+ ", Asignatura: " + listaNotasAsignatura.get(i).getIdAsignatura()+ ", Nota: " + listaNotasAsignatura.get(i).getNota());
         }
         
-        //Funcionalidad Notas del alumno por asignatura
-        System.out.println("FUNCIONALIDAD QUE FILTRA POR ALUMNO Y ASIGNATURA");
-        System.out.println("CASO RAMO 2 Y NOTAS");
-        List<Prueba> PruebasAsignaturas;
-        PruebasAsignaturas = pruebasController.showNotesForAsignature("17409487k", 2);
-        for (int i = 0; i < PruebasAsignaturas.size(); i++) {
-            System.out.println("Id asignatura: " + PruebasAsignaturas.get(i).getIdAsignatura() + ", Nota: " + PruebasAsignaturas.get(i).getNota());
-        }
-        System.out.println("CASO RAMO 4 Y NOTAS");
-        PruebasAsignaturas = pruebasController.showNotesForAsignature("17409487k", 4);
-        for (int i = 0; i < PruebasAsignaturas.size(); i++) {
-            System.out.println("Id asignatura: " + PruebasAsignaturas.get(i).getIdAsignatura() + ", Nota: " + PruebasAsignaturas.get(i).getNota());
-        }
         
-        //Funcionalidad que permite al usuario aluimno ver sus anotaciones
-         //Funcionalidad que permite al usuario aluimno ver sus anotaciones
-        System.out.println("FUNCIONALIDAD QUE PERMITE AL ALUMNO VER SUS ANOTACIONES");
-        AnotacionJpaController anotacionesController = new AnotacionJpaController(factory);
         
-        List<Anotacion> anotaciones;
-        anotaciones = anotacionesController.showAnotations("17409487k");
-        for (int i = 0; i < anotaciones.size(); i++) {
-            System.out.println("Id anotacion: " + anotaciones.get(i).getIdAnotacion()+ ", Contenido: " + anotaciones.get(i).getContenido());
-        }
-        
-        //Funcionalidad para agregar notas de los alumnos
-        System.out.println("FUNCIONALIDAD QUE PERMITE INSETAR NOTAS DE LOS ALUMNOS");
-        
-        Prueba nuevaPrueba = new Prueba(Integer.SIZE, 2, "17409487k", null);
-        nuevaPrueba.setNota(33);
-        //pruebasController.create(nuevaPrueba);
-        */
         System.out.println("FIN");
        }
 }
