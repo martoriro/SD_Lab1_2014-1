@@ -33,6 +33,15 @@ public class AsistenciaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+    //Funcionalidad, guarda las asistencias filtradas por rut, para mostrarlas a apoderados.
+    public List<Asistencia> asistenciaAlumnoApoderado(String rut){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Asistencia.findByRut").
+                setParameter("rut", rut);
+        return query.getResultList();
+    }
+    
     public void create(Asistencia asistencia) {
         EntityManager em = null;
         try {

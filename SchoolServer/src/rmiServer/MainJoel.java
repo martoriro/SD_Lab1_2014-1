@@ -88,7 +88,7 @@ public class MainJoel {
         System.out.println("fUNCIONALIDAD QUE PERMITE VER LOS MENSAJES DEL ADMINISTRADOR");
         MensajeJpaController mensajeController = new MensajeJpaController(factory);
         List<Mensaje> mensajeRecibido;
-        mensajeRecibido = mensajeController.mensajeEspecifico("alumno");
+        mensajeRecibido = mensajeController.mensajeEspecifico("apoderado");
         
         for (int i = 0; i < mensajeRecibido.size(); i++) {
             System.out.println("Asunto: " + mensajeRecibido.get(i).getAsunto()+ ", Contenido: " + mensajeRecibido.get(i).getContenido()+ ", Fecha: " + mensajeRecibido.get(i).getFecha());
@@ -115,6 +115,14 @@ public class MainJoel {
         nuevaAsistencia.setFecha(cal.getTime());
         
         //asistenciaController.create(nuevaAsistencia); //Comentada para no agregar la misma asistencia a cada rato
+        
+        System.out.println("FUNCIONALIDAD APODERADO VE ASISTENCIA DE SU HIJO");
+        List<Asistencia> asistenciaHijo;
+        asistenciaHijo = asistenciaController.asistenciaAlumnoApoderado("17409487k");
+        
+        for (int i = 0; i < asistenciaHijo.size(); i++) {
+            System.out.println("Rut: " + asistenciaHijo.get(i).getRut()+ ", Asignatura: " + asistenciaHijo.get(i).getIdAsignatura()+ ", Estado: " + asistenciaHijo.get(i).getEstado());
+        }
         
         System.out.println("FIN");
        }
