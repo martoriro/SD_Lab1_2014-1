@@ -5,6 +5,7 @@
 package rmiServer;
 
 import entityClass.Anotacion;
+import entityClass.Mensaje;
 import entityClass.Prueba;
 import entityClass.Usuario;
 import static entityClass.Usuario_.edad;
@@ -14,6 +15,7 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import sessionBeans.AnotacionJpaController;
+import sessionBeans.MensajeJpaController;
 import sessionBeans.PruebaJpaController;
 import sessionBeans.UsuarioJpaController;
 //import sessionBeans.*;
@@ -69,9 +71,14 @@ public class MainJoel {
             System.out.println("Rut: " + notas.get(i).getRut() + ", Ramo: " + notas.get(i).getIdAsignatura() + ", Nota: " + notas.get(i).getNota());
         }
         
+        System.out.println("fUNCIONALIDAD QUE PERMITE VER LOS MENSAJES DEL ADMINISTRADOR");
+        MensajeJpaController mensajeController = new MensajeJpaController(factory);
+        List<Mensaje> mensajeRecibido;
+        mensajeRecibido = mensajeController.mensajeEspecifico("alumno");
         
-        
-        
+        for (int i = 0; i < mensajeRecibido.size(); i++) {
+            System.out.println("Asunto: " + mensajeRecibido.get(i).getAsunto()+ ", Contenido: " + mensajeRecibido.get(i).getContenido()+ ", Fecha: " + mensajeRecibido.get(i).getFecha());
+        }
         
         
         /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");

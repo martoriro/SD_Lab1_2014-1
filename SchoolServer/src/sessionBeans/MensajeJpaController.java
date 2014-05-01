@@ -32,6 +32,15 @@ public class MensajeJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+    //Funcionalidad que permite filtrar los mensajes por tipo
+    public List<Mensaje> mensajeEspecifico(String tipo){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Mensaje.findByTipo").
+                setParameter("tipo", tipo);
+        return query.getResultList();
+    }
+    
     public void create(Mensaje mensaje) {
         EntityManager em = null;
         try {
