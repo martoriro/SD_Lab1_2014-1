@@ -8,6 +8,7 @@ package sessionBeans;
 
 import entityClass.Prueba;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,7 +33,25 @@ public class PruebaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-        //calcula el promedio general de un alumno
+    //calucla el promedio de una prueba de una asignatura realizada en una fecha
+    public float promedioGeneralPrueba(Date fecha, int id_asignatura){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByIdAsignaturaFecha").setParameter("idAsignatura",id_asignatura).
+                setParameter("fecha", fecha);
+        return sacaPromedio(query.getResultList());      
+        
+    }
+    //saca promedio general asignatura
+    public float promedioGeneralAsignatura(int id_asignatura){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByIdAsignatura").setParameter("idAsignatura", id_asignatura);
+        
+        return sacaPromedio(query.getResultList());
+    }
+    
+    //calcula el promedio general de un alumno
     public float promedioGeneralAlumno(String rut){
         EntityManager em = getEntityManager();
         Query query;
