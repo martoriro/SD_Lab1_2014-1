@@ -5,21 +5,26 @@
 package rmiServer;
 
 import encriptador.MD5;
-import encriptador.MD5;
 import entityClass.Anotacion;
+import entityClass.Asistencia;
 import entityClass.Mensaje;
 import entityClass.Prueba;
 import entityClass.Usuario;
 import static entityClass.Usuario_.edad;
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import sessionBeans.AnotacionJpaController;
+import sessionBeans.AsistenciaJpaController;
 import sessionBeans.MensajeJpaController;
 import sessionBeans.PruebaJpaController;
 import sessionBeans.UsuarioJpaController;
+import sun.util.calendar.BaseCalendar;
 //import sessionBeans.*;
 
 /**
@@ -97,7 +102,19 @@ public class MainJoel {
             System.out.println("Rut: " + listaNotasAsignatura.get(i).getRut()+ ", Asignatura: " + listaNotasAsignatura.get(i).getIdAsignatura()+ ", Nota: " + listaNotasAsignatura.get(i).getNota());
         }
         
+        System.out.println("FUNCIONALIDAD PROFESOR REGISTRA ASISTENCIA");
+        AsistenciaJpaController asistenciaController = new AsistenciaJpaController(factory);
+        Asistencia nuevaAsistencia;
+        nuevaAsistencia = new Asistencia(null, 0);
+        nuevaAsistencia.setIdAsignatura(2);
+        nuevaAsistencia.setRut("177402168");
         
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Calendar cal = Calendar.getInstance();
+        
+        nuevaAsistencia.setFecha(cal.getTime());
+        
+        //asistenciaController.create(nuevaAsistencia); //Comentada para no agregar la misma asistencia a cada rato
         
         System.out.println("FIN");
        }
