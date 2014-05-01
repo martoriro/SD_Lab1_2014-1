@@ -6,6 +6,7 @@ package rmiServer;
 
 import encriptador.MD5;
 import entityClass.Anotacion;
+import entityClass.Asignatura;
 import entityClass.Asistencia;
 import entityClass.Mensaje;
 import entityClass.Prueba;
@@ -20,6 +21,7 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import sessionBeans.AnotacionJpaController;
+import sessionBeans.AsignaturaJpaController;
 import sessionBeans.AsistenciaJpaController;
 import sessionBeans.MensajeJpaController;
 import sessionBeans.PruebaJpaController;
@@ -122,6 +124,41 @@ public class MainJoel {
         
         for (int i = 0; i < asistenciaHijo.size(); i++) {
             System.out.println("Rut: " + asistenciaHijo.get(i).getRut()+ ", Asignatura: " + asistenciaHijo.get(i).getIdAsignatura()+ ", Estado: " + asistenciaHijo.get(i).getEstado());
+        }
+        
+        
+        System.out.println("FUNCIONALIDAD COMO ADMINISTRADOR QUIERO HACER CRUD DE RAMOS");
+        
+        AsignaturaJpaController asignaturaController = new AsignaturaJpaController(factory);
+        
+        System.out.println("CRATE");
+        
+        Asignatura nuevaAsignatura = new Asignatura(null, "artes"); 
+        //asignaturaController.create(nuevaAsignatura); //Comentado para no crear varias veces la misma asignatura
+        
+        System.out.println("READ");
+        List<Asignatura> listaAsignaturas;
+        listaAsignaturas = asignaturaController.listaAsignaturas();
+        
+        for (int i = 0; i < listaAsignaturas.size(); i++) {
+            System.out.println("ID: " + listaAsignaturas.get(i).getIdAsignatura()+ ", Nombre: " + listaAsignaturas.get(i).getNombre());
+        }
+        
+        System.out.println("UPDATE");
+        nuevaAsignatura.setNombre("artesEditado");
+        nuevaAsignatura.setIdAsignatura(5);
+        //asignaturaController.edit(nuevaAsignatura);  //Comentado para editar cuando ya no exista
+        
+        for (int i = 0; i < listaAsignaturas.size(); i++) {
+            System.out.println("ID: " + listaAsignaturas.get(i).getIdAsignatura()+ ", Nombre: " + listaAsignaturas.get(i).getNombre());
+        }
+        
+        System.out.println("DELETE");
+        
+        //asignaturaController.destroy(6);  //Comentado para no eliminar el elemento no existente
+        
+        for (int i = 0; i < listaAsignaturas.size(); i++) {
+            System.out.println("ID: " + listaAsignaturas.get(i).getIdAsignatura()+ ", Nombre: " + listaAsignaturas.get(i).getNombre());
         }
         
         System.out.println("FIN");
