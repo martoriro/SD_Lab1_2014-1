@@ -161,6 +161,15 @@ public class MainJoel {
             System.out.println("ID: " + listaAsignaturas.get(i).getIdAsignatura()+ ", Nombre: " + listaAsignaturas.get(i).getNombre());
         }
         
+        System.out.println("FUNCIONALIDAD PARA CREAR MENSAJES");
+        Mensaje nuevoMensajeAdministrador = new Mensaje(null);
+        nuevoMensajeAdministrador.setAsunto("Correos electronicos");
+        nuevoMensajeAdministrador.setContenido("Solicito a los apoderados enviar su correo electronico a pepe@hotmail.com");
+        nuevoMensajeAdministrador.setTipo("apoderado");
+        nuevoMensajeAdministrador.setFecha(cal.getTime());
+        
+        //mensajeController.create(nuevoMensajeAdministrador); //Comento para no agregar a cada rato el mismo mensaje
+        
         System.out.println("FIN");
        }
 }
