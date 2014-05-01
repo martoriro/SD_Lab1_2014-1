@@ -5,6 +5,7 @@
 package rmiServer;
 
 import entityClass.Anotacion;
+import entityClass.Prueba;
 import entityClass.Usuario;
 import static entityClass.Usuario_.edad;
 import java.rmi.RemoteException;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import sessionBeans.AnotacionJpaController;
+import sessionBeans.PruebaJpaController;
 import sessionBeans.UsuarioJpaController;
 //import sessionBeans.*;
 
@@ -58,6 +60,20 @@ public class MainJoel {
         }
         //Funcionalidad ver notas del alumno
         System.out.println("FUNCIONALIDAD QUE MUESTRA TODAS LAS NOTAS");
+        
+        PruebaJpaController pruebaController = new PruebaJpaController(factory);
+        List<Prueba> notas;
+        notas = pruebaController.todasNotas("177402168");
+        
+        for (int i = 0; i < notas.size(); i++) {
+            System.out.println("Rut: " + notas.get(i).getRut() + ", Ramo: " + notas.get(i).getIdAsignatura() + ", Nota: " + notas.get(i).getNota());
+        }
+        
+        
+        
+        
+        
+        
         /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         PruebaJpaController pruebasController = new PruebaJpaController(factory);
         

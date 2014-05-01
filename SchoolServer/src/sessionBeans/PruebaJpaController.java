@@ -63,6 +63,16 @@ public class PruebaJpaController implements Serializable {
         return sacaPromedio(query.getResultList());            
     }
     
+    //Se guardan todas las notas de 1 alumno
+    public List<Prueba> todasNotas(String rut){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByRut").
+                setParameter("rut", rut);
+        return query.getResultList();
+    }
+    
+    
     public void create(Prueba prueba) {
         EntityManager em = null;
         try {

@@ -49,7 +49,7 @@ public class Prueba implements Serializable {
     @Column(name = "RUT")
     private String rut;
     @Column(name = "NOTA")
-    private Integer nota;
+    private Float nota;
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -85,11 +85,11 @@ public class Prueba implements Serializable {
         this.rut = rut;
     }
 
-    public Integer getNota() {
+    public Float getNota() {
         return nota;
     }
 
-    public void setNota(Integer nota) {
+    public void setNota(Float nota) {
         this.nota = nota;
     }
 
