@@ -6,6 +6,7 @@ package rmiServer;
 
 import entityClass.*;
 import static entityClass.Usuario_.edad;
+import entityClass.mergeClasses.*;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ public class MainMartin {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         AsistenciaJpaController asistencia = new AsistenciaJpaController(factory);
         
-        List<Asistencia> asistencias = asistencia.findAsistenciaPorDia("176032502", java.sql.Date.valueOf("2014-04-30"));
+        List<AsistenciaRamo> asistencias = asistencia.findAsistenciaPorDia("176032502", java.sql.Date.valueOf("2014-04-30"));
         //System.out.println(asistencias.);
         
         //Usuario nuevoUsuario = new Usuario("17409487g", "123", "Joel", 23, "alumno", "Avalos", "Pincheira");
