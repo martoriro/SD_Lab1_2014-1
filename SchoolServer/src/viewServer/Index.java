@@ -16,7 +16,7 @@ import java.rmi.RemoteException;
  *
  * @author Martín
  */
-public class Index extends javax.swing.JPanel {
+public class Index extends javax.swing.JFrame {
     private RmiConnection conexion = new RmiConnection();
     /**
      * Creates new form Index
