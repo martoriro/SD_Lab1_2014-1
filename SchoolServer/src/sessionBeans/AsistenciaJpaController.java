@@ -145,7 +145,7 @@ public class AsistenciaJpaController implements Serializable {
         //List<AsistenciaRamo> resultados = new ArrayList<AsistenciaRamo>();
         //TO-DO: Averiguar de [Ljava.lang.Object
         List <AsistenciaRamo> resultados = query.getResultList();
-        System.out.println(resultados.toString());
+        System.out.println(query.getResultList());
         /*for (Object object : query.getResultList()) {
             Map row = (Map) object;
             AsistenciaRamo asistencia = new AsistenciaRamo();

@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 })
 public class Asistencia implements Serializable {
-    private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -132,5 +132,9 @@ public class Asistencia implements Serializable {
     public String toString() {
         return "entityClass.Asistencia[ idAsistencia=" + idAsistencia + " ]";
     }
+    
+    @Entity
+    @JoinTable(name="ASISTENCIA_RAMO")
+    
     
 }
