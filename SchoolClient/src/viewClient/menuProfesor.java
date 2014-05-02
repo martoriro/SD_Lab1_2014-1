@@ -67,6 +67,11 @@ public class menuProfesor extends javax.swing.JFrame {
         jMenu2.setText("Asistencia");
 
         jMenuItem6.setText("Registrar");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuItem8.setText("Ver ");
@@ -127,6 +132,10 @@ public class menuProfesor extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         new profesorAsistencias().setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new profesorRegistraAsistencia().setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     
     
