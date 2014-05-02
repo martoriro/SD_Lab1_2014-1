@@ -6,8 +6,10 @@
 
 package sessionBeans;
 
+import encriptador.*;
 import entityClass.Usuario;
 import java.io.Serializable;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,7 +44,13 @@ public class UsuarioJpaController implements Serializable {
         return query.getResultList();
     }
             
-            
+    //Comprueba si se admite el acceso o no
+    public boolean login(String rut, String password) throws NoSuchAlgorithmException{
+        List<Usuario> user = buscarUsuario(rut);
+        MD5 instancia = new MD5();
+        return user.get(0).getPassword().equals(instancia.encriptar(password));
+    }
+    
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {

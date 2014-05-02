@@ -4,6 +4,7 @@
  */
 package rmiServer;
 
+import encriptador.MD5;
 import entityClass.*;
 import static entityClass.Usuario_.edad;
 import entityClass.mergeClasses.*;
@@ -28,13 +29,18 @@ public class MainMartin {
         System.out.println("ADMINISTRADOR: CRUD USUARIOS");
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         AsistenciaJpaController asistencia = new AsistenciaJpaController(factory);
-        
+        UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
+        MD5 instancia = new MD5();
         System.out.println(asistencia.promedioAsistenciaDia("176032502", java.sql.Date.valueOf("2014-04-30")));
         System.out.println(asistencia.promedioAsistenciaMes("176032502", 4));
         
-        //Usuario nuevoUsuario = new Usuario("17409487g", "123", "Joel", 23, "alumno", "Avalos", "Pincheira");
+        //System.out.println(instancia.encriptar("123"));
+        
+        //Usuario nuevoUsuario = new Usuario("17409487z", instancia.encriptar("123"), "Joel", 23, "alumno", "Avalos", "Pincheira");
+        
         //Usuario nUser2 = new Usuario("176032502", "123", "M", 23, "profesor", "Gonzalez", "Sotomayor");
         //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
+        System.out.println(usuarioController.login("17409487z", "124"));
         //usuarioController.create(nUser2); //Comentado para no meter al mismo wn
         //Eliminar usuario
         //usuarioController.destroy("17409487k");
