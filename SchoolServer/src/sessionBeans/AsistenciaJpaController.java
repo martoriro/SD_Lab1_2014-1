@@ -7,9 +7,12 @@
 package sessionBeans;
 
 import entityClass.Asistencia;
+import entityClass.mergeClasses.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -133,13 +136,25 @@ public class AsistenciaJpaController implements Serializable {
         }
     }
     
-    public List<Asistencia> findAsistenciaPorDia(String rut, Date fecha){
+    public List<AsistenciaRamo> findAsistenciaPorDia(String rut, Date fecha){
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Asistencia.findAlumnosByAsignaturaAndDia").
                 setParameter("rut", rut).
                 setParameter("fecha", fecha);
-        return query.getResultList();
+        //List<AsistenciaRamo> resultados = new ArrayList<AsistenciaRamo>();
+        //TO-DO: Averiguar de [Ljava.lang.Object
+        List <AsistenciaRamo> resultados = query.getResultList();
+        /*for (Object object : query.getResultList()) {
+            Map row = (Map) object;
+            AsistenciaRamo asistencia = new AsistenciaRamo();
+            asistencia.setFecha((Date) row.get("0"));         
+            asistencia.setEstado((int) row.get("1"));
+            asistencia.setRut((int) row.get("2"));
+            asistencia.setId((int) row.get("3"));
+            resultados.add(asistencia); 
+        }*/
+        return resultados;
     }
 
     public int getAsistenciaCount() {
