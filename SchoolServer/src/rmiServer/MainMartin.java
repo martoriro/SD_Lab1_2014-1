@@ -29,8 +29,8 @@ public class MainMartin {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         AsistenciaJpaController asistencia = new AsistenciaJpaController(factory);
         
-        List<AsistenciaRamo> asistencias = asistencia.findAsistenciaPorDia("176032502", java.sql.Date.valueOf("2014-04-30"));
-        //System.out.println(asistencias.);
+        System.out.println(asistencia.promedioAsistenciaDia("176032502", java.sql.Date.valueOf("2014-04-30")));
+        System.out.println(asistencia.promedioAsistenciaMes("176032502", 4));
         
         //Usuario nuevoUsuario = new Usuario("17409487g", "123", "Joel", 23, "alumno", "Avalos", "Pincheira");
         //Usuario nUser2 = new Usuario("176032502", "123", "M", 23, "profesor", "Gonzalez", "Sotomayor");

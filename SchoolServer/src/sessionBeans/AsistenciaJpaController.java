@@ -7,10 +7,12 @@
 package sessionBeans;
 
 import entityClass.Asistencia;
+import entityClass.Usuario;
 import entityClass.mergeClasses.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -136,26 +138,64 @@ public class AsistenciaJpaController implements Serializable {
         }
     }
     
-    public List<AsistenciaRamo> findAsistenciaPorDia(String rut, Date fecha){
+    //Utiliza una clase especial creada para guardar el cruce de tablas: "AsistenciaRamo" obtenido de la query y calcula el promedio de asistencia diaria
+    public float promedioAsistenciaDia(String rut, Date fecha){
+        float asistentes = 0;
+        float total = 0;
+        float resultado;
+        List<AsistenciaRamo> asistencias = new ArrayList<>();
+        List<Object[]> resultados = findAsistenciaPorRutyFecha(rut, fecha);
+        for(Object[] result: resultados)
+            asistencias.add(new AsistenciaRamo((String)result[0], (int)result[1], (Date)result[2], (int)result[3]));
+        for(AsistenciaRamo asistencia: asistencias){
+            if(asistencia.getEstado() == 1){
+                asistentes++;
+            }
+            total++;
+        }
+        resultado = (asistentes/total)*100;
+        return resultado;
+    }
+    
+    //Utiliza una clase especial creada para guardar el cruce de tablas: "AsistenciaRamo" obtenido de la query y calcula el promedio de asistencia mensual
+    public float promedioAsistenciaMes(String rut, int mes){
+        mes--;
+        float asistentes = 0;
+        float total = 0;
+        float resultado;
+        List<AsistenciaRamo> asistencias = new ArrayList<>();
+        List<Object[]> resultados = findAsistenciaPorRutyMes(rut, mes);
+        for(Object[] result: resultados)
+            asistencias.add(new AsistenciaRamo((String)result[0], (int)result[1], (Date)result[2], (int)result[3]));
+        for(AsistenciaRamo asistencia: asistencias){
+            if(asistencia.getFecha().getMonth() == mes){
+                if(asistencia.getEstado() == 1){
+                    asistentes++;
+                }
+                total++;
+            }
+        }
+        resultado = (asistentes/total)*100;
+        return resultado;
+    }
+    
+    //Busca Asistencia por dia y rut (asume una asignatura por profesor)
+    public List findAsistenciaPorRutyFecha(String rut, Date fecha){
         EntityManager em = getEntityManager();
         Query query;
-        query = em.createNamedQuery("Asistencia.findAlumnosByAsignaturaAndDia").
+        query = em.createNamedQuery("Asistencia.findAlumnosByRutAndFecha").
                 setParameter("rut", rut).
                 setParameter("fecha", fecha);
-        //List<AsistenciaRamo> resultados = new ArrayList<AsistenciaRamo>();
-        //TO-DO: Averiguar de [Ljava.lang.Object
-        List <AsistenciaRamo> resultados = query.getResultList();
-        System.out.println(query.getResultList());
-        /*for (Object object : query.getResultList()) {
-            Map row = (Map) object;
-            AsistenciaRamo asistencia = new AsistenciaRamo();
-            asistencia.setFecha((Date) row.get("0"));         
-            asistencia.setEstado((int) row.get("1"));
-            asistencia.setRut((int) row.get("2"));
-            asistencia.setId((int) row.get("3"));
-            resultados.add(asistencia); 
-        }*/
-        return resultados;
+        return query.getResultList();
+    }
+    
+    //Busca Asistencia por mes y rut (asume una asignatura por profesor)
+    public List findAsistenciaPorRutyMes(String rut, int mes){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Asistencia.findAlumnosByRut").
+                setParameter("rut", rut);
+        return query.getResultList();
     }
 
     public int getAsistenciaCount() {

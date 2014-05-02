@@ -6,7 +6,8 @@
 
 package entityClass.mergeClasses;
 
-import java.sql.Date;
+import entityClass.*;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,28 +23,38 @@ import javax.persistence.TemporalType;
  *
  * @author Martín
  */
-@Entity
+//@Entity
 //@JoinTable(name="ASISTENCIA_RAMO");
 public class AsistenciaRamo {
-    int rut;
+    String rut;
     int estado;
     int id_asignatura;
     Date fecha;
     
-    public AsistenciaRamo(){
-        rut = 0;
-    }
-    
-    public void setRut(int rutE){
+    public AsistenciaRamo(String rutE, int idAsignatura, Date fechaE, int estadoE){
         rut = rutE;
-    }
-    public void setEstado(int estadoE){
+        id_asignatura = idAsignatura;
+        fecha = fechaE;
         estado = estadoE;
     }
-    public void setId(int idE){
-        id_asignatura = idE;
+
+    public String getRut(){
+        return rut;
     }
-    public void setFecha(Date fechaE){
-        fecha = fechaE;
+    
+    public Date getFecha(){
+        return fecha;
+    }
+    
+    public int getEstado(){
+        return estado;
+    }
+    
+    public int getAsignatura(){
+        return id_asignatura;
+    }
+    
+    public void showAsistencia(){
+        System.out.println("Rut: "+rut+" ID Asignatura: "+id_asignatura+" Fecha: "+fecha+" Asistio?: "+estado);
     }
 }
