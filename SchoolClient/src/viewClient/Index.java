@@ -27,7 +27,7 @@ public class Index extends javax.swing.JFrame {
         initComponents();
         if(!connection.rmiRegistry()){
             JOptionPane.showMessageDialog(null, "Error el servidor no se encuentra en linea o está en mantención", "ERROR", JOptionPane.WARNING_MESSAGE);
-            
+            System.exit(0); 
         }
     }
 
@@ -47,7 +47,6 @@ public class Index extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingreso de Usuario");
         setName("Index"); // NOI18N
         setResizable(false);
@@ -68,6 +67,11 @@ public class Index extends javax.swing.JFrame {
         jLabel2.setText("Contraseña:");
 
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +122,22 @@ public class Index extends javax.swing.JFrame {
         try {
             String tipoUsuario = connection.getServer().userLogin(user, password);
             if(tipoUsuario != null ){
-                System.out.println("pase usted " + tipoUsuario);
+                switch(tipoUsuario){
+                    case "profesor":
+                        System.out.println("hola");
+                        break;
+                    case "alumno":
+                        MenuAlumno menuAlumno = new MenuAlumno();
+                        menuAlumno.setVisible(true);
+                        this.hide();
+                        break;
+                    case "administrador":
+                        System.out.println("estas");
+                        break;
+                    case "apoderado":
+                        System.out.println("tu");
+                        break;    
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta.\n Inténtelo nuevamente.", "ERROR", JOptionPane.WARNING_MESSAGE);
             }
@@ -128,6 +147,10 @@ public class Index extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0); 
+    }//GEN-LAST:event_btnSalirActionPerformed
 
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
