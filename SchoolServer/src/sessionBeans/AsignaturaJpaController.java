@@ -41,6 +41,14 @@ public class AsignaturaJpaController implements Serializable {
         return query.getResultList();       
     }
     
+    public List<Asignatura> nombreAsignatura(int id){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Asignatura.findByIdAsignatura").
+                setParameter("idAsignatura", id);
+        return query.getResultList();
+    }
+    
     public void create(Asignatura asignatura) {
         EntityManager em = null;
         try {

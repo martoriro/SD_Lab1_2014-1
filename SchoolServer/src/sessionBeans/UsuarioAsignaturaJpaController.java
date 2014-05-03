@@ -32,6 +32,15 @@ public class UsuarioAsignaturaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+    //Listar IDS asignaturas por rut
+    public List<UsuarioAsignatura> AsignaturasRut(String rut){
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("UsuarioAsignatura.findByRut").
+                setParameter("rut", rut);
+        return query.getResultList();
+    }
+    
     public void create(UsuarioAsignatura usuarioAsignatura) {
         EntityManager em = null;
         try {

@@ -11,12 +11,14 @@ import entityClass.Asistencia;
 import entityClass.Mensaje;
 import entityClass.Prueba;
 import entityClass.Usuario;
+import entityClass.UsuarioAsignatura;
 import static entityClass.Usuario_.edad;
 import java.rmi.RemoteException;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -25,6 +27,7 @@ import sessionBeans.AsignaturaJpaController;
 import sessionBeans.AsistenciaJpaController;
 import sessionBeans.MensajeJpaController;
 import sessionBeans.PruebaJpaController;
+import sessionBeans.UsuarioAsignaturaJpaController;
 import sessionBeans.UsuarioJpaController;
 import sun.util.calendar.BaseCalendar;
 //import sessionBeans.*;
@@ -41,7 +44,7 @@ public class MainJoel {
     public static void main(String[] args) throws RemoteException, Exception {
        
         System.out.println("FUNCIONALIDAD QUE ECRIPTA EN MD5");
-        String password = "123";
+        String password = "a";
         String passwordEncriptada;
         MD5 instancia = new MD5();
         passwordEncriptada = instancia.encriptar(password);
@@ -51,7 +54,7 @@ public class MainJoel {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
         
-        Usuario nuevoUsuario = new Usuario("17409487g", "123", "Joel", 23, "alumno", "Avalos", "Pincheira");
+        Usuario nuevoUsuario = new Usuario("a", passwordEncriptada, "SuperJoel", 23, "alumno", "Avalos", "Pincheira");
         //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
         //Eliminar usuario
         //usuarioController.destroy("17409487k");
@@ -171,5 +174,29 @@ public class MainJoel {
         //mensajeController.create(nuevoMensajeAdministrador); //Comento para no agregar a cada rato el mismo mensaje
         
         System.out.println("FIN");
+        UsuarioAsignaturaJpaController UsuarioAsignaturaController = new UsuarioAsignaturaJpaController(factory);
+        List<UsuarioAsignatura> listatest;
+        List<Asignatura> AsignaturaName;
+        
+        List<String> listaAsignaturasTranform;
+        String nombre="";
+        
+        listatest = UsuarioAsignaturaController.AsignaturasRut("a");
+        
+        String listaProbando[] = new String[listatest.size()];
+        
+        for (int i = 0; i < listatest.size(); i++) {
+            AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
+            System.out.println("ID: " + listatest.get(i).getIdAsignatura());
+            System.out.println("Nombre: " + AsignaturaName.get(0).getNombre());
+            listaProbando[i] = AsignaturaName.get(0).getNombre();
+            
+        }
+        
+        for (int i = 0; i < listaProbando.length; i++) {
+            System.out.println("ID: " + listaProbando[i]);
+        }
+        
+        
        }
 }

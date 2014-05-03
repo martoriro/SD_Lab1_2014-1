@@ -7,6 +7,7 @@ package implementation;
 import entityClass.Anotacion;
 import entityClass.Asignatura;
 import entityClass.Usuario;
+import entityClass.UsuarioAsignatura;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.NoSuchAlgorithmException;
@@ -49,16 +50,22 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
     }
     
     //Funciones de profesores
-    public List<String> verAsignaturas() throws RemoteException{
-        List<String> listaNombres = null;
-        List<Asignatura> listaAsignaturas;
-        listaAsignaturas = asignaturaController.listaAsignaturas();
+    public String[] verAsignaturas(String rut) throws RemoteException{
         
-        for(int i=0; i< listaAsignaturas.size();i++ ){
-            listaNombres.add(listaAsignaturas.get(i).getNombre());
-            
+        List<UsuarioAsignatura> listatest;
+        List<Asignatura> AsignaturaName;
+
+        listatest = usuarioAsignaturaController.AsignaturasRut(rut);
+        
+        String listaProbando[] = new String[listatest.size()];
+        
+        for (int i = 0; i < listatest.size(); i++) {
+            AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
+            //System.out.println("ID: " + listatest.get(i).getIdAsignatura());
+            //System.out.println("Nombre: " + AsignaturaName.get(0).getNombre());
+            listaProbando[i] = AsignaturaName.get(0).getNombre(); 
         }
-        return listaNombres;
+        return listaProbando;
     }
     
     public String nombreApellido(String rut) throws RemoteException{
