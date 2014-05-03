@@ -4,6 +4,7 @@
  */
 package interfaceServer;
 
+import java.awt.List;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -13,4 +14,5 @@ import java.rmi.RemoteException;
  */
 public interface InterfaceS extends Remote {
     public String userLogin(String user, String pass) throws RemoteException;
+    public java.util.List<String> verAsignaturas() throws RemoteException;
 }

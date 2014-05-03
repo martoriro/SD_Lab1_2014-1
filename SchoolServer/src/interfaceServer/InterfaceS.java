@@ -15,5 +15,6 @@ import java.util.List;
  */
 public interface InterfaceS extends Remote{
     public String userLogin (String user, String pass) throws RemoteException;
+    public List<String> verAsignaturas() throws RemoteException;
     
 }

@@ -5,6 +5,7 @@
 package implementation;
 
 import entityClass.Anotacion;
+import entityClass.Asignatura;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.NoSuchAlgorithmException;
@@ -22,7 +23,15 @@ import sessionBeans.*;
 public class ServerImplementation extends UnicastRemoteObject implements interfaceServer.InterfaceS {
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
     UsuarioJpaController userFunction = new UsuarioJpaController(factory);
+    AnotacionJpaController anotacionController = new AnotacionJpaController(factory);
+    AsignaturaJpaController asignaturaController = new AsignaturaJpaController(factory);
+    AsistenciaJpaController asistenciaController = new AsistenciaJpaController(factory);
+    MensajeJpaController mensajeController = new MensajeJpaController(factory);
+    PruebaJpaController pruebaController = new PruebaJpaController(factory);
+    UsuarioAsignaturaJpaController usuarioAsignaturaController = new UsuarioAsignaturaJpaController(factory);
     
+    
+        
     public ServerImplementation() throws RemoteException{
         
     }
@@ -37,6 +46,20 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return resp;
     }
-
+    
+    //Funciones de profesores
+    public List<String> verAsignaturas() throws RemoteException{
+        List<String> listaNombres = null;
+        List<Asignatura> listaAsignaturas;
+        listaAsignaturas = asignaturaController.listaAsignaturas();
+        
+        for(int i=0; i< listaAsignaturas.size();i++ ){
+            listaNombres.add(listaAsignaturas.get(i).getNombre());
+            
+        }
+        return listaNombres;
+    }
+    
+    
 
 }
