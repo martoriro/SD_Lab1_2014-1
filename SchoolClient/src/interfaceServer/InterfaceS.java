@@ -15,4 +15,5 @@ import java.rmi.RemoteException;
 public interface InterfaceS extends Remote {
     public String userLogin(String user, String pass) throws RemoteException;
     public java.util.List<String> verAsignaturas() throws RemoteException;
+    public String nombreApellido(String rut) throws RemoteException;
 }

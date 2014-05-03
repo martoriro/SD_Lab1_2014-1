@@ -6,6 +6,7 @@ package implementation;
 
 import entityClass.Anotacion;
 import entityClass.Asignatura;
+import entityClass.Usuario;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.NoSuchAlgorithmException;
@@ -60,6 +61,19 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         return listaNombres;
     }
     
-    
+    public String nombreApellido(String rut) throws RemoteException{
+        String nombreApellido = "";
+        String nombre = null;
+        String apellidoPat = null;
+        String apellidoMat = null;
+        List<Usuario> usuarioPorRut;
+        usuarioPorRut = userFunction.buscarUsuario(rut);
+        nombre = usuarioPorRut.get(0).getNombre();
+        apellidoPat = usuarioPorRut.get(0).getApellidoPat();
+        apellidoMat = usuarioPorRut.get(0).getApellidoMat();
+        nombreApellido = nombre + ", " + apellidoPat + ", " + apellidoMat;
+
+        return nombreApellido;
+    }
 
 }
