@@ -110,8 +110,6 @@ public class alumnoMisNotas extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtNotas);
-        jtNotas.getColumnModel().getColumn(0).setHeaderValue("Fecha Prueba");
-        jtNotas.getColumnModel().getColumn(1).setHeaderValue("Nota");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,11 +162,8 @@ public class alumnoMisNotas extends javax.swing.JFrame {
             
             DefaultTableModel model = (DefaultTableModel) jtNotas.getModel();
             for(int i = 0; i< cant; i++){
-                System.out.println(aux[i]);
-                fila[0] = aux[i].split(".")[0];
-                System.out.println(fila[0]);
-                fila[1] = aux[i].split(".")[1];
-                System.out.println(fila[0]);
+                fila[0] = aux[i].split("/")[0];
+                fila[1] = aux[i].split("/")[1];
                 model.addRow(fila);            
             }
             jtNotas.setModel(model);
