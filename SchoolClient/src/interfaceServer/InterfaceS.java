@@ -16,4 +16,5 @@ public interface InterfaceS extends Remote {
     public String userLogin(String user, String pass) throws RemoteException;
     public String[] verAsignaturas(String rut) throws RemoteException;
     public String nombreApellido(String rut) throws RemoteException;
+    public String[] verNotas(String rut, String nombre) throws RemoteException;
 }

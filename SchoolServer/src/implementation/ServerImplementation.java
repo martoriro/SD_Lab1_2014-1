@@ -6,6 +6,7 @@ package implementation;
 
 import entityClass.Anotacion;
 import entityClass.Asignatura;
+import entityClass.Prueba;
 import entityClass.Usuario;
 import entityClass.UsuarioAsignatura;
 import java.rmi.RemoteException;
@@ -81,6 +82,21 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         nombreApellido = nombre + " " + apellidoPat + " " + apellidoMat;
 
         return nombreApellido;
+    }
+    
+    public String[] verNotas(String rut, String nombre) throws RemoteException{
+        List<Asignatura> Asignaturas;
+        Asignaturas = asignaturaController.idAsignatura(nombre);
+        List<Prueba> listaPruebas;
+        listaPruebas = pruebaController.notasPorAsignatura(rut, Asignaturas.get(0).getIdAsignatura());
+        
+        String listaPruebasNotas[] = new String[listaPruebas.size()];
+        for (int i = 0; i < listaPruebas.size(); i++) {
+            //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
+            
+            listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + " " + listaPruebas.get(i).getNota(); 
+        }
+        return listaPruebasNotas;
     }
 
 }
