@@ -205,7 +205,7 @@ public class MainJoel {
             //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
             
 
-            listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + " " + listaPruebas.get(i).getNota();
+            listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + "." + listaPruebas.get(i).getNota();
         }
 
         for (int i = 0; i < listaPruebasNotas.length; i++) {

@@ -94,7 +94,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         for (int i = 0; i < listaPruebas.size(); i++) {
             //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
             
-            listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + " " + listaPruebas.get(i).getNota(); 
+            listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + "." + listaPruebas.get(i).getNota(); 
         }
         return listaPruebasNotas;
     }
