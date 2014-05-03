@@ -124,7 +124,9 @@ public class Index extends javax.swing.JFrame {
             if(tipoUsuario != null ){
                 switch(tipoUsuario){
                     case "profesor":
-                        System.out.println("hola");
+                        MenuProfesor menuProfesor =new MenuProfesor();
+                        menuProfesor.setVisible(true);
+                        this.hide();
                         break;
                     case "alumno":
                         MenuAlumno menuAlumno = new MenuAlumno();
@@ -132,10 +134,14 @@ public class Index extends javax.swing.JFrame {
                         this.hide();
                         break;
                     case "administrador":
-                        System.out.println("estas");
+                        MenuAdmin menuAdmin = new MenuAdmin();
+                        menuAdmin.setVisible(true);
+                        this.hide();
                         break;
                     case "apoderado":
-                        System.out.println("tu");
+                        MenuApoderado menuApoderado = new MenuApoderado();
+                        menuApoderado.setVisible(true);
+                        this.hide();
                         break;    
                 }
             }else{
