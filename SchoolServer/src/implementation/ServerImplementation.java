@@ -28,8 +28,8 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
     }
 
     @Override
-    public boolean userLogin(String user, String pass) throws RemoteException {
-        boolean resp = false;
+    public String userLogin(String user, String pass) throws RemoteException {
+        String resp = null;
         try {
             resp = userFunction.login(user, pass);
         } catch (NoSuchAlgorithmException ex) {

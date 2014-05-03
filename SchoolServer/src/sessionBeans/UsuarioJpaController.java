@@ -45,13 +45,17 @@ public class UsuarioJpaController implements Serializable {
     }
             
     //Comprueba si se admite el acceso o no
-    public boolean login(String rut, String password) throws NoSuchAlgorithmException{
+    public String login(String rut, String password) throws NoSuchAlgorithmException{
         List<Usuario> user = buscarUsuario(rut);
-        MD5 instancia = new MD5();
+        MD5 instancia = new MD5();        
         if(user.size()==0){
-            return false;
+            return null;
         }else{
-            return user.get(0).getPassword().equals(instancia.encriptar(password));
+            if(user.get(0).getPassword().equals(instancia.encriptar(password))){
+                return user.get(0).getTipo();
+            }else{
+                return null;
+            }
         }
     }
     

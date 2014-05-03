@@ -12,5 +12,5 @@ import java.rmi.RemoteException;
  * @author Gustavo Salvo Lara
  */
 public interface InterfaceS extends Remote {
-    public boolean userLogin(String user, String pass) throws RemoteException;
+    public String userLogin(String user, String pass) throws RemoteException;
 }

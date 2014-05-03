@@ -49,7 +49,6 @@ public class Index extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingreso de Usuario");
-        setAlwaysOnTop(true);
         setName("Index"); // NOI18N
         setResizable(false);
 
@@ -91,8 +90,8 @@ public class Index extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(inputUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -104,8 +103,11 @@ public class Index extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnIngresar))
-                .addGap(26, 26, 26))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        inputPass.getAccessibleContext().setAccessibleName("");
+        inputPass.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,8 +116,9 @@ public class Index extends javax.swing.JFrame {
         user = inputUser.getText();
         password = inputPass.getText();
         try {
-            if(connection.getServer().userLogin(user, password)){
-                System.out.println("pase usted");
+            String tipoUsuario = connection.getServer().userLogin(user, password);
+            if(tipoUsuario != null ){
+                System.out.println("pase usted " + tipoUsuario);
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta.\n Inténtelo nuevamente.", "ERROR", JOptionPane.WARNING_MESSAGE);
             }
