@@ -7,12 +7,15 @@
             <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/META-INF/persistence.xml</file>
         </group>
         <group>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/sessionBeans/AsistenciaJpaController.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/rmiServer/MainGustavo.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/entityClass/mergeClasses/AsistenciaRamo.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/entityClass/Asistencia.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/rmiServer/MainMartin.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/rmiServer/MainJoel.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/sessionBeans/UsuarioJpaController.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/sessionBeans/UsuarioAsignaturaJpaController.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/implementation/ServerImplementation.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/rmiServer/MainJoel.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/entityClass/Asignatura.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/entityClass/Prueba.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/sessionBeans/PruebaJpaController.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/sessionBeans/AsignaturaJpaController.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/interfaceServer/InterfaceS.java</file>
         </group>
     </open-files>
 </project-private>
