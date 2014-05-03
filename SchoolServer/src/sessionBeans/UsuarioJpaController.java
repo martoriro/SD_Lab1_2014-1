@@ -48,7 +48,11 @@ public class UsuarioJpaController implements Serializable {
     public boolean login(String rut, String password) throws NoSuchAlgorithmException{
         List<Usuario> user = buscarUsuario(rut);
         MD5 instancia = new MD5();
-        return user.get(0).getPassword().equals(instancia.encriptar(password));
+        if(user.size()==0){
+            return false;
+        }else{
+            return user.get(0).getPassword().equals(instancia.encriptar(password));
+        }
     }
     
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {

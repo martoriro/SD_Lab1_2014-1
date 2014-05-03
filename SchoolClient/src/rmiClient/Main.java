@@ -6,27 +6,22 @@ package rmiClient;
 
 import java.rmi.RemoteException;
 import rmiClient.RmiConnection;
+import viewClient.Index;
 
 /**
  *
  * @author Gustavo Salvo Lara
  */
 public class Main {
-    private static RmiConnection connection = new RmiConnection();
+    
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws RemoteException {
-        if(connection.rmiRegistry()){
-            if(connection.getServer().userLogin("juanito", "1234")){
-                System.out.println("Bienvenido :)");
-            }else{
-                System.out.println("No eres Bienvenido :(");
-            }
-            
-        }else{
-            System.out.println("no se pudo :(");
-        }
+        Index login = new Index();
+        login.setVisible(true);
+        
+
     }
 }

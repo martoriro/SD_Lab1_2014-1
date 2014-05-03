@@ -6,7 +6,6 @@ package rmiServer;
 
 import java.rmi.RemoteException;
 import viewServer.Index;
-import viewServer.Index2;
 
 /**
  *
@@ -16,10 +15,7 @@ public class MainGustavo {
     
     
     public static void main(String[] args) throws RemoteException, Exception {
-        
-        Index2 window = new Index2();
-        window.setVisible(true);
-        System.out.println("no sale :(");
-        
+        Index window = new Index();        
+        window.setVisible(true);        
     }
 }

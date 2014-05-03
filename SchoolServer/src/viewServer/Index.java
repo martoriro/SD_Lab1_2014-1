@@ -1,28 +1,28 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package viewServer;
 
-import java.rmi.registry.Registry;
-import rmiServer.RmiConnection;
 import implementation.ServerImplementation;
+import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.rmi.RemoteException;
+import rmiServer.RmiConnection;
+
 /**
  *
- * @author Martín
+ * @author Gustavo Salvo Lara
  */
 public class Index extends javax.swing.JFrame {
-    private RmiConnection conexion = new RmiConnection();
+    RmiConnection conexion = new RmiConnection();
     /**
      * Creates new form Index
      */
     public Index() {
         initComponents();
+        btnStop.setEnabled(false);
     }
 
     /**
@@ -35,68 +35,77 @@ public class Index extends javax.swing.JFrame {
     private void initComponents() {
 
         btnRun = new javax.swing.JButton();
-        btnPause = new javax.swing.JButton();
+        btnStop = new javax.swing.JButton();
 
-        btnRun.setText("Run");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Consola Servidor");
+        setAlwaysOnTop(true);
+        setResizable(false);
+
+        btnRun.setText("Strart");
         btnRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRunActionPerformed(evt);
             }
         });
 
-        btnPause.setText("Pause");
-        btnPause.addActionListener(new java.awt.event.ActionListener() {
+        btnStop.setText("Stop");
+        btnStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPauseActionPerformed(evt);
+                btnStopActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPause, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
-        Registry registro;
+       Registry registro;
         try {
             registro = conexion.getRegistry();
             ServerImplementation objeto = new ServerImplementation();
             registro.rebind("IMP", objeto);
             this.btnRun.setEnabled(false);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRunActionPerformed
-
-    private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
-        try {
-            conexion.stop();
-            this.btnRun.setEnabled(true);
+            this.btnStop.setEnabled(true);
         } catch (RemoteException ex) {
             Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnPauseActionPerformed
+    }//GEN-LAST:event_btnRunActionPerformed
 
+    private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
+        try {
+            conexion.stop();
+            this.btnRun.setEnabled(true);
+            this.btnStop.setEnabled(false);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnStopActionPerformed
 
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPause;
     private javax.swing.JButton btnRun;
+    private javax.swing.JButton btnStop;
     // End of variables declaration//GEN-END:variables
 }

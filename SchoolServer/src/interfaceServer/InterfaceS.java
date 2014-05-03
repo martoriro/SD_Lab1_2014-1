@@ -15,5 +15,5 @@ import java.util.List;
  */
 public interface InterfaceS extends Remote{
     public boolean userLogin (String user, String pass) throws RemoteException;
-    public List<Anotacion> filtrarAnotaciones(String rut, String tipo) throws RemoteException;
+    
 }
