@@ -71,7 +71,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         nombre = usuarioPorRut.get(0).getNombre();
         apellidoPat = usuarioPorRut.get(0).getApellidoPat();
         apellidoMat = usuarioPorRut.get(0).getApellidoMat();
-        nombreApellido = nombre + ", " + apellidoPat + ", " + apellidoMat;
+        nombreApellido = nombre + " " + apellidoPat + " " + apellidoMat;
 
         return nombreApellido;
     }
