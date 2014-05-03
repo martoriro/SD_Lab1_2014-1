@@ -129,7 +129,7 @@ public class Index extends javax.swing.JFrame {
                         this.hide();
                         break;
                     case "alumno":
-                        MenuAlumno menuAlumno = new MenuAlumno();
+                        MenuAlumno menuAlumno = new MenuAlumno(user);
                         menuAlumno.setVisible(true);
                         this.hide();
                         break;
