@@ -32,6 +32,8 @@ public class AsignaturaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+   
+    
     //Funcionalidad para ver todas las asignaturas
     public List<Asignatura> listaAsignaturas(){
         EntityManager em = getEntityManager();

@@ -19,5 +19,6 @@ public interface InterfaceS extends Remote{
     public String nombreApellido(String rut) throws RemoteException;
     public String[] verNotas(String rut, String nombre) throws RemoteException;
     public float calculaPromedioAsignatura(String asignatura, String rut) throws RemoteException;
-    
+    public String[][] asignaturaPromedioAlumno(String rut) throws RemoteException;
+    public float promedioGeneralAlumno(String rut) throws RemoteException;
 }

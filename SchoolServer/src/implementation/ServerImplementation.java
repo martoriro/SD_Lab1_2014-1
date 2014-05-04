@@ -50,6 +50,29 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         return resp;
     }
     
+    public float promedioGeneralAlumno(String rut){
+        String[][]promAsig = asignaturaPromedioAlumno(rut);
+        float sum=0;
+        for(int i = 0; i< promAsig[0].length ; i++){
+            sum += Float.parseFloat(promAsig[1][i]);            
+        }
+        float prom = sum/promAsig[0].length;
+        return Float.parseFloat(Math.round(prom*Math.pow(10,1))/Math.pow(10,1)+"");
+    }
+    
+    public String[][] asignaturaPromedioAlumno(String rut){
+        List<UsuarioAsignatura> asignaturas = usuarioAsignaturaController.AsignaturasRut(rut);
+        int cantAsignaturas = asignaturas.size();
+        String asigProm[][] = new String [2][cantAsignaturas] ;
+        for(int i = 0; i<cantAsignaturas; i++){
+            asigProm[0][i] = (asignaturaController.nombreAsignatura(asignaturas.get(i).getIdAsignatura()).get(0).getNombre());
+            
+            asigProm[1][i] = (pruebaController.sacaPromedioRamo(rut,asignaturas.get(i).getIdAsignatura())+"");
+            
+        }
+        return asigProm;
+        
+    }
     
     public float calculaPromedioAsignatura(String asignatura, String rut){
         int idAsignatura = Integer.parseInt(asignaturaController.idAsignatura(asignatura).get(0).getIdAsignatura()+"");

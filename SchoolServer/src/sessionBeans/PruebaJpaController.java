@@ -57,18 +57,11 @@ public class PruebaJpaController implements Serializable {
         return sacaPromedio(query.getResultList());
     }
     
-    //calcula el promedio general de un alumno
-    public float promedioGeneralAlumno(String rut){
-        EntityManager em = getEntityManager();
-        Query query;
-        query = em.createNamedQuery("Prueba.findByRut").setParameter("rut", rut);
-        return sacaPromedio(query.getResultList());
-        
-    }
     
     //saca el promedio de notas de una lista de Pruebas
     public float sacaPromedio(List<Prueba> p){
         int cant = p.size();
+        System.out.println(p.get(0).getFecha());
         float prom = 0;
         float sum = 0;
         for(int i = 0; i< cant; i++){

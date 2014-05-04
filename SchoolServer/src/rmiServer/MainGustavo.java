@@ -16,8 +16,7 @@ public class MainGustavo {
     
     
     public static void main(String[] args) throws RemoteException, Exception {
-        ServerImplementation a = new ServerImplementation();
-        a.calculaPromedioAsignatura("matematicas", "17409487z");
+        ServerImplementation a = new ServerImplementation();        
         Index window = new Index();        
         window.setVisible(true);        
     }

@@ -548,6 +548,27 @@ public class MenuAlumno extends javax.swing.JFrame {
     private void menuPromedioGeneralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPromedioGeneralActionPerformed
         ocultaVentanas();
         jPPromedio.setVisible(rootPaneCheckingEnabled);
+        try {
+            String asignaturas[][] =  connection.getServer().asignaturaPromedioAlumno(rut);
+            if(asignaturas[0].length>0){
+                DefaultTableModel model = (DefaultTableModel) jtPromedios.getModel();
+                model.setRowCount(0);
+                String aux[] = new String[2];
+                
+                for(int i = 0; i< asignaturas[0].length; i++){
+                    aux[0]= asignaturas[0][i];
+                    aux[1]= asignaturas[1][i];
+                    model.addRow(aux);
+                }
+                jtPromedios.setModel(model);
+                txtPromGeneral.setText(connection.getServer().promedioGeneralAlumno(rut)+"");
+            }else{
+                
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_menuPromedioGeneralActionPerformed
 
     private void cbAsignaturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsignaturasActionPerformed
