@@ -4,6 +4,7 @@
  */
 package viewClient;
 
+import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,7 @@ public class Index extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingreso de Usuario");
         setName("Index"); // NOI18N
         setResizable(false);
@@ -125,21 +127,25 @@ public class Index extends javax.swing.JFrame {
                 switch(tipoUsuario){
                     case "profesor":
                         MenuProfesor menuProfesor =new MenuProfesor();
+                        menuProfesor.setExtendedState(MAXIMIZED_BOTH);
                         menuProfesor.setVisible(true);
                         this.hide();
                         break;
                     case "alumno":
                         MenuAlumno menuAlumno = new MenuAlumno(user);
+                        menuAlumno.setExtendedState(MAXIMIZED_BOTH);
                         menuAlumno.setVisible(true);
                         this.hide();
                         break;
                     case "administrador":
                         MenuAdmin menuAdmin = new MenuAdmin();
-                        menuAdmin.setVisible(true);
+                        menuAdmin.setExtendedState(MAXIMIZED_BOTH);
+                        menuAdmin.setVisible(true);                        
                         this.hide();
                         break;
                     case "apoderado":
                         MenuApoderado menuApoderado = new MenuApoderado();
+                        menuApoderado.setExtendedState(MAXIMIZED_BOTH);
                         menuApoderado.setVisible(true);
                         this.hide();
                         break;    
