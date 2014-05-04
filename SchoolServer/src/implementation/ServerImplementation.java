@@ -50,7 +50,13 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         return resp;
     }
     
-    //Funciones de profesores
+    
+    public float calculaPromedioAsignatura(String asignatura, String rut){
+        int idAsignatura = Integer.parseInt(asignaturaController.idAsignatura(asignatura).get(0).getIdAsignatura()+"");
+        return pruebaController.sacaPromedioRamo(rut, idAsignatura);        
+    }
+    
+    
     public String[] verAsignaturas(String rut) throws RemoteException{
         
         List<UsuarioAsignatura> listatest;

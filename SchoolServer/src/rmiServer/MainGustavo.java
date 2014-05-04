@@ -4,6 +4,7 @@
  */
 package rmiServer;
 
+import implementation.ServerImplementation;
 import java.rmi.RemoteException;
 import viewServer.Index;
 
@@ -15,6 +16,8 @@ public class MainGustavo {
     
     
     public static void main(String[] args) throws RemoteException, Exception {
+        ServerImplementation a = new ServerImplementation();
+        a.calculaPromedioAsignatura("matematicas", "17409487z");
         Index window = new Index();        
         window.setVisible(true);        
     }

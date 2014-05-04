@@ -32,7 +32,13 @@ public class PruebaJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
+    
+    //redondear un numero
+    public float round(float i){
+        float aux = Float.parseFloat(Math.round(i*Math.pow(10,1))/Math.pow(10,1)+"");
+        return aux ;
+    }
+   
     //calucla el promedio de una prueba de una asignatura realizada en una fecha
     public float promedioGeneralPrueba(Date fecha, int id_asignatura){
         EntityManager em = getEntityManager();
@@ -69,7 +75,7 @@ public class PruebaJpaController implements Serializable {
             sum += p.get(i).getNota();            
         }
         prom = sum/cant;
-        return prom;
+        return round(prom);
     }
     
     //identifica las notas de un alumno de una asignatura
