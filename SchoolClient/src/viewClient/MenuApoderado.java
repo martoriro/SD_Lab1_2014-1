@@ -796,6 +796,8 @@ public class MenuApoderado extends javax.swing.JFrame {
     private void btnVerNotasRamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotasRamosActionPerformed
         String asignatura = (String)cbMateriaRamos.getSelectedItem();
         try {
+            jLabel31.setText("PROFESOR");
+            jLabel31.setText("PROFESOR: "+connection.getServer().obtenerProfesor(cbMateriaRamos.getSelectedItem()+""));
             String aux[] = connection.getServer().verNotas(rutAlumnos[cbAlumnoRamos.getSelectedIndex()], asignatura);
             int cant  = aux.length;
             Object[] fila = new Object[2];
@@ -808,6 +810,7 @@ public class MenuApoderado extends javax.swing.JFrame {
             }
             jtNotas.setModel(model);
             txtProm.setText(connection.getServer().calculaPromedioAsignatura(asignatura, rutAlumnos[cbAlumnoRamos.getSelectedIndex()])+"");
+            
         } catch (RemoteException ex) {
             Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e){
