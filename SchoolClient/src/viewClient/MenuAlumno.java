@@ -283,6 +283,7 @@ public class MenuAlumno extends javax.swing.JFrame {
         contAnotacion.setEditable(false);
         contAnotacion.setColumns(20);
         contAnotacion.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        contAnotacion.setLineWrap(true);
         contAnotacion.setRows(5);
         jScrollPane4.setViewportView(contAnotacion);
 
@@ -389,6 +390,7 @@ public class MenuAlumno extends javax.swing.JFrame {
 
         contMensaje.setColumns(20);
         contMensaje.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        contMensaje.setLineWrap(true);
         contMensaje.setRows(5);
         jScrollPane6.setViewportView(contMensaje);
 
@@ -445,7 +447,7 @@ public class MenuAlumno extends javax.swing.JFrame {
             .addGroup(JpMensajesLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addGap(11, 11, 11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(JpMensajesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -558,7 +560,7 @@ public class MenuAlumno extends javax.swing.JFrame {
                 .addComponent(JpAnotaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JpMensajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -568,7 +570,7 @@ public class MenuAlumno extends javax.swing.JFrame {
         JpAnotaciones.setVisible(false);
         JpMensajes.setVisible(false);
         jPAsignatura.setVisible(false);
-        jPPromedio.setVisible(false);        
+        jPPromedio.setVisible(false);     
     }
     
     private void menuMisNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMisNotasActionPerformed
