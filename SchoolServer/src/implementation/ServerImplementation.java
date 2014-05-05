@@ -209,7 +209,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
             rut = listaProfesores.get(i).getRut();
             for (int j = 0; j < listaUsuariosAsignaturas.size(); j++) {
                 if (rut.equals(listaUsuariosAsignaturas.get(j).getRut())) {
-                    nombre = rut;
+                    nombre = listaProfesores.get(i).getNombre();
                 } else {
                     //nada
                 }

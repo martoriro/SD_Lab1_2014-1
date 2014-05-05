@@ -243,7 +243,7 @@ public class MainJoel {
             rut = listaProfesores.get(i).getRut();
             for (int j = 0; j < listaUsuariosAsignaturas.size(); j++) {
                 if (rut.equals(listaUsuariosAsignaturas.get(j).getRut())) {
-                    nombre2 = rut;
+                    nombre2 = listaProfesores.get(i).getNombre();
                 } else {
                     //nada
                 }
