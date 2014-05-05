@@ -49,6 +49,34 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return resp;
     }
+    public String[] miAnotacion(int idAnotacion) throws RemoteException{
+        List<Anotacion> anotaciones = anotacionController.miAnotacion(idAnotacion);
+        String resultado[] = new String[3];
+        resultado[0] = anotaciones.get(0).getFecha()+"";
+        resultado[1] = nombreApellido(anotaciones.get(0).getRutProfesor()+"");
+        resultado[2] = anotaciones.get(0).getContenido()+"";
+        return resultado;
+    }
+    
+    public String[] filtraAnotaciones(String rut,String tipo){
+        List<Anotacion> anotaciones = anotacionController.filtrarAnotaciones(rut, tipo);
+        int cant = anotaciones.size();
+        String anotacionesFiltradas[] = new String[cant];
+        for(int i = 0; i<cant; i++){
+            anotacionesFiltradas[i] = anotaciones.get(i).getIdAnotacion()+"";
+        }
+        return anotacionesFiltradas;
+    }
+    
+    public String[] anotacionesTodas(String rut){
+        List<Anotacion> anotaciones = anotacionController.buscarAnotaciones(rut);
+        int cant = anotaciones.size();
+        String anotacionesFiltradas[] = new String[cant];
+        for(int i = 0; i<cant; i++){
+            anotacionesFiltradas[i] = anotaciones.get(i).getIdAnotacion()+"";
+        }
+        return anotacionesFiltradas;
+    }
     
     public float promedioGeneralAlumno(String rut){
         String[][]promAsig = asignaturaPromedioAlumno(rut);

@@ -42,6 +42,15 @@ public class AnotacionJpaController implements Serializable {
         
         return query.getResultList();
     }
+    public List<Anotacion> miAnotacion(int idAnotacion){
+        EntityManager em = getEntityManager();
+        Query query;
+        
+        query = em.createNamedQuery("Anotacion.findByIdAnotacion").
+                setParameter("idAnotacion", idAnotacion);
+        
+        return query.getResultList();
+    }
     
     public List<Anotacion> buscarAnotaciones(String rut){
         EntityManager em = getEntityManager();

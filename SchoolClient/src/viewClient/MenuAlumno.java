@@ -7,6 +7,8 @@ package viewClient;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import rmiClient.RmiConnection;
 
@@ -26,7 +28,9 @@ public class MenuAlumno extends javax.swing.JFrame {
         rut = user;
         txtBv.setText("BIENVENIDO(A) ALUMNO(A): " + connection.getServer().nombreApellido(rut).toUpperCase());
         ocultaVentanas();
-        
+        cbTipoAnotacion.addItem("Todas");
+        cbTipoAnotacion.addItem("Positivas");
+        cbTipoAnotacion.addItem("Negativas");
     }
 
     /**
@@ -65,6 +69,10 @@ public class MenuAlumno extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         bntVerAnotacion = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JTextField();
+        txtProfesor = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         JpMensajes = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         contMensaje = new javax.swing.JTextArea();
@@ -267,15 +275,11 @@ public class MenuAlumno extends javax.swing.JFrame {
             }
         });
 
+        contAnotacion.setEditable(false);
         contAnotacion.setColumns(20);
         contAnotacion.setRows(5);
         jScrollPane4.setViewportView(contAnotacion);
 
-        listaAnotaciones.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane5.setViewportView(listaAnotaciones);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -288,7 +292,15 @@ public class MenuAlumno extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Fecha de la Anotación:");
+        jLabel7.setText("ID Anotación:");
+
+        txtFecha.setEditable(false);
+
+        txtProfesor.setEditable(false);
+
+        jLabel11.setText("Fecha:");
+
+        jLabel12.setText("Profesor:");
 
         javax.swing.GroupLayout JpAnotacionesLayout = new javax.swing.GroupLayout(JpAnotaciones);
         JpAnotaciones.setLayout(JpAnotacionesLayout);
@@ -297,7 +309,6 @@ public class MenuAlumno extends javax.swing.JFrame {
             .addGroup(JpAnotacionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
                     .addGroup(JpAnotacionesLayout.createSequentialGroup()
                         .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(bntVerAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -306,10 +317,19 @@ public class MenuAlumno extends javax.swing.JFrame {
                                 .addComponent(cbTipoAnotacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtProfesor)
+                                    .addComponent(txtFecha)))))
+                    .addComponent(jLabel5)
                     .addComponent(jLabel7))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
         JpAnotacionesLayout.setVerticalGroup(
             JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,11 +343,21 @@ public class MenuAlumno extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bntVerAnotacion)
+                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(bntVerAnotacion))
+                    .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                        .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -537,7 +567,10 @@ public class MenuAlumno extends javax.swing.JFrame {
 
     private void menuMisAnotacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMisAnotacionesActionPerformed
         ocultaVentanas();
+        listaAnotaciones.removeAll();
+        contAnotacion.setText("");
         JpAnotaciones.setVisible(rootPaneCheckingEnabled);
+        
     }//GEN-LAST:event_menuMisAnotacionesActionPerformed
 
     private void menuMensajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMensajesActionPerformed
@@ -602,11 +635,49 @@ public class MenuAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_cbTipoAnotacionActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        // TODO add your handling code here:
+        String tipoAnotacion = (String)cbTipoAnotacion.getSelectedItem();
+        listaAnotaciones.removeAll();
+        contAnotacion.setText("");
+        String[] anotaciones;
+        try{
+            if(tipoAnotacion.equals("Todas")){
+                DefaultListModel modelo1 = new DefaultListModel();
+                anotaciones = connection.getServer().anotacionesTodas(rut);
+                for(int i = 0 ; i< anotaciones.length; i++){
+                    modelo1.addElement(anotaciones[i]);
+                }
+                listaAnotaciones.setModel(modelo1);
+            }if(tipoAnotacion.equals("Positivas")){
+                DefaultListModel modelo2 = new DefaultListModel();
+                anotaciones = connection.getServer().filtraAnotaciones(rut, "positiva");
+                for(int i = 0 ; i< anotaciones.length; i++){
+                    modelo2.addElement(anotaciones[i]);
+                }
+                listaAnotaciones.setModel(modelo2);
+            }if(tipoAnotacion.equals("Negativas")){
+                DefaultListModel modelo3 = new DefaultListModel();
+                anotaciones = connection.getServer().filtraAnotaciones(rut, "negativa");
+                for(int i = 0 ; i< anotaciones.length; i++){
+                    modelo3.addElement(anotaciones[i]);
+                }
+                listaAnotaciones.setModel(modelo3);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void bntVerAnotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVerAnotacionActionPerformed
-        // TODO add your handling code here:
+        int idAnotacion = Integer.parseInt(listaAnotaciones.getSelectedValue()+"");
+        try {
+            String anotacion[] = connection.getServer().miAnotacion(idAnotacion);
+            txtFecha.setText(anotacion[0]);
+            txtProfesor.setText(anotacion[1]);                   
+            contAnotacion.setText(anotacion[2]);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_bntVerAnotacionActionPerformed
 
     private void cbAsuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsuntoActionPerformed
@@ -641,6 +712,8 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JTextArea contMensaje;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -670,6 +743,8 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMisNotas;
     private javax.swing.JMenuItem menuPromedioGeneral;
     private javax.swing.JLabel txtBv;
+    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtProfesor;
     private javax.swing.JLabel txtProm;
     private javax.swing.JLabel txtPromGeneral;
     // End of variables declaration//GEN-END:variables
