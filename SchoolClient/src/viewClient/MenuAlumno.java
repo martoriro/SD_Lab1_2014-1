@@ -638,6 +638,8 @@ public class MenuAlumno extends javax.swing.JFrame {
         String tipoAnotacion = (String)cbTipoAnotacion.getSelectedItem();
         listaAnotaciones.removeAll();
         contAnotacion.setText("");
+        txtProfesor.setText("");
+        txtFecha.setText("");
         String[] anotaciones;
         try{
             if(tipoAnotacion.equals("Todas")){
