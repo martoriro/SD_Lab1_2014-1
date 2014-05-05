@@ -27,4 +27,5 @@ public interface InterfaceS extends Remote{
     public String[] leerMensaje(int id) throws RemoteException;
     public String[] listarMensajes(String tipo) throws RemoteException;
     public String tipoUsuario(String rut) throws RemoteException;
+    public String[] obtenerHijos(String rutApoderado) throws RemoteException;
 }

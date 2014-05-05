@@ -60,6 +60,17 @@ public class UsuarioJpaController implements Serializable {
         }
     }
     
+    //Lista que retorna los apoderados de un padre
+    public List<Usuario> buscarHijos(String rutApoderado){
+        EntityManager em = getEntityManager();
+        Query query;
+        
+        query = em.createNamedQuery("Usuario.findByRutApoderado").
+                setParameter("rutApoderado", rutApoderado);
+        
+        return query.getResultList();
+    }
+    
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {

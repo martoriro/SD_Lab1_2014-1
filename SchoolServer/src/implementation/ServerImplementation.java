@@ -25,6 +25,7 @@ import sessionBeans.*;
  * @author Gustavo Salvo Lara
  */
 public class ServerImplementation extends UnicastRemoteObject implements interfaceServer.InterfaceS {
+
     EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
     UsuarioJpaController userFunction = new UsuarioJpaController(factory);
     AnotacionJpaController anotacionController = new AnotacionJpaController(factory);
@@ -33,11 +34,8 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
     MensajeJpaController mensajeController = new MensajeJpaController(factory);
     PruebaJpaController pruebaController = new PruebaJpaController(factory);
     UsuarioAsignaturaJpaController usuarioAsignaturaController = new UsuarioAsignaturaJpaController(factory);
-    
-    
-        
-    public ServerImplementation() throws RemoteException{
-        
+
+    public ServerImplementation() throws RemoteException {
     }
 
     @Override
@@ -50,108 +48,108 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return resp;
     }
-    
-    public String tipoUsuario(String rut){
+
+    public String tipoUsuario(String rut) {
         Usuario user = userFunction.buscarUsuario(rut).get(0);
         return user.getTipo();
     }
-    
-    public String[] leerMensaje(int id){
-        String mensaje[]= new String[3];
-        Mensaje msg =mensajeController.findMensaje(id); 
-        mensaje[0] = msg.getFecha()+"";
+
+    public String[] leerMensaje(int id) {
+        String mensaje[] = new String[3];
+        Mensaje msg = mensajeController.findMensaje(id);
+        mensaje[0] = msg.getFecha() + "";
         mensaje[1] = msg.getAsunto();
-        mensaje[2] = msg.getContenido();        
+        mensaje[2] = msg.getContenido();
         return mensaje;
     }
-    
-    public String[] listarMensajes(String tipo){
+
+    public String[] listarMensajes(String tipo) {
         List<Mensaje> mensaje = mensajeController.mensajeEspecifico(tipo);
         String idMensajes[] = new String[mensaje.size()];
-        for(int i = 0; i < idMensajes.length; i++){
-            idMensajes[i] = mensaje.get(i).getIdMensaje()+"";
-        }        
+        for (int i = 0; i < idMensajes.length; i++) {
+            idMensajes[i] = mensaje.get(i).getIdMensaje() + "";
+        }
         return idMensajes;
     }
-    
-    public String[] miAnotacion(int idAnotacion) throws RemoteException{
+
+    public String[] miAnotacion(int idAnotacion) throws RemoteException {
         List<Anotacion> anotaciones = anotacionController.miAnotacion(idAnotacion);
         String resultado[] = new String[4];
-        resultado[0] = anotaciones.get(0).getFecha()+"";
-        resultado[1] = nombreApellido(anotaciones.get(0).getRutProfesor()+"");
-        resultado[2] = anotaciones.get(0).getContenido()+"";
-        resultado[3] = anotaciones.get(0).getTipoAnotacion()+"";
+        resultado[0] = anotaciones.get(0).getFecha() + "";
+        resultado[1] = nombreApellido(anotaciones.get(0).getRutProfesor() + "");
+        resultado[2] = anotaciones.get(0).getContenido() + "";
+        resultado[3] = anotaciones.get(0).getTipoAnotacion() + "";
         return resultado;
     }
-    
-    public String[] filtraAnotaciones(String rut,String tipo){
+
+    public String[] filtraAnotaciones(String rut, String tipo) {
         List<Anotacion> anotaciones = anotacionController.filtrarAnotaciones(rut, tipo);
         int cant = anotaciones.size();
         String anotacionesFiltradas[] = new String[cant];
-        for(int i = 0; i<cant; i++){
-            anotacionesFiltradas[i] = anotaciones.get(i).getIdAnotacion()+"";
+        for (int i = 0; i < cant; i++) {
+            anotacionesFiltradas[i] = anotaciones.get(i).getIdAnotacion() + "";
         }
         return anotacionesFiltradas;
     }
-    
-    public String[] anotacionesTodas(String rut){
+
+    public String[] anotacionesTodas(String rut) {
         List<Anotacion> anotaciones = anotacionController.buscarAnotaciones(rut);
         int cant = anotaciones.size();
         String anotacionesFiltradas[] = new String[cant];
-        for(int i = 0; i<cant; i++){
-            anotacionesFiltradas[i] = anotaciones.get(i).getIdAnotacion()+"";
+        for (int i = 0; i < cant; i++) {
+            anotacionesFiltradas[i] = anotaciones.get(i).getIdAnotacion() + "";
         }
         return anotacionesFiltradas;
     }
-    
-    public float promedioGeneralAlumno(String rut){
-        String[][]promAsig = asignaturaPromedioAlumno(rut);
-        float sum=0;
-        for(int i = 0; i< promAsig[0].length ; i++){
-            sum += Float.parseFloat(promAsig[1][i]);            
+
+    public float promedioGeneralAlumno(String rut) {
+        String[][] promAsig = asignaturaPromedioAlumno(rut);
+        float sum = 0;
+        for (int i = 0; i < promAsig[0].length; i++) {
+            sum += Float.parseFloat(promAsig[1][i]);
         }
-        float prom = sum/promAsig[0].length;
-        return Float.parseFloat(Math.round(prom*Math.pow(10,1))/Math.pow(10,1)+"");
+        float prom = sum / promAsig[0].length;
+        return Float.parseFloat(Math.round(prom * Math.pow(10, 1)) / Math.pow(10, 1) + "");
     }
-    
-    public String[][] asignaturaPromedioAlumno(String rut){
+
+    public String[][] asignaturaPromedioAlumno(String rut) {
         List<UsuarioAsignatura> asignaturas = usuarioAsignaturaController.AsignaturasRut(rut);
         int cantAsignaturas = asignaturas.size();
-        String asigProm[][] = new String [2][cantAsignaturas] ;
-        for(int i = 0; i<cantAsignaturas; i++){
+        String asigProm[][] = new String[2][cantAsignaturas];
+        for (int i = 0; i < cantAsignaturas; i++) {
             asigProm[0][i] = (asignaturaController.nombreAsignatura(asignaturas.get(i).getIdAsignatura()).get(0).getNombre());
-            
-            asigProm[1][i] = (pruebaController.sacaPromedioRamo(rut,asignaturas.get(i).getIdAsignatura())+"");
-            
+
+            asigProm[1][i] = (pruebaController.sacaPromedioRamo(rut, asignaturas.get(i).getIdAsignatura()) + "");
+
         }
         return asigProm;
-        
+
     }
-    
-    public float calculaPromedioAsignatura(String asignatura, String rut){
-        int idAsignatura = Integer.parseInt(asignaturaController.idAsignatura(asignatura).get(0).getIdAsignatura()+"");
-        return pruebaController.sacaPromedioRamo(rut, idAsignatura);        
+
+    public float calculaPromedioAsignatura(String asignatura, String rut) {
+        int idAsignatura = Integer.parseInt(asignaturaController.idAsignatura(asignatura).get(0).getIdAsignatura() + "");
+        return pruebaController.sacaPromedioRamo(rut, idAsignatura);
     }
-    
-    public String[] verAsignaturas(String rut) throws RemoteException{
-        
+
+    public String[] verAsignaturas(String rut) throws RemoteException {
+
         List<UsuarioAsignatura> listatest;
         List<Asignatura> AsignaturaName;
 
         listatest = usuarioAsignaturaController.AsignaturasRut(rut);
-        
+
         String listaProbando[] = new String[listatest.size()];
-        
+
         for (int i = 0; i < listatest.size(); i++) {
             AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
             //System.out.println("ID: " + listatest.get(i).getIdAsignatura());
             //System.out.println("Nombre: " + AsignaturaName.get(0).getNombre());
-            listaProbando[i] = AsignaturaName.get(0).getNombre(); 
+            listaProbando[i] = AsignaturaName.get(0).getNombre();
         }
         return listaProbando;
     }
-    
-    public String nombreApellido(String rut) throws RemoteException{
+
+    public String nombreApellido(String rut) throws RemoteException {
         String nombreApellido = "";
         String nombre = null;
         String apellidoPat = null;
@@ -165,24 +163,32 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
 
         return nombreApellido;
     }
-    
-    public String[] verNotas(String rut, String nombre) throws RemoteException{
+
+    public String[] verNotas(String rut, String nombre) throws RemoteException {
         List<Asignatura> Asignaturas;
         Asignaturas = asignaturaController.idAsignatura(nombre);
         List<Prueba> listaPruebas;
         listaPruebas = pruebaController.notasPorAsignatura(rut, Asignaturas.get(0).getIdAsignatura());
-        
+
         String listaPruebasNotas[] = new String[listaPruebas.size()];
         for (int i = 0; i < listaPruebas.size(); i++) {
             //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
-            
-            listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + "/" + listaPruebas.get(i).getNota(); 
+
+            listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + "/" + listaPruebas.get(i).getNota();
         }
         return listaPruebasNotas;
     }
 
- 
+    public String[] obtenerHijos(String rutApoderado) throws RemoteException {
+        List<Usuario> listaHijos;
+        listaHijos = userFunction.buscarHijos(rutApoderado);
+        String hijos[] = new String[listaHijos.size()];
 
+        for (int i = 0; i < listaHijos.size(); i++) {
+            //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
 
-
+            hijos[i] = listaHijos.get(i).getRut() + "," + listaHijos.get(i).getNombre() + " " + listaHijos.get(i).getApellidoPat() + " " + listaHijos.get(i).getApellidoMat();
+        }
+        return hijos;
+    }
 }
