@@ -191,4 +191,31 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return hijos;
     }
+
+    public String obtenerProfesor(String materia) throws Exception{
+        List<Asignatura> listaAsignaturas;
+        listaAsignaturas = asignaturaController.idAsignatura(materia);
+        int idAsignatura;
+        idAsignatura = listaAsignaturas.get(0).getIdAsignatura();
+        String rut;
+        String nombre = "";
+        List<UsuarioAsignatura> listaUsuariosAsignaturas;
+        listaUsuariosAsignaturas = usuarioAsignaturaController.AsignaturasID(idAsignatura);
+        //Ahora obtengo los profesores
+        List<Usuario> listaProfesores;
+        listaProfesores = userFunction.buscarProfesor();
+
+        for (int i = 0; i < listaProfesores.size(); i++) {
+            rut = listaProfesores.get(i).getRut();
+            for (int j = 0; j < listaUsuariosAsignaturas.size(); j++) {
+                if (rut.equals(listaUsuariosAsignaturas.get(j).getRut())) {
+                    nombre = rut;
+                } else {
+                    //nada
+                }
+            }
+        }
+
+        return nombre;
+    }
 }

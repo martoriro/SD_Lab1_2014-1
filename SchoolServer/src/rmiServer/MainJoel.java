@@ -46,7 +46,7 @@ public class MainJoel {
     public static void main(String[] args) throws RemoteException, Exception {
 
         System.out.println("FUNCIONALIDAD QUE ECRIPTA EN MD5");
-        String password = "c";
+        String password = "h";
         String passwordEncriptada;
         MD5 instancia = new MD5();
         passwordEncriptada = instancia.encriptar(password);
@@ -56,7 +56,7 @@ public class MainJoel {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
 
-        Usuario nuevoUsuario = new Usuario("c", passwordEncriptada, "Martin", 23, "apoderado", "Gonzales", "Botero");
+        Usuario nuevoUsuario = new Usuario("h", passwordEncriptada, "Cristobal", 23, "alumno", "Efra", "Landaeta");
         //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
         //Eliminar usuario
         //usuarioController.destroy("17409487k");
@@ -203,7 +203,7 @@ public class MainJoel {
         String listaPruebasNotas[] = new String[listaPruebas.size()];
         for (int i = 0; i < listaPruebas.size(); i++) {
             //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
-            
+
 
             listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + "." + listaPruebas.get(i).getNota();
         }
@@ -212,7 +212,7 @@ public class MainJoel {
             System.out.println("Tengo: " + listaPruebasNotas[i]);
         }
 
-        
+
         List<Usuario> listaHijos;
         listaHijos = usuarioController.buscarHijos("c");
         String hijos[] = new String[listaHijos.size()];
@@ -221,10 +221,35 @@ public class MainJoel {
             //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
             hijos[i] = listaHijos.get(i).getRut() + "," + listaHijos.get(i).getNombre() + " " + listaHijos.get(i).getApellidoPat() + " " + listaHijos.get(i).getApellidoMat();
         }
-        
+
         for (int i = 0; i < hijos.length; i++) {
             System.out.println("Hijo: " + hijos[i]);
         }
-        
+
+
+        List<Asignatura> listaAsignaturas2;
+        listaAsignaturas2 = asignaturaController.idAsignatura("matematicas");
+        int idAsignatura;
+        idAsignatura = listaAsignaturas2.get(0).getIdAsignatura();
+        String rut;
+        String nombre2 = "";
+        List<UsuarioAsignatura> listaUsuariosAsignaturas;
+        listaUsuariosAsignaturas = UsuarioAsignaturaController.AsignaturasID(idAsignatura);
+        //Ahora obtengo los profesores
+        List<Usuario> listaProfesores;
+        listaProfesores = usuarioController.buscarProfesor();
+
+        for (int i = 0; i < listaProfesores.size(); i++) {
+            rut = listaProfesores.get(i).getRut();
+            for (int j = 0; j < listaUsuariosAsignaturas.size(); j++) {
+                if (rut.equals(listaUsuariosAsignaturas.get(j).getRut())) {
+                    nombre2 = rut;
+                } else {
+                    //nada
+                }
+            }
+        }
+        System.out.println("Nombre: " + nombre2);
+
     }
 }
