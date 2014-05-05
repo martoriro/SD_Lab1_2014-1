@@ -73,6 +73,8 @@ public class MenuAlumno extends javax.swing.JFrame {
         txtProfesor = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        txtTipo = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         JpMensajes = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         contMensaje = new javax.swing.JTextArea();
@@ -302,6 +304,10 @@ public class MenuAlumno extends javax.swing.JFrame {
 
         jLabel12.setText("Profesor:");
 
+        txtTipo.setEditable(false);
+
+        jLabel13.setText("Tipo:");
+
         javax.swing.GroupLayout JpAnotacionesLayout = new javax.swing.GroupLayout(JpAnotaciones);
         JpAnotaciones.setLayout(JpAnotacionesLayout);
         JpAnotacionesLayout.setHorizontalGroup(
@@ -310,25 +316,38 @@ public class MenuAlumno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JpAnotacionesLayout.createSequentialGroup()
-                        .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(bntVerAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                .addComponent(cbTipoAnotacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
                         .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(bntVerAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(cbTipoAnotacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel7))
+                        .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpAnotacionesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtProfesor)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpAnotacionesLayout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(22, 22, 22)))
+                                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                                        .addComponent(txtProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(16, 16, 16)
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtFecha)))))
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel5))
                 .addContainerGap())
         );
         JpAnotacionesLayout.setVerticalGroup(
@@ -341,23 +360,25 @@ public class MenuAlumno extends javax.swing.JFrame {
                     .addComponent(cbTipoAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFiltrar))
                 .addGap(9, 9, 9)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(JpAnotacionesLayout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(bntVerAnotacion))
-                    .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JpAnotacionesLayout.createSequentialGroup()
                         .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(JpAnotacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JpAnotacionesLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(bntVerAnotacion)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -527,7 +548,7 @@ public class MenuAlumno extends javax.swing.JFrame {
                 .addComponent(JpAnotaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JpMensajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -640,6 +661,7 @@ public class MenuAlumno extends javax.swing.JFrame {
         contAnotacion.setText("");
         txtProfesor.setText("");
         txtFecha.setText("");
+        txtTipo.setText("");
         String[] anotaciones;
         try{
             if(tipoAnotacion.equals("Todas")){
@@ -676,6 +698,7 @@ public class MenuAlumno extends javax.swing.JFrame {
             txtFecha.setText(anotacion[0]);
             txtProfesor.setText(anotacion[1]);                   
             contAnotacion.setText(anotacion[2]);
+            txtTipo.setText(anotacion[3]);
         } catch (RemoteException ex) {
             Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -716,6 +739,7 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -749,5 +773,6 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JTextField txtProfesor;
     private javax.swing.JLabel txtProm;
     private javax.swing.JLabel txtPromGeneral;
+    private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 }

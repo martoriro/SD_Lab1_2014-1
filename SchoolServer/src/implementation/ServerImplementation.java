@@ -51,10 +51,11 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
     }
     public String[] miAnotacion(int idAnotacion) throws RemoteException{
         List<Anotacion> anotaciones = anotacionController.miAnotacion(idAnotacion);
-        String resultado[] = new String[3];
+        String resultado[] = new String[4];
         resultado[0] = anotaciones.get(0).getFecha()+"";
         resultado[1] = nombreApellido(anotaciones.get(0).getRutProfesor()+"");
         resultado[2] = anotaciones.get(0).getContenido()+"";
+        resultado[3] = anotaciones.get(0).getTipoAnotacion()+"";
         return resultado;
     }
     
