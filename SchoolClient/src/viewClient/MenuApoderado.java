@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import rmiClient.RmiConnection;
 
@@ -17,13 +18,17 @@ import rmiClient.RmiConnection;
  */
 public class MenuApoderado extends javax.swing.JFrame {
     String rut;
+    String rutAlumnos[];
+    String nombreAlumnos[];
     private static RmiConnection connection = new RmiConnection();
     /**
      * Creates new form MenuApoderado
      */
-    public MenuApoderado() {
+    public MenuApoderado(String user) throws RemoteException {
         initComponents();
         ocultaVentanas();
+        rut = user;
+        txtBv.setText(("BIENVENIDO(A) APODERADO(A): "+connection.getServer().nombreApellido(rut)).toUpperCase());
     }
     
     private void ocultaVentanas(){
@@ -80,6 +85,7 @@ public class MenuApoderado extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         cbAsignaturas3 = new javax.swing.JComboBox();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         JpMensajesApoderado = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         contMensaje2 = new javax.swing.JTextArea();
@@ -146,9 +152,9 @@ public class MenuApoderado extends javax.swing.JFrame {
         });
 
         cbAlumnoRamos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cbAlumnoRamos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAlumnoRamosActionPerformed(evt);
+        cbAlumnoRamos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAlumnoRamosItemStateChanged(evt);
             }
         });
 
@@ -374,6 +380,8 @@ public class MenuApoderado extends javax.swing.JFrame {
 
         jLabel14.setText("Alumno:");
 
+        jLabel15.setText("Materia:");
+
         javax.swing.GroupLayout JpAnotacionesApoderadoLayout = new javax.swing.GroupLayout(JpAnotacionesApoderado);
         JpAnotacionesApoderado.setLayout(JpAnotacionesApoderadoLayout);
         JpAnotacionesApoderadoLayout.setHorizontalGroup(
@@ -409,32 +417,34 @@ public class MenuApoderado extends javax.swing.JFrame {
                                         .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtFecha)))))
                     .addGroup(JpAnotacionesApoderadoLayout.createSequentialGroup()
-                        .addGroup(JpAnotacionesApoderadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(JpAnotacionesApoderadoLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbAsignaturas3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbTipoAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(JpAnotacionesApoderadoLayout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbAsignaturas3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbTipoAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         JpAnotacionesApoderadoLayout.setVerticalGroup(
             JpAnotacionesApoderadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JpAnotacionesApoderadoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(JpAnotacionesApoderadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(JpAnotacionesApoderadoLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel9)
                         .addGap(9, 9, 9)
                         .addGroup(JpAnotacionesApoderadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(cbAsignaturas3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbTipoAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnFiltrar))
+                            .addComponent(btnFiltrar)
+                            .addComponent(jLabel15))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10)
                         .addGap(9, 9, 9)
@@ -442,7 +452,6 @@ public class MenuApoderado extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addComponent(bntVerAnotacion))
                     .addGroup(JpAnotacionesApoderadoLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addGroup(JpAnotacionesApoderadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
@@ -604,11 +613,9 @@ public class MenuApoderado extends javax.swing.JFrame {
                         .addComponent(jPNotasRamos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPPromedioAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JpAnotacionesApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JpMensajesApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(JpAnotacionesApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JpMensajesApoderado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(txtBv))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -632,8 +639,27 @@ public class MenuApoderado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void verNotasRamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verNotasRamosActionPerformed
+        cbAlumnoRamos.removeAllItems();
         ocultaVentanas();
         jPNotasRamos.setVisible(rootPaneCheckingEnabled);
+        try {
+            String aux[] = connection.getServer().obtenerHijos(rut);
+            rutAlumnos = new String[aux.length];
+            nombreAlumnos = new String[aux.length];
+            for(int i = 0; i< aux.length; i++){
+                rutAlumnos[i] = aux[i].split(",")[0];
+                nombreAlumnos[i] = aux[i].split(",")[1];
+            }            
+            for(int i = 0 ; i< nombreAlumnos.length; i++){
+                cbAlumnoRamos.addItem(nombreAlumnos[i]);
+            }
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+               
+        
     }//GEN-LAST:event_verNotasRamosActionPerformed
 
     private void mensajesRecibidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mensajesRecibidosActionPerformed
@@ -647,7 +673,27 @@ public class MenuApoderado extends javax.swing.JFrame {
     }//GEN-LAST:event_anotacionesActionPerformed
 
     private void btnVerNotasPromediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotasPromediosActionPerformed
-        
+        DefaultTableModel model = (DefaultTableModel) jtNotas1.getModel();
+        model.setRowCount(0);
+        jtNotas1.setModel(model);
+        txtProm1.setText("0.0");
+        try {
+            String asignaturas[][] =  connection.getServer().asignaturaPromedioAlumno(rutAlumnos[cbAlumnosPromedio.getSelectedIndex()]);
+            if(asignaturas[0].length>0){                
+                String aux[] = new String[2];                
+                for(int i = 0; i< asignaturas[0].length; i++){
+                    aux[0]= asignaturas[0][i];
+                    aux[1]= asignaturas[1][i];
+                    model.addRow(aux);
+                }
+                jtNotas1.setModel(model);
+                txtProm1.setText(connection.getServer().promedioGeneralAlumno(rutAlumnos[cbAlumnosPromedio.getSelectedIndex()])+"");
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnVerNotasPromediosActionPerformed
 
     private void cbAlumnosPromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlumnosPromedioActionPerformed
@@ -656,7 +702,22 @@ public class MenuApoderado extends javax.swing.JFrame {
 
     private void verPromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPromedioActionPerformed
         ocultaVentanas();
+        cbAlumnosPromedio.removeAllItems();
         jPPromedioAlumno.setVisible(rootPaneCheckingEnabled);
+        String aux[];
+        try {
+            aux = connection.getServer().obtenerHijos(rut);
+            rutAlumnos = new String[aux.length];
+            nombreAlumnos = new String[aux.length];
+            for(int i = 0; i< aux.length; i++){
+                rutAlumnos[i] = aux[i].split(",")[0];
+                nombreAlumnos[i] = aux[i].split(",")[1];
+                cbAlumnosPromedio.addItem(nombreAlumnos[i]);
+            } 
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           
     }//GEN-LAST:event_verPromedioActionPerformed
 
     private void cbTipoAnotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAnotacionActionPerformed
@@ -718,29 +779,24 @@ public class MenuApoderado extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAsignaturas3ActionPerformed
 
     private void bntVerMensaje2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVerMensaje2ActionPerformed
-        try {
+        /*try {
             int idMensaje = Integer.parseInt(jLMensajes.getSelectedValue()+"");
             txtFechaMensaje.setText(connection.getServer().leerMensaje(idMensaje)[0]);
             txtAsunto.setText(connection.getServer().leerMensaje(idMensaje)[1]);
             contMensaje.setText(connection.getServer().leerMensaje(idMensaje)[2]);
         } catch (RemoteException ex) {
             Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_bntVerMensaje2ActionPerformed
 
     private void cbMateriaRamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMateriaRamosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbMateriaRamosActionPerformed
 
-    private void cbAlumnoRamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlumnoRamosActionPerformed
-        //ocultaVentanas();
-        jPNotasRamos.setVisible(rootPaneCheckingEnabled);
-    }//GEN-LAST:event_cbAlumnoRamosActionPerformed
-
     private void btnVerNotasRamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotasRamosActionPerformed
-        String asignatura = (String)cbAlumnoRamos.getSelectedItem();
+        String asignatura = (String)cbMateriaRamos.getSelectedItem();
         try {
-            String aux[] = connection.getServer().verNotas(rut, asignatura);
+            String aux[] = connection.getServer().verNotas(rutAlumnos[cbAlumnoRamos.getSelectedIndex()], asignatura);
             int cant  = aux.length;
             Object[] fila = new Object[2];
             DefaultTableModel model = (DefaultTableModel) jtNotas.getModel();
@@ -751,9 +807,11 @@ public class MenuApoderado extends javax.swing.JFrame {
                 model.addRow(fila);
             }
             jtNotas.setModel(model);
-            txtProm.setText(connection.getServer().calculaPromedioAsignatura(asignatura, rut)+"");
+            txtProm.setText(connection.getServer().calculaPromedioAsignatura(asignatura, rutAlumnos[cbAlumnoRamos.getSelectedIndex()])+"");
         } catch (RemoteException ex) {
             Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnVerNotasRamosActionPerformed
 
@@ -761,16 +819,24 @@ public class MenuApoderado extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_salirMouseClicked
 
+    private void cbAlumnoRamosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAlumnoRamosItemStateChanged
+        cbMateriaRamos.removeAllItems();
+        try {
+            String asignaturas[] = connection.getServer().verAsignaturas(rutAlumnos[cbAlumnoRamos.getSelectedIndex()]);
+            for(int  i = 0; i< asignaturas.length;i++){
+                cbMateriaRamos.addItem(asignaturas[i]);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbAlumnoRamosItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpAnotacionesApoderado;
-    private javax.swing.JPanel JpMensajes;
-    private javax.swing.JPanel JpMensajes1;
     private javax.swing.JPanel JpMensajesApoderado;
     private javax.swing.JMenuItem anotaciones;
     private javax.swing.JButton bntVerAnotacion;
-    private javax.swing.JButton bntVerMensaje;
-    private javax.swing.JButton bntVerMensaje1;
     private javax.swing.JButton bntVerMensaje2;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JButton btnVerNotasPromedios;
@@ -781,11 +847,7 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JComboBox cbMateriaRamos;
     private javax.swing.JComboBox cbTipoAnotacion;
     private javax.swing.JTextArea contAnotacion;
-    private javax.swing.JTextArea contMensaje;
-    private javax.swing.JTextArea contMensaje1;
     private javax.swing.JTextArea contMensaje2;
-    private javax.swing.JList jLMensajes;
-    private javax.swing.JList jLMensajes1;
     private javax.swing.JList jLMensajes2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -793,14 +855,7 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -822,25 +877,17 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jtNotas;
     private javax.swing.JTable jtNotas1;
     private javax.swing.JList listaAnotaciones;
     private javax.swing.JMenuItem mensajesRecibidos;
     private javax.swing.JMenu salir;
-    private javax.swing.JTextField txtAsunto;
-    private javax.swing.JTextField txtAsunto1;
     private javax.swing.JTextField txtAsunto2;
     private javax.swing.JLabel txtBv;
     private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtFechaMensaje;
-    private javax.swing.JTextField txtFechaMensaje1;
     private javax.swing.JTextField txtFechaMensaje2;
     private javax.swing.JTextField txtProfesor;
     private javax.swing.JLabel txtProm;

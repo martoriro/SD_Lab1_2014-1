@@ -144,7 +144,7 @@ public class Index extends javax.swing.JFrame {
                         this.hide();
                         break;
                     case "apoderado":
-                        MenuApoderado menuApoderado = new MenuApoderado();
+                        MenuApoderado menuApoderado = new MenuApoderado(user);
                         menuApoderado.setExtendedState(MAXIMIZED_BOTH);
                         menuApoderado.setVisible(true);
                         this.hide();
