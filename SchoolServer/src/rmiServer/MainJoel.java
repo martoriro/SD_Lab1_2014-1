@@ -212,5 +212,19 @@ public class MainJoel {
             System.out.println("Tengo: " + listaPruebasNotas[i]);
         }
 
+        
+        List<Usuario> listaHijos;
+        listaHijos = usuarioController.buscarHijos("c");
+        String hijos[] = new String[listaHijos.size()];
+
+        for (int i = 0; i < listaHijos.size(); i++) {
+            //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
+            hijos[i] = listaHijos.get(i).getRut() + "," + listaHijos.get(i).getNombre() + " " + listaHijos.get(i).getApellidoPat() + " " + listaHijos.get(i).getApellidoMat();
+        }
+        
+        for (int i = 0; i < hijos.length; i++) {
+            System.out.println("Hijo: " + hijos[i]);
+        }
+        
     }
 }
