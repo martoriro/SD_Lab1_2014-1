@@ -34,7 +34,8 @@ public class UsuarioJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
+    
+    
     public List<Usuario> buscarUsuario(String rut){
         EntityManager em = getEntityManager();
         Query query;

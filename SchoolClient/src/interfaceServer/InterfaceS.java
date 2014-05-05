@@ -23,4 +23,7 @@ public interface InterfaceS extends Remote {
     public String[] filtraAnotaciones(String rut,String tipo)throws RemoteException;
     public String[] anotacionesTodas(String rut) throws RemoteException;
     public String[] miAnotacion(int idAnotacion) throws RemoteException;
+    public String[] leerMensaje(int id) throws RemoteException;
+    public String[] listarMensajes(String tipo) throws RemoteException;
+    public String tipoUsuario(String rut) throws RemoteException;
 }

@@ -6,6 +6,7 @@ package implementation;
 
 import entityClass.Anotacion;
 import entityClass.Asignatura;
+import entityClass.Mensaje;
 import entityClass.Prueba;
 import entityClass.Usuario;
 import entityClass.UsuarioAsignatura;
@@ -49,6 +50,30 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return resp;
     }
+    
+    public String tipoUsuario(String rut){
+        Usuario user = userFunction.buscarUsuario(rut).get(0);
+        return user.getTipo();
+    }
+    
+    public String[] leerMensaje(int id){
+        String mensaje[]= new String[3];
+        Mensaje msg =mensajeController.findMensaje(id); 
+        mensaje[0] = msg.getFecha()+"";
+        mensaje[1] = msg.getAsunto();
+        mensaje[2] = msg.getContenido();        
+        return mensaje;
+    }
+    
+    public String[] listarMensajes(String tipo){
+        List<Mensaje> mensaje = mensajeController.mensajeEspecifico(tipo);
+        String idMensajes[] = new String[mensaje.size()];
+        for(int i = 0; i < idMensajes.length; i++){
+            idMensajes[i] = mensaje.get(i).getIdMensaje()+"";
+        }        
+        return idMensajes;
+    }
+    
     public String[] miAnotacion(int idAnotacion) throws RemoteException{
         List<Anotacion> anotaciones = anotacionController.miAnotacion(idAnotacion);
         String resultado[] = new String[4];
@@ -108,7 +133,6 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         return pruebaController.sacaPromedioRamo(rut, idAsignatura);        
     }
     
-    
     public String[] verAsignaturas(String rut) throws RemoteException{
         
         List<UsuarioAsignatura> listatest;
@@ -156,5 +180,9 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return listaPruebasNotas;
     }
+
+ 
+
+
 
 }
