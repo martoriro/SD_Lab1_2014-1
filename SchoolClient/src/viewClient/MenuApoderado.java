@@ -111,6 +111,8 @@ public class MenuApoderado extends javax.swing.JFrame {
         anotaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mensajesRecibidos = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mensajesRecibidos1 = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -598,6 +600,18 @@ public class MenuApoderado extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Chat");
+
+        mensajesRecibidos1.setText("Ver recibidos");
+        mensajesRecibidos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mensajesRecibidos1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mensajesRecibidos1);
+
+        jMenuBar1.add(jMenu4);
+
         salir.setText("Salir");
         salir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -868,6 +882,10 @@ public class MenuApoderado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbAlumnoRamosItemStateChanged
 
+    private void mensajesRecibidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mensajesRecibidos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mensajesRecibidos1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpAnotacionesApoderado;
@@ -908,6 +926,7 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPNotasRamos;
     private javax.swing.JPanel jPPromedioAlumno;
@@ -921,6 +940,7 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JTable jtNotas1;
     private javax.swing.JList listaAnotaciones;
     private javax.swing.JMenuItem mensajesRecibidos;
+    private javax.swing.JMenuItem mensajesRecibidos1;
     private javax.swing.JMenu salir;
     private javax.swing.JTextField txtAsunto2;
     private javax.swing.JLabel txtBv;

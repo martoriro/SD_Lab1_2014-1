@@ -5,8 +5,10 @@
 package viewClient;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.TemporalType;
 import javax.swing.DefaultListModel;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
@@ -20,6 +22,8 @@ import rmiClient.RmiConnection;
 public class MenuProfesor extends javax.swing.JFrame {
     private static RmiConnection connection = new RmiConnection();
     String rut;
+    String rutAlumnos[];
+    String nombreAlumnos[];
     /**
      * Creates new form MenuProfesor
      */
@@ -37,6 +41,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         verAsistencia.setVisible(false);
         ingresarAsistencia.setVisible(false);
         mensajes.setVisible(false);
+        anotacion.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,7 +103,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jtNotas2 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fecha = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btnVerNotas3 = new javax.swing.JButton();
         verAsistencia = new javax.swing.JPanel();
@@ -109,16 +114,30 @@ public class MenuProfesor extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         cbAsignaturas5 = new javax.swing.JComboBox();
+        anotacion = new javax.swing.JPanel();
+        tipoAnotacion = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        anotame = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
+        cbAsignaturas8 = new javax.swing.JComboBox();
+        jLabel19 = new javax.swing.JLabel();
+        btnVerNotas7 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -178,7 +197,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         promedioCursoLayout.setHorizontalGroup(
             promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, promedioCursoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(promedioCursoLayout.createSequentialGroup()
@@ -195,7 +214,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         promedioCursoLayout.setVerticalGroup(
             promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(promedioCursoLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(20, 20, 20)
                 .addGroup(promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -207,9 +226,9 @@ public class MenuProfesor extends javax.swing.JFrame {
         );
 
         cbAsignaturas1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cbAsignaturas1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAsignaturas1ActionPerformed(evt);
+        cbAsignaturas1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAsignaturas1ItemStateChanged(evt);
             }
         });
 
@@ -257,11 +276,6 @@ public class MenuProfesor extends javax.swing.JFrame {
         jLabel7.setText("NOTAS DE LOS ALUMNOS");
 
         cbAsignaturas2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cbAsignaturas2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbAsignaturas2ItemStateChanged(evt);
-            }
-        });
 
         jLabel5.setText("Alumnos:");
 
@@ -540,7 +554,7 @@ public class MenuProfesor extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("INGRESAR NOTAS");
 
-        jTextField1.setEditable(false);
+        fecha.setEditable(false);
 
         jLabel9.setText("Fecha:");
 
@@ -575,7 +589,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                                     .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(ingresarNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)
+                                    .addComponent(fecha)
                                     .addComponent(cbAsignaturas3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28))))
@@ -591,7 +605,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                     .addComponent(cbAsignaturas3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ingresarNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -686,6 +700,88 @@ public class MenuProfesor extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tipoAnotacion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tipoAnotacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoAnotacionActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Tipo:");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setText("ANOTACIÓN");
+
+        anotame.setColumns(20);
+        anotame.setRows(5);
+        anotame.setWrapStyleWord(true);
+        jScrollPane6.setViewportView(anotame);
+
+        jLabel18.setText("Anotación:");
+
+        cbAsignaturas8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbAsignaturas8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAsignaturas8ActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("Alumno:");
+
+        btnVerNotas7.setText("GUARDAR");
+        btnVerNotas7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerNotas7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout anotacionLayout = new javax.swing.GroupLayout(anotacion);
+        anotacion.setLayout(anotacionLayout);
+        anotacionLayout.setHorizontalGroup(
+            anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(anotacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(anotacionLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addGroup(anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnVerNotas7)
+                            .addGroup(anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel18)
+                                .addGroup(anotacionLayout.createSequentialGroup()
+                                    .addGroup(anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel19)
+                                        .addComponent(jLabel2))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tipoAnotacion, 0, 243, Short.MAX_VALUE)
+                                        .addComponent(cbAsignaturas8, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        anotacionLayout.setVerticalGroup(
+            anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(anotacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addGap(21, 21, 21)
+                .addGroup(anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tipoAnotacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(anotacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(cbAsignaturas8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnVerNotas7)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
         jMenu3.setText("Notas");
 
         jMenuItem7.setText("Ingresar notas");
@@ -713,6 +809,18 @@ public class MenuProfesor extends javax.swing.JFrame {
         jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu5.setText("Anotaciones");
+
+        jMenuItem9.setText("Ingresar Anotación");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem9);
+
+        jMenuBar1.add(jMenu5);
 
         jMenu2.setText("Asistencia");
 
@@ -746,6 +854,18 @@ public class MenuProfesor extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu6.setText("Chat");
+
+        jMenuItem10.setText("Ver recibidos");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem10);
+
+        jMenuBar1.add(jMenu6);
+
         jMenu4.setText("Salir");
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -764,41 +884,43 @@ public class MenuProfesor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBv)
-                    .addComponent(verAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(ingresarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mensajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(promedioCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(promedioCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(verAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(notasAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(notasAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(anotacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ingresarNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtBv, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ingresarNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ingresarNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(notasAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(anotacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(promedioCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(notasAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(promedioCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(verAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(verAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ingresarAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mensajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addGap(122, 122, 122))
         );
 
         pack();
@@ -866,6 +988,17 @@ public class MenuProfesor extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         ocultaVentanas();
         ingresarNotas.setVisible(rootPaneCheckingEnabled);
+        cbAsignaturas3.removeAllItems();
+        java.util.Date f = new Date();
+        fecha.setText(f+"");
+        try {
+            String ingresoNota[] = connection.getServer().verAsignaturas(rut);
+            for(int i = 0 ; i< ingresoNota.length; i++){
+                cbAsignaturas3.addItem(ingresoNota[i]);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
@@ -898,12 +1031,28 @@ public class MenuProfesor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVerNotasActionPerformed
 
-    private void cbAsignaturas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsignaturas1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbAsignaturas1ActionPerformed
-
     private void btnVerNotas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotas1ActionPerformed
-        // TODO add your handling code here:
+        String asignatura = (String)cbAsignaturas1.getSelectedItem();
+        try {            
+            String aux[] = connection.getServer().verNotas(rutAlumnos[cbAsignaturas2.getSelectedIndex()], asignatura);
+            int cant  = aux.length;
+            Object[] fila = new Object[2];
+            DefaultTableModel model = (DefaultTableModel) jtNotas1.getModel();
+            model.setRowCount(0);
+            for(int i = 0; i< cant; i++){
+                fila[0] = aux[i].split("/")[0];
+                fila[1] = aux[i].split("/")[1];
+                model.addRow(fila);
+            }
+            
+            jtNotas1.setModel(model);
+            txtProm1.setText(connection.getServer().calculaPromedioAsignatura(asignatura, rutAlumnos[cbAsignaturas2.getSelectedIndex()])+"");
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnVerNotas1ActionPerformed
 
     private void cbAsignaturas4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsignaturas4ActionPerformed
@@ -949,14 +1098,75 @@ public class MenuProfesor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAsignaturas3ActionPerformed
 
-    private void cbAsignaturas2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAsignaturas2ItemStateChanged
-        String alNotasAlumnos = cbAsignaturas2.getSelectedItem()+"";
-        
-    }//GEN-LAST:event_cbAsignaturas2ItemStateChanged
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ocultaVentanas();
+        anotacion.setVisible(rootPaneCheckingEnabled);
+        tipoAnotacion.removeAllItems();
+        tipoAnotacion.addItem("positiva");
+        tipoAnotacion.addItem("negativa");
+        try {            
+            String aux[] = connection.getServer().todosAlumnos();
+            rutAlumnos = new String[aux.length];
+            nombreAlumnos = new String[aux.length];
+            for(int i = 0; i< aux.length; i++){
+                rutAlumnos[i] = aux[i].split(",")[0];
+                nombreAlumnos[i] = aux[i].split(",")[1];
+            }            
+            for(int i = 0 ; i< nombreAlumnos.length; i++){
+                cbAsignaturas8.addItem(nombreAlumnos[i]);
+            }
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void cbAsignaturas1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAsignaturas1ItemStateChanged
+        String aNotasAlumnos = cbAsignaturas1.getSelectedItem()+"";
+        cbAsignaturas2.removeAllItems();
+        try {
+            
+            String aux[] = connection.getServer().alumnosAsignatura(aNotasAlumnos);
+            rutAlumnos = new String[aux.length];
+            nombreAlumnos = new String[aux.length];
+            for(int i = 0; i< aux.length; i++){
+                rutAlumnos[i] = aux[i].split(",")[0];
+                nombreAlumnos[i] = aux[i].split(",")[1];
+            }            
+            for(int i = 0 ; i< nombreAlumnos.length; i++){
+                cbAsignaturas2.addItem(nombreAlumnos[i]);
+            }
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cbAsignaturas1ItemStateChanged
+
+    private void tipoAnotacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoAnotacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoAnotacionActionPerformed
+
+    private void cbAsignaturas8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsignaturas8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAsignaturas8ActionPerformed
+
+    private void btnVerNotas7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotas7ActionPerformed
+        try {
+            connection.getServer().crearAnotacion(anotame.getText(),rut, tipoAnotacion.getSelectedItem()+"", rutAlumnos[cbAsignaturas8.getSelectedIndex()]);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnVerNotas7ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel anotacion;
+    private javax.swing.JTextArea anotame;
     private javax.swing.JButton bntVerMensaje2;
     private javax.swing.JButton btnVerNotas;
     private javax.swing.JButton btnVerNotas1;
@@ -964,6 +1174,7 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JButton btnVerNotas3;
     private javax.swing.JButton btnVerNotas4;
     private javax.swing.JButton btnVerNotas5;
+    private javax.swing.JButton btnVerNotas7;
     private javax.swing.JComboBox cbAsignaturas;
     private javax.swing.JComboBox cbAsignaturas1;
     private javax.swing.JComboBox cbAsignaturas2;
@@ -971,7 +1182,9 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JComboBox cbAsignaturas4;
     private javax.swing.JComboBox cbAsignaturas5;
     private javax.swing.JComboBox cbAsignaturas6;
+    private javax.swing.JComboBox cbAsignaturas8;
     private javax.swing.JTextArea contMensaje2;
+    private javax.swing.JTextField fecha;
     private javax.swing.JPanel ingresarAsistencia;
     private javax.swing.JPanel ingresarNotas;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -984,6 +1197,10 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -999,7 +1216,10 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1007,6 +1227,7 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -1014,8 +1235,8 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTable jtNotas;
     private javax.swing.JTable jtNotas1;
@@ -1025,6 +1246,7 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JPanel mensajes;
     private javax.swing.JPanel notasAlumnos;
     private javax.swing.JPanel promedioCurso;
+    private javax.swing.JComboBox tipoAnotacion;
     private javax.swing.JTextField txtAsunto2;
     private javax.swing.JLabel txtBv;
     private javax.swing.JTextField txtFechaMensaje2;
