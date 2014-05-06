@@ -313,10 +313,10 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         return listaAlumnos;
     }
     
-    public void crearAnotacion(String contenido, Date fecha, String rutProfesor, String tipo, String rutAlumno) throws RemoteException{
+    public void crearAnotacion(String contenido, String rutProfesor, String tipo, String rutAlumno) throws RemoteException{
         Anotacion nuevaAnotacion = new Anotacion();
         nuevaAnotacion.setContenido(contenido);
-        nuevaAnotacion.setFecha(fecha);
+        nuevaAnotacion.setFecha(null);
         nuevaAnotacion.setRutProfesor(rutProfesor);
         nuevaAnotacion.setTipoAnotacion(tipo);
         nuevaAnotacion.setRutAlumno(rutAlumno);
