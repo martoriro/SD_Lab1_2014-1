@@ -7,6 +7,7 @@ package interfaceServer;
 import entityClass.Anotacion;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,4 +32,5 @@ public interface InterfaceS extends Remote{
     public String obtenerProfesor(String materia) throws Exception;
     public String[] promedios(String asignatura) throws Exception;
     public String[] alumnosAsignatura(String asignatura) throws RemoteException;
+    public void crearAnotacion(String contenido, Date fecha, String rutProfesor, String tipo, String rutAlumno) throws RemoteException;
 }

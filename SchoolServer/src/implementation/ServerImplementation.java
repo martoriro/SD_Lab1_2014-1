@@ -13,6 +13,7 @@ import entityClass.UsuarioAsignatura;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -309,16 +310,18 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
                 aux++;
             }
         }
-
-        //String resultado;
-        //String resultadofinal[] = new String[cantidadAlumnos];
-
-        //for (int i = 0; i < listaAlumnos.length; i++) {
-           // resultado = listaAlumnos[i] + "," + pruebaController.sacaPromedioRamoJoel(listaAlumnos[i], idAsignatura2);
-           // resultadofinal[i] = resultado;
-        //}
-
         return listaAlumnos;
+    }
+    
+    public void crearAnotacion(String contenido, Date fecha, String rutProfesor, String tipo, String rutAlumno) throws RemoteException{
+        Anotacion nuevaAnotacion = new Anotacion();
+        nuevaAnotacion.setContenido(contenido);
+        nuevaAnotacion.setFecha(fecha);
+        nuevaAnotacion.setRutProfesor(rutProfesor);
+        nuevaAnotacion.setTipoAnotacion(tipo);
+        nuevaAnotacion.setRutAlumno(rutAlumno);
+        
+        anotacionController.create(nuevaAnotacion);
     }
 
     //Funcionalidades del administrador

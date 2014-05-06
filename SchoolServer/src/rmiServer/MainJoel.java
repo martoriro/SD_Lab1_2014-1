@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -248,7 +249,7 @@ public class MainJoel {
         }
         System.out.println("Nombre: " + nombre2);
 
-        
+
         //Aca empieza la funcion que saca promedios por alumnos
         List<Asignatura> listaAsignatura;
         listaAsignatura = asignaturaController.idAsignatura("matematicas");
@@ -290,9 +291,9 @@ public class MainJoel {
                 aux++;
             }
         }
-        
-   
-        
+
+
+
         for (int i = 0; i < listaAlumnos.length; i++) {
             System.out.println(listaAlumnos[i]);
         }
