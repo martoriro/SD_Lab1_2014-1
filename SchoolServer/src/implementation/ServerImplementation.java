@@ -314,9 +314,11 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
     }
     
     public void crearAnotacion(String contenido, String rutProfesor, String tipo, String rutAlumno) throws RemoteException{
+        Date fecha = new Date();
+        
         Anotacion nuevaAnotacion = new Anotacion();
         nuevaAnotacion.setContenido(contenido);
-        nuevaAnotacion.setFecha(null);
+        nuevaAnotacion.setFecha(fecha);
         nuevaAnotacion.setRutProfesor(rutProfesor);
         nuevaAnotacion.setTipoAnotacion(tipo);
         nuevaAnotacion.setRutAlumno(rutAlumno);
