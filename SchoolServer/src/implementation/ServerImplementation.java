@@ -323,6 +323,17 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         
         anotacionController.create(nuevaAnotacion);
     }
+    
+    public String[] todosAlumnos() throws RemoteException{
+        List<Usuario> listaAlumnos;
+        String resultado;
+        listaAlumnos = userFunction.buscarAlumnos();
+        String listaAlumnos2[] = new String[listaAlumnos.size()];
+        for(int i = 0; i < listaAlumnos2.length; i++){
+            listaAlumnos2[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + listaAlumnos.get(i).getApellidoMat();
+        }
+        return listaAlumnos2;
+    }
 
     //Funcionalidades del administrador
     public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {

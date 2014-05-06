@@ -82,6 +82,16 @@ public class UsuarioJpaController implements Serializable {
         return query.getResultList();
     }
     
+    public List<Usuario> buscarAlumnos(){
+        EntityManager em = getEntityManager();
+        Query query;
+        
+        query = em.createNamedQuery("Usuario.findByTipo").
+                setParameter("tipo", "alumno");
+        
+        return query.getResultList();
+    }
+    
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
