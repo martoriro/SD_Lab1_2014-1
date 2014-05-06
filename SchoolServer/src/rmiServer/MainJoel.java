@@ -286,21 +286,15 @@ public class MainJoel {
 
             if (listaUsuarios.get(0).getTipo().equals("profesor")) {
             } else {
-                listaAlumnos[aux] = listaUsuarios.get(0).getRut();
+                listaAlumnos[aux] = listaUsuarios.get(0).getRut() + "," + listaUsuarios.get(0).getNombre();
                 aux++;
             }
         }
         
-        String resultado;
-        String resultadofinal[] = new String[cantidadAlumnos];
+   
         
         for (int i = 0; i < listaAlumnos.length; i++) {
-            resultado = listaAlumnos[i] + "," + pruebaController.sacaPromedioRamoJoel(listaAlumnos[i], idAsignatura2);
-            resultadofinal[i] = resultado;
-        }
-        
-        for (int i = 0; i < resultadofinal.length; i++) {
-            System.out.println(resultadofinal[i]);
+            System.out.println(listaAlumnos[i]);
         }
     }
 }

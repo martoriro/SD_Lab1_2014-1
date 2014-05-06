@@ -220,7 +220,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         return nombre;
     }
 
-    public String[] promedios(String asignatura) throws Exception{
+    public String[] promedios(String asignatura) throws Exception {
         List<Asignatura> listaAsignatura;
         listaAsignatura = asignaturaController.idAsignatura(asignatura);
         int idAsignatura2 = 0;
@@ -267,8 +267,58 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
             resultado = listaAlumnos[i] + "," + pruebaController.sacaPromedioRamoJoel(listaAlumnos[i], idAsignatura2);
             resultadofinal[i] = resultado;
         }
-        
+
         return resultadofinal;
+    }
+
+    public String[] alumnosAsignatura(String asignatura) throws RemoteException {
+        
+        List<Asignatura> listaAsignatura;
+        listaAsignatura = asignaturaController.idAsignatura(asignatura);
+        int idAsignatura2 = 0;
+        idAsignatura2 = listaAsignatura.get(0).getIdAsignatura();
+
+        List<UsuarioAsignatura> listaAlumnosProfesores;
+        listaAlumnosProfesores = usuarioAsignaturaController.AsignaturasID(idAsignatura2);
+
+        List<Usuario> listaUsuarios;
+        Usuario usuarioAgregar = new Usuario();
+        int cantidadAlumnos = 0;
+
+        for (int i = 0; i < listaAlumnosProfesores.size(); i++) {
+
+            listaUsuarios = userFunction.buscarUsuario(listaAlumnosProfesores.get(i).getRut());
+            //System.out.println(listaUsuarios.get(0).getRut());
+
+            if (listaUsuarios.get(0).getTipo().equals("profesor")) {
+                //listaAlumnosProfesores.remove(listaUsuarios.get(0));
+            } else {
+                cantidadAlumnos++;
+            }
+        }
+        String listaAlumnos[] = new String[cantidadAlumnos];
+        int aux = 0;
+
+        for (int i = 0; i < listaAlumnosProfesores.size(); i++) {
+
+            listaUsuarios = userFunction.buscarUsuario(listaAlumnosProfesores.get(i).getRut());
+
+            if (listaUsuarios.get(0).getTipo().equals("profesor")) {
+            } else {
+                listaAlumnos[aux] = listaUsuarios.get(0).getRut() + "," + listaUsuarios.get(0).getNombre();
+                aux++;
+            }
+        }
+
+        //String resultado;
+        //String resultadofinal[] = new String[cantidadAlumnos];
+
+        //for (int i = 0; i < listaAlumnos.length; i++) {
+           // resultado = listaAlumnos[i] + "," + pruebaController.sacaPromedioRamoJoel(listaAlumnos[i], idAsignatura2);
+           // resultadofinal[i] = resultado;
+        //}
+
+        return listaAlumnos;
     }
 
     //Funcionalidades del administrador

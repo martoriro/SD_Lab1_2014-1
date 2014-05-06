@@ -30,4 +30,5 @@ public interface InterfaceS extends Remote{
     public String[] obtenerHijos(String rutApoderado) throws RemoteException;
     public String obtenerProfesor(String materia) throws Exception;
     public String[] promedios(String asignatura) throws Exception;
+    public String[] alumnosAsignatura(String asignatura) throws RemoteException;
 }
