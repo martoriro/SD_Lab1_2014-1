@@ -29,6 +29,10 @@ public class MenuApoderado extends javax.swing.JFrame {
         ocultaVentanas();
         rut = user;
         txtBv.setText(("BIENVENIDO(A) APODERADO(A): "+connection.getServer().nombreApellido(rut)).toUpperCase());
+        cbTipoAnotacion.addItem("Todas");
+        cbTipoAnotacion.addItem("Positivas");
+        cbTipoAnotacion.addItem("Negativas");
+        
     }
     
     private void ocultaVentanas(){
@@ -342,6 +346,7 @@ public class MenuApoderado extends javax.swing.JFrame {
         contAnotacion.setEditable(false);
         contAnotacion.setColumns(20);
         contAnotacion.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        contAnotacion.setLineWrap(true);
         contAnotacion.setRows(5);
         jScrollPane4.setViewportView(contAnotacion);
 
@@ -380,7 +385,7 @@ public class MenuApoderado extends javax.swing.JFrame {
 
         jLabel14.setText("Alumno:");
 
-        jLabel15.setText("Materia:");
+        jLabel15.setText("Tipo:");
 
         javax.swing.GroupLayout JpAnotacionesApoderadoLayout = new javax.swing.GroupLayout(JpAnotacionesApoderado);
         JpAnotacionesApoderado.setLayout(JpAnotacionesApoderadoLayout);
@@ -468,6 +473,7 @@ public class MenuApoderado extends javax.swing.JFrame {
 
         contMensaje2.setColumns(20);
         contMensaje2.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        contMensaje2.setLineWrap(true);
         contMensaje2.setRows(5);
         jScrollPane9.setViewportView(contMensaje2);
 
@@ -665,11 +671,39 @@ public class MenuApoderado extends javax.swing.JFrame {
     private void mensajesRecibidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mensajesRecibidosActionPerformed
         ocultaVentanas();
         JpMensajesApoderado.setVisible(rootPaneCheckingEnabled);
+        jLMensajes2.removeAll();
+        contMensaje2.setText("");
+        txtFechaMensaje2.setText("");
+        txtAsunto2.setText("");
+        DefaultListModel modelo = new DefaultListModel();
+        String mensajesId[];
+        try {
+            mensajesId = connection.getServer().listarMensajes(connection.getServer().tipoUsuario(rut));
+            for(int i = 0 ; i< mensajesId.length; i++){
+                modelo.addElement(mensajesId[i]);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        jLMensajes2.setModel(modelo);
     }//GEN-LAST:event_mensajesRecibidosActionPerformed
 
     private void anotacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anotacionesActionPerformed
         ocultaVentanas();
+        cbAsignaturas3.removeAllItems();
         JpAnotacionesApoderado.setVisible(rootPaneCheckingEnabled);
+        try {
+            String aux[] = connection.getServer().obtenerHijos(rut);
+            rutAlumnos = new String[aux.length];
+            nombreAlumnos = new String[aux.length];
+            for(int i = 0; i< aux.length; i++){
+                rutAlumnos[i] = aux[i].split(",")[0];
+                nombreAlumnos[i] = aux[i].split(",")[1];
+                cbAsignaturas3.addItem(nombreAlumnos[i]);
+            }             
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_anotacionesActionPerformed
 
     private void btnVerNotasPromediosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotasPromediosActionPerformed
@@ -690,7 +724,7 @@ public class MenuApoderado extends javax.swing.JFrame {
                 txtProm1.setText(connection.getServer().promedioGeneralAlumno(rutAlumnos[cbAlumnosPromedio.getSelectedIndex()])+"");
             }
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
@@ -735,28 +769,28 @@ public class MenuApoderado extends javax.swing.JFrame {
         try{
             if(tipoAnotacion.equals("Todas")){
                 DefaultListModel modelo1 = new DefaultListModel();
-                anotaciones = connection.getServer().anotacionesTodas(rut);
+                anotaciones = connection.getServer().anotacionesTodas(rutAlumnos[cbAsignaturas3.getSelectedIndex()]);
                 for(int i = 0 ; i< anotaciones.length; i++){
                     modelo1.addElement(anotaciones[i]);
                 }
                 listaAnotaciones.setModel(modelo1);
             }if(tipoAnotacion.equals("Positivas")){
                 DefaultListModel modelo2 = new DefaultListModel();
-                anotaciones = connection.getServer().filtraAnotaciones(rut, "positiva");
+                anotaciones = connection.getServer().filtraAnotaciones(rutAlumnos[cbAsignaturas3.getSelectedIndex()], "positiva");
                 for(int i = 0 ; i< anotaciones.length; i++){
                     modelo2.addElement(anotaciones[i]);
                 }
                 listaAnotaciones.setModel(modelo2);
             }if(tipoAnotacion.equals("Negativas")){
                 DefaultListModel modelo3 = new DefaultListModel();
-                anotaciones = connection.getServer().filtraAnotaciones(rut, "negativa");
+                anotaciones = connection.getServer().filtraAnotaciones(rutAlumnos[cbAsignaturas3.getSelectedIndex()], "negativa");
                 for(int i = 0 ; i< anotaciones.length; i++){
                     modelo3.addElement(anotaciones[i]);
                 }
                 listaAnotaciones.setModel(modelo3);
             }
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
@@ -769,7 +803,7 @@ public class MenuApoderado extends javax.swing.JFrame {
             contAnotacion.setText(anotacion[2]);
             txtTipo.setText(anotacion[3]);
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_bntVerAnotacionActionPerformed
@@ -779,14 +813,14 @@ public class MenuApoderado extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAsignaturas3ActionPerformed
 
     private void bntVerMensaje2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVerMensaje2ActionPerformed
-        /*try {
-            int idMensaje = Integer.parseInt(jLMensajes.getSelectedValue()+"");
-            txtFechaMensaje.setText(connection.getServer().leerMensaje(idMensaje)[0]);
-            txtAsunto.setText(connection.getServer().leerMensaje(idMensaje)[1]);
-            contMensaje.setText(connection.getServer().leerMensaje(idMensaje)[2]);
+       try {
+            int idMensaje = Integer.parseInt(jLMensajes2.getSelectedValue()+"");
+            txtFechaMensaje2.setText(connection.getServer().leerMensaje(idMensaje)[0]);
+            txtAsunto2.setText(connection.getServer().leerMensaje(idMensaje)[1]);
+            contMensaje2.setText(connection.getServer().leerMensaje(idMensaje)[2]);
         } catch (RemoteException ex) {
-            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_bntVerMensaje2ActionPerformed
 
     private void cbMateriaRamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMateriaRamosActionPerformed
