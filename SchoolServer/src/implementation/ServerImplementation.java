@@ -79,7 +79,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         String resultado[] = new String[4];
         resultado[0] = anotaciones.get(0).getFecha() + "";
         resultado[1] = nombreApellido(anotaciones.get(0).getRutProfesor() + "");
-        resultado[2] = anotaciones.get(0).getContenido() + "";
+        resultado[2] = anotaciones.get(0).getContenido();
         resultado[3] = anotaciones.get(0).getTipoAnotacion() + "";
         return resultado;
     }

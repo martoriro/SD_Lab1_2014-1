@@ -47,7 +47,7 @@ public class MainJoel {
     public static void main(String[] args) throws RemoteException, Exception {
 
         System.out.println("FUNCIONALIDAD QUE ECRIPTA EN MD5");
-        String password = "w";
+        String password = "d";
         String passwordEncriptada;
         MD5 instancia = new MD5();
         passwordEncriptada = instancia.encriptar(password);
@@ -57,8 +57,8 @@ public class MainJoel {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
 
-        Usuario nuevoUsuario = new Usuario("w", passwordEncriptada, "Edmundo", 40, "profesor", "Leiba", "Torres");
-        //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
+        Usuario nuevoUsuario = new Usuario("d", passwordEncriptada, "Gustavo", 40, "alumno", "Consolador", "Salvo");
+        usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
         //Eliminar usuario
         //usuarioController.destroy("17409487k");
 
