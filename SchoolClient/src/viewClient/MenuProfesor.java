@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import rmiClient.RmiConnection;
 
 /**
@@ -53,8 +55,6 @@ public class MenuProfesor extends javax.swing.JFrame {
         cbAsignaturas = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         btnVerNotas = new javax.swing.JButton();
-        txtProm = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtNotas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
@@ -142,29 +142,19 @@ public class MenuProfesor extends javax.swing.JFrame {
 
         jLabel1.setText("Asignatura: ");
 
-        btnVerNotas.setText("VER NOTAS");
+        btnVerNotas.setText("VER");
         btnVerNotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerNotasActionPerformed(evt);
             }
         });
 
-        txtProm.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        txtProm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtProm.setText("0.0");
-        txtProm.setToolTipText("");
-        txtProm.setInheritsPopupMenu(false);
-        txtProm.setName(""); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setText("Promedio:");
-
         jtNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Alumno", "Promedio"
+                "Rut Alumno", "Promedio"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -198,16 +188,9 @@ public class MenuProfesor extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbAsignaturas, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(promedioCursoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnVerNotas))
-                            .addGroup(promedioCursoLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(txtProm, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(16, 16, 16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVerNotas)))
+                .addGap(39, 39, 39))
         );
         promedioCursoLayout.setVerticalGroup(
             promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,12 +203,7 @@ public class MenuProfesor extends javax.swing.JFrame {
                     .addComponent(cbAsignaturas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVerNotas))
                 .addGap(18, 18, 18)
-                .addGroup(promedioCursoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(promedioCursoLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtProm, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         cbAsignaturas1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -279,9 +257,9 @@ public class MenuProfesor extends javax.swing.JFrame {
         jLabel7.setText("NOTAS DE LOS ALUMNOS");
 
         cbAsignaturas2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cbAsignaturas2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbAsignaturas2ActionPerformed(evt);
+        cbAsignaturas2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAsignaturas2ItemStateChanged(evt);
             }
         });
 
@@ -795,9 +773,9 @@ public class MenuProfesor extends javax.swing.JFrame {
                         .addComponent(promedioCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(notasAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ingresarNotas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -829,6 +807,16 @@ public class MenuProfesor extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         ocultaVentanas();
         promedioCurso.setVisible(rootPaneCheckingEnabled);
+        cbAsignaturas.removeAllItems();
+        try {
+            String asignaturasPromedios[] = connection.getServer().verAsignaturas(rut);
+            for(int i = 0 ; i< asignaturasPromedios.length; i++){
+                cbAsignaturas.addItem(asignaturasPromedios[i]);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -864,6 +852,15 @@ public class MenuProfesor extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         ocultaVentanas();
         notasAlumnos.setVisible(rootPaneCheckingEnabled);
+        cbAsignaturas1.removeAllItems();
+        try {
+            String asignaturasPromedios[] = connection.getServer().verAsignaturas(rut);
+            for(int i = 0 ; i< asignaturasPromedios.length; i++){
+                cbAsignaturas1.addItem(asignaturasPromedios[i]);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -880,7 +877,25 @@ public class MenuProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAsignaturasActionPerformed
 
     private void btnVerNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotasActionPerformed
-        
+        String asignaturaPromedioCurso = cbAsignaturas.getSelectedItem()+"";
+        try {
+            String aux[] = connection.getServer().promedios(asignaturaPromedioCurso);
+            int cant  = aux.length;
+            Object[] fila = new Object[2];
+            DefaultTableModel model = (DefaultTableModel) jtNotas.getModel();
+            model.setRowCount(0);
+            for(int i = 0; i< cant; i++){
+                fila[0] = aux[i].split(",")[0];
+                fila[1] = aux[i].split(",")[1];
+                model.addRow(fila);
+            }
+            jtNotas.setModel(model);
+            
+        } catch (RemoteException ex) {
+            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnVerNotasActionPerformed
 
     private void cbAsignaturas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsignaturas1ActionPerformed
@@ -890,10 +905,6 @@ public class MenuProfesor extends javax.swing.JFrame {
     private void btnVerNotas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotas1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVerNotas1ActionPerformed
-
-    private void cbAsignaturas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsignaturas2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbAsignaturas2ActionPerformed
 
     private void cbAsignaturas4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAsignaturas4ActionPerformed
         // TODO add your handling code here:
@@ -938,6 +949,11 @@ public class MenuProfesor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAsignaturas3ActionPerformed
 
+    private void cbAsignaturas2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAsignaturas2ItemStateChanged
+        String alNotasAlumnos = cbAsignaturas2.getSelectedItem()+"";
+        
+    }//GEN-LAST:event_cbAsignaturas2ItemStateChanged
+
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -968,7 +984,6 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -1013,7 +1028,6 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JTextField txtAsunto2;
     private javax.swing.JLabel txtBv;
     private javax.swing.JTextField txtFechaMensaje2;
-    private javax.swing.JLabel txtProm;
     private javax.swing.JLabel txtProm1;
     private javax.swing.JPanel verAsistencia;
     // End of variables declaration//GEN-END:variables
