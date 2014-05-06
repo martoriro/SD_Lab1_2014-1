@@ -46,7 +46,7 @@ public class MainJoel {
     public static void main(String[] args) throws RemoteException, Exception {
 
         System.out.println("FUNCIONALIDAD QUE ECRIPTA EN MD5");
-        String password = "h";
+        String password = "w";
         String passwordEncriptada;
         MD5 instancia = new MD5();
         passwordEncriptada = instancia.encriptar(password);
@@ -56,7 +56,7 @@ public class MainJoel {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("SchoolServerPU");
         UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
 
-        Usuario nuevoUsuario = new Usuario("h", passwordEncriptada, "Cristobal", 23, "alumno", "Efra", "Landaeta");
+        Usuario nuevoUsuario = new Usuario("w", passwordEncriptada, "Edmundo", 40, "profesor", "Leiba", "Torres");
         //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
         //Eliminar usuario
         //usuarioController.destroy("17409487k");
@@ -204,14 +204,12 @@ public class MainJoel {
         for (int i = 0; i < listaPruebas.size(); i++) {
             //AsignaturaName = asignaturaController.nombreAsignatura(listatest.get(i).getIdAsignatura());
 
-
             listaPruebasNotas[i] = listaPruebas.get(i).getFecha() + "." + listaPruebas.get(i).getNota();
         }
 
         for (int i = 0; i < listaPruebasNotas.length; i++) {
             System.out.println("Tengo: " + listaPruebasNotas[i]);
         }
-
 
         List<Usuario> listaHijos;
         listaHijos = usuarioController.buscarHijos("c");
@@ -225,7 +223,6 @@ public class MainJoel {
         for (int i = 0; i < hijos.length; i++) {
             System.out.println("Hijo: " + hijos[i]);
         }
-
 
         List<Asignatura> listaAsignaturas2;
         listaAsignaturas2 = asignaturaController.idAsignatura("matematicas");
@@ -251,5 +248,59 @@ public class MainJoel {
         }
         System.out.println("Nombre: " + nombre2);
 
+        
+        //Aca empieza la funcion que saca promedios por alumnos
+        List<Asignatura> listaAsignatura;
+        listaAsignatura = asignaturaController.idAsignatura("matematicas");
+        int idAsignatura2 = 0;
+        idAsignatura2 = listaAsignatura.get(0).getIdAsignatura();
+
+        List<UsuarioAsignatura> listaAlumnosProfesores;
+        listaAlumnosProfesores = UsuarioAsignaturaController.AsignaturasID(idAsignatura2);
+        System.out.println(listaAlumnosProfesores.size());
+
+        List<Usuario> listaUsuarios;
+        Usuario usuarioAgregar = new Usuario();
+        int cantidadAlumnos = 0;
+
+        for (int i = 0; i < listaAlumnosProfesores.size(); i++) {
+
+            listaUsuarios = usuarioController.buscarUsuario(listaAlumnosProfesores.get(i).getRut());
+            //System.out.println(listaUsuarios.get(0).getRut());
+
+            if (listaUsuarios.get(0).getTipo().equals("profesor")) {
+                System.out.println("hola soy profe");
+                //listaAlumnosProfesores.remove(listaUsuarios.get(0));
+            } else {
+                cantidadAlumnos++;
+            }
+        }
+        System.out.println(cantidadAlumnos);
+        String listaAlumnos[] = new String[cantidadAlumnos];
+        int aux = 0;
+
+        for (int i = 0; i < listaAlumnosProfesores.size(); i++) {
+
+            listaUsuarios = usuarioController.buscarUsuario(listaAlumnosProfesores.get(i).getRut());
+            //System.out.println(listaUsuarios.get(0).getRut());
+
+            if (listaUsuarios.get(0).getTipo().equals("profesor")) {
+            } else {
+                listaAlumnos[aux] = listaUsuarios.get(0).getRut();
+                aux++;
+            }
+        }
+        
+        String resultado;
+        String resultadofinal[] = new String[cantidadAlumnos];
+        
+        for (int i = 0; i < listaAlumnos.length; i++) {
+            resultado = listaAlumnos[i] + "," + pruebaController.sacaPromedioRamoJoel(listaAlumnos[i], idAsignatura2);
+            resultadofinal[i] = resultado;
+        }
+        
+        for (int i = 0; i < resultadofinal.length; i++) {
+            System.out.println(resultadofinal[i]);
+        }
     }
 }

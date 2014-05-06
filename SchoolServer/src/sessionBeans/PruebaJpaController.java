@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sessionBeans;
 
 import entityClass.Prueba;
@@ -32,66 +31,80 @@ public class PruebaJpaController implements Serializable {
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     //redondear un numero
-    public float round(float i){
-        float aux = Float.parseFloat(Math.round(i*Math.pow(10,1))/Math.pow(10,1)+"");
-        return aux ;
+    public float round(float i) {
+        float aux = Float.parseFloat(Math.round(i * Math.pow(10, 1)) / Math.pow(10, 1) + "");
+        return aux;
     }
-   
+
     //calucla el promedio de una prueba de una asignatura realizada en una fecha
-    public float promedioGeneralPrueba(Date fecha, int id_asignatura){
+    public float promedioGeneralPrueba(Date fecha, int id_asignatura) {
         EntityManager em = getEntityManager();
         Query query;
-        query = em.createNamedQuery("Prueba.findByIdAsignaturaFecha").setParameter("idAsignatura",id_asignatura).
+        query = em.createNamedQuery("Prueba.findByIdAsignaturaFecha").setParameter("idAsignatura", id_asignatura).
                 setParameter("fecha", fecha);
-        return sacaPromedio(query.getResultList());      
-        
+        return sacaPromedio(query.getResultList());
+
     }
+
     //saca promedio general asignatura
-    public float promedioGeneralAsignatura(int id_asignatura){
+
+    public float promedioGeneralAsignatura(int id_asignatura) {
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Prueba.findByIdAsignatura").setParameter("idAsignatura", id_asignatura);
-        
+
         return sacaPromedio(query.getResultList());
     }
-    
-    
+
     //saca el promedio de notas de una lista de Pruebas
-    public float sacaPromedio(List<Prueba> p){
+    public float sacaPromedio(List<Prueba> p) {
         int cant = p.size();
-        System.out.println(p.get(0).getFecha());
+        //System.out.println(p.get(0).getFecha());
         float prom = 0;
         float sum = 0;
-        for(int i = 0; i< cant; i++){
-            sum += p.get(i).getNota();            
+        for (int i = 0; i < cant; i++) {
+            sum += p.get(i).getNota();
         }
-        prom = sum/cant;
+        prom = sum / cant;
         return round(prom);
     }
-    
+
     //identifica las notas de un alumno de una asignatura
-    public float sacaPromedioRamo(String rut , int id_asignatura){
+    public float sacaPromedioRamo(String rut, int id_asignatura) {
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Prueba.findByRutIdAsignatura").
                 setParameter("rut", rut).
                 setParameter("idAsignatura", id_asignatura);
-        return sacaPromedio(query.getResultList());            
+        return sacaPromedio(query.getResultList());
     }
-    
+
+    public float sacaPromedioRamoJoel(String rut, int id_asignatura) {
+        EntityManager em = getEntityManager();
+        Query query;
+        query = em.createNamedQuery("Prueba.findByRutIdAsignatura").
+                setParameter("rut", rut).
+                setParameter("idAsignatura", id_asignatura);
+        if (query.getResultList().size() == 0) {
+            return 0;
+        } else {
+            return sacaPromedio(query.getResultList());
+        }
+    }
+
     //Se guardan todas las notas de 1 alumno
-    public List<Prueba> todasNotas(String rut){
+    public List<Prueba> todasNotas(String rut) {
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Prueba.findByRut").
                 setParameter("rut", rut);
         return query.getResultList();
     }
-    
+
     //Obtiene la lista de notas segun el alumno y la asignatura
-    public List<Prueba> notasPorAsignatura(String rut, int id){
+    public List<Prueba> notasPorAsignatura(String rut, int id) {
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Prueba.findByRutIdAsignatura").
@@ -99,7 +112,7 @@ public class PruebaJpaController implements Serializable {
                 setParameter("idAsignatura", id);
         return query.getResultList();
     }
-    
+
     public void create(Prueba prueba) {
         EntityManager em = null;
         try {
@@ -203,5 +216,5 @@ public class PruebaJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

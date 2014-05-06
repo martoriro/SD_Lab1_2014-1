@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import sessionBeans.*;
+import sessionBeans.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -192,7 +193,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         return hijos;
     }
 
-    public String obtenerProfesor(String materia) throws Exception{
+    public String obtenerProfesor(String materia) throws Exception {
         List<Asignatura> listaAsignaturas;
         listaAsignaturas = asignaturaController.idAsignatura(materia);
         int idAsignatura;
@@ -217,5 +218,69 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
 
         return nombre;
+    }
+
+    public String[] promedios(String asignatura) throws Exception{
+        List<Asignatura> listaAsignatura;
+        listaAsignatura = asignaturaController.idAsignatura(asignatura);
+        int idAsignatura2 = 0;
+        idAsignatura2 = listaAsignatura.get(0).getIdAsignatura();
+
+        List<UsuarioAsignatura> listaAlumnosProfesores;
+        listaAlumnosProfesores = usuarioAsignaturaController.AsignaturasID(idAsignatura2);
+
+        List<Usuario> listaUsuarios;
+        Usuario usuarioAgregar = new Usuario();
+        int cantidadAlumnos = 0;
+
+        for (int i = 0; i < listaAlumnosProfesores.size(); i++) {
+
+            listaUsuarios = userFunction.buscarUsuario(listaAlumnosProfesores.get(i).getRut());
+            //System.out.println(listaUsuarios.get(0).getRut());
+
+            if (listaUsuarios.get(0).getTipo().equals("profesor")) {
+                System.out.println("hola soy profe");
+                //listaAlumnosProfesores.remove(listaUsuarios.get(0));
+            } else {
+                cantidadAlumnos++;
+            }
+        }
+        String listaAlumnos[] = new String[cantidadAlumnos];
+        int aux = 0;
+
+        for (int i = 0; i < listaAlumnosProfesores.size(); i++) {
+
+            listaUsuarios = userFunction.buscarUsuario(listaAlumnosProfesores.get(i).getRut());
+            //System.out.println(listaUsuarios.get(0).getRut());
+
+            if (listaUsuarios.get(0).getTipo().equals("profesor")) {
+            } else {
+                listaAlumnos[aux] = listaUsuarios.get(0).getRut();
+                aux++;
+            }
+        }
+
+        String resultado;
+        String resultadofinal[] = new String[cantidadAlumnos];
+
+        for (int i = 0; i < listaAlumnos.length; i++) {
+            resultado = listaAlumnos[i] + "," + pruebaController.sacaPromedioRamoJoel(listaAlumnos[i], idAsignatura2);
+            resultadofinal[i] = resultado;
+        }
+        
+        return resultadofinal;
+    }
+
+    //Funcionalidades del administrador
+    public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {
+        Usuario nuevoUsuario = new Usuario(rut, password, nombre, edad, tipo, apellidoPat, apellidoMat);
+        nuevoUsuario.setRutApoderado(rutApoderado);
+        userFunction.create(nuevoUsuario);
+    }
+
+    public void eliminarUsuario(String rut) throws NonexistentEntityException {
+        List<Usuario> listaUsuario;
+        listaUsuario = userFunction.buscarUsuario(rut);
+        userFunction.destroy(listaUsuario.get(0).getRut());
     }
 }
