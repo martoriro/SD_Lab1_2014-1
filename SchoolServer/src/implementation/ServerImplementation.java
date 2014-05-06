@@ -330,7 +330,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         listaAlumnos = userFunction.buscarAlumnos();
         String listaAlumnos2[] = new String[listaAlumnos.size()];
         for(int i = 0; i < listaAlumnos2.length; i++){
-            listaAlumnos2[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + listaAlumnos.get(i).getApellidoMat();
+            listaAlumnos2[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + " "+ listaAlumnos.get(i).getApellidoMat();
         }
         return listaAlumnos2;
     }

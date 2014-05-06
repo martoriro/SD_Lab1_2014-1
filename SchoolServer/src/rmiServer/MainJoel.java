@@ -297,5 +297,6 @@ public class MainJoel {
         for (int i = 0; i < listaAlumnos.length; i++) {
             System.out.println(listaAlumnos[i]);
         }
+        
     }
 }
