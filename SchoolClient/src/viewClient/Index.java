@@ -126,7 +126,7 @@ public class Index extends javax.swing.JFrame {
             if(tipoUsuario != null ){
                 switch(tipoUsuario){
                     case "profesor":
-                        MenuProfesor menuProfesor =new MenuProfesor();
+                        MenuProfesor menuProfesor =new MenuProfesor(user);
                         menuProfesor.setExtendedState(MAXIMIZED_BOTH);
                         menuProfesor.setVisible(true);
                         this.hide();
