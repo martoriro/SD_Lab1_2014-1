@@ -4,7 +4,9 @@
  */
 package viewClient;
 
+import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.logging.*;
 import javax.swing.JOptionPane;
 import rmiClient.RmiConnection;
 
@@ -18,6 +20,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     String rutProfesor[];
     String rutAlumno[];
     String nombreAlumno[];
+    String rutUser;
     
     /**
      * Creates new form MenuAdmin
@@ -143,6 +146,8 @@ public class MenuAdmin extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        initChat = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -285,15 +290,17 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setMinWidth(50);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-        jTable1.getColumnModel().getColumn(2).setHeaderValue("Nombre");
-        jTable1.getColumnModel().getColumn(3).setHeaderValue("A. Paterno");
-        jTable1.getColumnModel().getColumn(4).setHeaderValue("A. Materno");
-        jTable1.getColumnModel().getColumn(5).setHeaderValue("Edad");
-        jTable1.getColumnModel().getColumn(6).setHeaderValue("Tipo");
-        jTable1.getColumnModel().getColumn(7).setHeaderValue("Alumno");
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(50);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTable1.getColumnModel().getColumn(2).setHeaderValue("Nombre");
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("A. Paterno");
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("A. Materno");
+            jTable1.getColumnModel().getColumn(5).setHeaderValue("Edad");
+            jTable1.getColumnModel().getColumn(6).setHeaderValue("Tipo");
+            jTable1.getColumnModel().getColumn(7).setHeaderValue("Alumno");
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -482,9 +489,11 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(jTable2);
-        jTable2.getColumnModel().getColumn(0).setMinWidth(50);
-        jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
-        jTable2.getColumnModel().getColumn(0).setMaxWidth(50);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setMinWidth(50);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(50);
+        }
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -811,6 +820,18 @@ public class MenuAdmin extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu6.setText("Chat");
+
+        initChat.setText("Iniciar Chat");
+        initChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                initChatActionPerformed(evt);
+            }
+        });
+        jMenu6.add(initChat);
+
+        jMenuBar1.add(jMenu6);
+
         jMenu5.setText("Salir");
         jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -943,6 +964,16 @@ public class MenuAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void initChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initChatActionPerformed
+        ChatView chat;
+        try {
+            chat = new ChatView(rutUser);
+            chat.setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_initChatActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox alumno;
@@ -953,6 +984,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JTabbedPane crudUsuario;
     private javax.swing.JTextField edad;
     private javax.swing.JPanel enviarMensajes;
+    private javax.swing.JMenuItem initChat;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1005,6 +1037,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;

@@ -111,8 +111,8 @@ public class MenuApoderado extends javax.swing.JFrame {
         anotaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mensajesRecibidos = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        mensajesRecibidos1 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        initChat = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -600,17 +600,17 @@ public class MenuApoderado extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Chat");
+        jMenu5.setText("Chat");
 
-        mensajesRecibidos1.setText("Ver recibidos");
-        mensajesRecibidos1.addActionListener(new java.awt.event.ActionListener() {
+        initChat.setText("Iniciar Chat");
+        initChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mensajesRecibidos1ActionPerformed(evt);
+                initChatActionPerformed(evt);
             }
         });
-        jMenu4.add(mensajesRecibidos1);
+        jMenu5.add(initChat);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenu5);
 
         salir.setText("Salir");
         salir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -882,9 +882,15 @@ public class MenuApoderado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cbAlumnoRamosItemStateChanged
 
-    private void mensajesRecibidos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mensajesRecibidos1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mensajesRecibidos1ActionPerformed
+    private void initChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initChatActionPerformed
+        ChatView chat;
+        try {
+            chat = new ChatView(rut);
+            chat.setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_initChatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -903,6 +909,7 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JComboBox cbTipoAnotacion;
     private javax.swing.JTextArea contAnotacion;
     private javax.swing.JTextArea contMensaje2;
+    private javax.swing.JMenuItem initChat;
     private javax.swing.JList jLMensajes2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -926,7 +933,7 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPNotasRamos;
     private javax.swing.JPanel jPPromedioAlumno;
@@ -940,7 +947,6 @@ public class MenuApoderado extends javax.swing.JFrame {
     private javax.swing.JTable jtNotas1;
     private javax.swing.JList listaAnotaciones;
     private javax.swing.JMenuItem mensajesRecibidos;
-    private javax.swing.JMenuItem mensajesRecibidos1;
     private javax.swing.JMenu salir;
     private javax.swing.JTextField txtAsunto2;
     private javax.swing.JLabel txtBv;

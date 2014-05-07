@@ -136,8 +136,8 @@ public class MenuProfesor extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        initChat = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         jCheckBoxMenuItem1.setSelected(true);
@@ -185,9 +185,11 @@ public class MenuProfesor extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtNotas);
-        jtNotas.getColumnModel().getColumn(1).setMinWidth(70);
-        jtNotas.getColumnModel().getColumn(1).setPreferredWidth(70);
-        jtNotas.getColumnModel().getColumn(1).setMaxWidth(70);
+        if (jtNotas.getColumnModel().getColumnCount() > 0) {
+            jtNotas.getColumnModel().getColumn(1).setMinWidth(70);
+            jtNotas.getColumnModel().getColumn(1).setPreferredWidth(70);
+            jtNotas.getColumnModel().getColumn(1).setMaxWidth(70);
+        }
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("PROMEDIO POR CURSO");
@@ -268,9 +270,11 @@ public class MenuProfesor extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jtNotas1);
-        jtNotas1.getColumnModel().getColumn(1).setMinWidth(70);
-        jtNotas1.getColumnModel().getColumn(1).setPreferredWidth(70);
-        jtNotas1.getColumnModel().getColumn(1).setMaxWidth(70);
+        if (jtNotas1.getColumnModel().getColumnCount() > 0) {
+            jtNotas1.getColumnModel().getColumn(1).setMinWidth(70);
+            jtNotas1.getColumnModel().getColumn(1).setPreferredWidth(70);
+            jtNotas1.getColumnModel().getColumn(1).setMaxWidth(70);
+        }
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("NOTAS DE LOS ALUMNOS");
@@ -367,9 +371,11 @@ public class MenuProfesor extends javax.swing.JFrame {
             }
         });
         jScrollPane5.setViewportView(jtNotas4);
-        jtNotas4.getColumnModel().getColumn(1).setMinWidth(70);
-        jtNotas4.getColumnModel().getColumn(1).setPreferredWidth(70);
-        jtNotas4.getColumnModel().getColumn(1).setMaxWidth(70);
+        if (jtNotas4.getColumnModel().getColumnCount() > 0) {
+            jtNotas4.getColumnModel().getColumn(1).setMinWidth(70);
+            jtNotas4.getColumnModel().getColumn(1).setPreferredWidth(70);
+            jtNotas4.getColumnModel().getColumn(1).setMaxWidth(70);
+        }
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel15.setText("INGRESAR ASISTENCIA");
@@ -547,9 +553,11 @@ public class MenuProfesor extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(jtNotas2);
-        jtNotas2.getColumnModel().getColumn(1).setMinWidth(70);
-        jtNotas2.getColumnModel().getColumn(1).setPreferredWidth(70);
-        jtNotas2.getColumnModel().getColumn(1).setMaxWidth(70);
+        if (jtNotas2.getColumnModel().getColumnCount() > 0) {
+            jtNotas2.getColumnModel().getColumn(1).setMinWidth(70);
+            jtNotas2.getColumnModel().getColumn(1).setPreferredWidth(70);
+            jtNotas2.getColumnModel().getColumn(1).setMaxWidth(70);
+        }
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("INGRESAR NOTAS");
@@ -642,9 +650,11 @@ public class MenuProfesor extends javax.swing.JFrame {
             }
         });
         jScrollPane4.setViewportView(jtNotas3);
-        jtNotas3.getColumnModel().getColumn(1).setMinWidth(70);
-        jtNotas3.getColumnModel().getColumn(1).setPreferredWidth(70);
-        jtNotas3.getColumnModel().getColumn(1).setMaxWidth(70);
+        if (jtNotas3.getColumnModel().getColumnCount() > 0) {
+            jtNotas3.getColumnModel().getColumn(1).setMinWidth(70);
+            jtNotas3.getColumnModel().getColumn(1).setPreferredWidth(70);
+            jtNotas3.getColumnModel().getColumn(1).setMaxWidth(70);
+        }
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("VER ASISTENCIA");
@@ -854,17 +864,17 @@ public class MenuProfesor extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu6.setText("Chat");
+        jMenu7.setText("Chat");
 
-        jMenuItem10.setText("Ver recibidos");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        initChat.setText("Iniciar Chat");
+        initChat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                initChatActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem10);
+        jMenu7.add(initChat);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(jMenu7);
 
         jMenu4.setText("Salir");
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1167,9 +1177,15 @@ public class MenuProfesor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnVerNotas7ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    private void initChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initChatActionPerformed
+        ChatView chat;
+        try {
+            chat = new ChatView(rut);
+            chat.setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_initChatActionPerformed
 
 
     
@@ -1196,6 +1212,7 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JTextField fecha;
     private javax.swing.JPanel ingresarAsistencia;
     private javax.swing.JPanel ingresarNotas;
+    private javax.swing.JMenuItem initChat;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JList jLMensajes2;
     private javax.swing.JLabel jLabel1;
@@ -1226,9 +1243,8 @@ public class MenuProfesor extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

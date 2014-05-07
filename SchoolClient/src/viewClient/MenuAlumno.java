@@ -97,7 +97,6 @@ public class MenuAlumno extends javax.swing.JFrame {
         menuMensajes = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         initChat = new javax.swing.JMenuItem();
-        stopChat = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -538,14 +537,6 @@ public class MenuAlumno extends javax.swing.JFrame {
         });
         jMenu5.add(initChat);
 
-        stopChat.setText("Detener Chat");
-        stopChat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopChatActionPerformed(evt);
-            }
-        });
-        jMenu5.add(stopChat);
-
         jMenuBar1.add(jMenu5);
 
         jMenu4.setText("Salir");
@@ -784,10 +775,6 @@ public class MenuAlumno extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_initChatActionPerformed
 
-    private void stopChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopChatActionPerformed
-        
-    }//GEN-LAST:event_stopChatActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpAnotaciones;
@@ -838,7 +825,6 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMisAnotaciones;
     private javax.swing.JMenuItem menuMisNotas;
     private javax.swing.JMenuItem menuPromedioGeneral;
-    private javax.swing.JMenuItem stopChat;
     private javax.swing.JTextField txtAsunto;
     private javax.swing.JLabel txtBv;
     private javax.swing.JTextField txtFecha;

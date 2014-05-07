@@ -57,17 +57,17 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
+        <Menu class="javax.swing.JMenu" name="jMenu5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Chat"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mensajesRecibidos1">
+            <MenuItem class="javax.swing.JMenuItem" name="initChat">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ver recibidos"/>
+                <Property name="text" type="java.lang.String" value="Iniciar Chat"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mensajesRecibidos1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="initChatActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
