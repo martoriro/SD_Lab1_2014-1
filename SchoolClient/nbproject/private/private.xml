@@ -6,10 +6,8 @@
         <group name="Lab SD 1"/>
         <group>
             <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolClient/src/viewClient/MenuAlumno.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolClient/src/chat/Chat.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolClient/src/viewClient/ChatView.java</file>
             <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolClient/src/rmiClient/Main.java</file>
-            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolClient/src/interfaceServer/ChatInterface.java</file>
+            <file>file:/C:/Users/Martín/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolClient/src/viewClient/ChatView.java</file>
         </group>
     </open-files>
 </project-private>
