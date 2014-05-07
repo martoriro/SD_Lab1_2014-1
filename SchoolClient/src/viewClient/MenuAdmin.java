@@ -6,8 +6,13 @@ package viewClient;
 
 import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import java.util.logging.*;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
+import javax.swing.table.DefaultTableModel;
 import rmiClient.RmiConnection;
 
 /**
@@ -16,10 +21,11 @@ import rmiClient.RmiConnection;
  */
 public class MenuAdmin extends javax.swing.JFrame {
     private static RmiConnection connection = new RmiConnection();
-    String nombreProfesore[];
+    String nombreProfesores[];
     String rutProfesor[];
     String rutAlumno[];
     String nombreAlumno[];
+    String materias[];
     String rutUser;
     
     /**
@@ -37,6 +43,17 @@ public class MenuAdmin extends javax.swing.JFrame {
         profesoresAsignatura.setVisible(false);
         enviarMensajes.setVisible(false);
         mantencion.setVisible(false);
+        try {
+            materias = connection.getServer().asignaturas();
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jComboBox8.removeAllItems();
+        jComboBox9.removeAllItems();
+        for(int j=0; j<materias.length; j++){
+            jComboBox8.addItem(materias[j]);
+            jComboBox9.addItem(materias[j]);
+        }
                 
     }
     
@@ -714,8 +731,8 @@ public class MenuAdmin extends javax.swing.JFrame {
                         .addComponent(jLabel29)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(alumnosAsignaturasLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(alumnosAsignaturasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(alumnosAsignaturasLayout.createSequentialGroup()
                                 .addComponent(jLabel27)
@@ -908,24 +925,66 @@ public class MenuAdmin extends javax.swing.JFrame {
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         ocultaVentanas();
         profesoresAsignatura.setVisible(rootPaneCheckingEnabled);
+        
+        
+        String aux[];
+        try {
+            
+            aux = connection.getServer().profesores();
+            int cant  = aux.length;
+            jList1.removeAll();
+            DefaultListModel modelo = new DefaultListModel();
+            rutProfesor = new String[cant];
+            nombreProfesores = new String[cant];
+            for(int i = 0; i< cant; i++){
+                rutProfesor[i] = aux[i].split(",")[0];
+                nombreProfesores[i] = aux[i].split(",")[1];                
+                modelo.addElement(nombreProfesores[i]);          
+            }
+            jList1.setModel(modelo);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         ocultaVentanas();
         alumnosAsignaturas.setVisible(rootPaneCheckingEnabled);
+        String aux[];
+        try {
+            aux = connection.getServer().alumnos();
+            int cant  = aux.length;
+            rutAlumno = new String[cant];
+            nombreAlumno = new String[cant];
+            jList2.removeAll();
+            DefaultListModel modelo = new DefaultListModel();
+            for(int i = 0; i< cant; i++){
+                rutAlumno[i] = aux[i].split(",")[0];
+                nombreAlumno[i] = aux[i].split(",")[1];                
+                modelo.addElement(nombreAlumno[i]);          
+            }
+            jList2.setModel(modelo);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void bntVerMensaje2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVerMensaje2ActionPerformed
-        
-        /*try {
-            jComboBox7.setSelectedIndex(0);
-            txtAsunto2.setText("");
-            contMensaje2.setText("");
-            connection.getServer().crearMensaje(txtAsunto2.getText(),contMensaje2.getText(),jComboBox7.getSelectedItem()+"");
-            
-        } catch (RemoteException ex) {
-            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        if(txtAsunto2.getText().length()==0 || contMensaje2.getText().length()==0){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        }else{
+            try {
+                connection.getServer().crearMensaje(txtAsunto2.getText(),contMensaje2.getText(),jComboBox7.getSelectedItem()+"");
+                jComboBox7.setSelectedIndex(0);
+                txtAsunto2.setText("");
+                contMensaje2.setText("");
+                JOptionPane.showMessageDialog(null, "Mensaje enviado exitosamente", "MENSAJE", JOptionPane.WARNING_MESSAGE);
+            } catch (RemoteException ex) {
+                Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                
+            }  
+        }
     }//GEN-LAST:event_bntVerMensaje2ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -952,15 +1011,36 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        jComboBox8.setSelectedIndex(0);
-        jList1.setSelectedIndices(null);
-        JOptionPane.showMessageDialog(null, "Asignación realizada correctamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            if(connection.getServer().profesorMateria(jList1.getSelectedValue()+"",jComboBox8.getSelectedItem()+"")){
+                JOptionPane.showMessageDialog(null, "Asignación realizada correctamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+                jComboBox8.setSelectedIndex(0);
+                jList1.setSelectedIndices(null);
+            }else{
+                JOptionPane.showMessageDialog(null, "El profesor ya tiene asignada esa asignatura", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         jComboBox9.setSelectedIndex(0);
         jList1.setSelectedIndices(null);
-        JOptionPane.showMessageDialog(null, "Asignación realizada correctamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+        try {
+            
+            if(connection.getServer().profesorMateria(jList2.getSelectedValue()+"",jComboBox9.getSelectedItem()+"")){
+                JOptionPane.showMessageDialog(null, "Asignación realizada correctamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+                jComboBox8.setSelectedIndex(0);
+                jList2.setSelectedIndices(null);
+            }else{
+                JOptionPane.showMessageDialog(null, "El alumno ya tiene asignada esa asignatura", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }//GEN-LAST:event_jButton8ActionPerformed
 
