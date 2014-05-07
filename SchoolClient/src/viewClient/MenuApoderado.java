@@ -860,7 +860,7 @@ public class MenuApoderado extends javax.swing.JFrame {
             txtProm.setText(connection.getServer().calculaPromedioAsignatura(asignatura, rutAlumnos[cbAlumnoRamos.getSelectedIndex()])+"");
             
         } catch (RemoteException ex) {
-            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
@@ -878,7 +878,7 @@ public class MenuApoderado extends javax.swing.JFrame {
                 cbMateriaRamos.addItem(asignaturas[i]);
             }
         } catch (RemoteException ex) {
-            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuApoderado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cbAlumnoRamosItemStateChanged
 

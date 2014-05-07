@@ -700,7 +700,7 @@ public class MenuAlumno extends javax.swing.JFrame {
             jtNotas.setModel(model);
             txtProm.setText(connection.getServer().calculaPromedioAsignatura(asignatura, rut)+"");
         } catch (RemoteException ex) {
-            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnVerNotasActionPerformed
