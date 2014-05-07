@@ -273,7 +273,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
     }
 
     public String[] alumnosAsignatura(String asignatura) throws RemoteException {
-        
+
         List<Asignatura> listaAsignatura;
         listaAsignatura = asignaturaController.idAsignatura(asignatura);
         int idAsignatura2 = 0;
@@ -312,67 +312,97 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return listaAlumnos;
     }
-    
-    public void crearAnotacion(String contenido, String rutProfesor, String tipo, String rutAlumno) throws RemoteException{
+
+    public void crearAnotacion(String contenido, String rutProfesor, String tipo, String rutAlumno) throws RemoteException {
         Date fecha = new Date();
-        
+
         Anotacion nuevaAnotacion = new Anotacion();
         nuevaAnotacion.setContenido(contenido);
         nuevaAnotacion.setFecha(fecha);
         nuevaAnotacion.setRutProfesor(rutProfesor);
         nuevaAnotacion.setTipoAnotacion(tipo);
         nuevaAnotacion.setRutAlumno(rutAlumno);
-        
+
         anotacionController.create(nuevaAnotacion);
     }
-    
-    public String[] todosAlumnos() throws RemoteException{
+
+    public String[] todosAlumnos() throws RemoteException {
         List<Usuario> listaAlumnos;
         String resultado;
         listaAlumnos = userFunction.buscarAlumnos();
         String listaAlumnos2[] = new String[listaAlumnos.size()];
-        for(int i = 0; i < listaAlumnos2.length; i++){
-            listaAlumnos2[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + " "+ listaAlumnos.get(i).getApellidoMat();
+        for (int i = 0; i < listaAlumnos2.length; i++) {
+            listaAlumnos2[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + " " + listaAlumnos.get(i).getApellidoMat();
         }
         return listaAlumnos2;
     }
-    
-     public void crearMensaje(String asunto, String contenido, String tipo) throws RemoteException{
+
+    public void crearMensaje(String asunto, String contenido, String tipo) throws RemoteException {
         Date fecha = new Date();
-        
+
         Mensaje nuevoMensaje;
         nuevoMensaje = new Mensaje();
         nuevoMensaje.setAsunto(asunto);
         nuevoMensaje.setContenido(contenido);
         nuevoMensaje.setTipo(tipo);
         nuevoMensaje.setFecha(fecha);
-        
+
         mensajeController.create(nuevoMensaje);
     }
-     
-     public String[] profesores() throws RemoteException{
-         List<Usuario> listaProfesores;
-         listaProfesores = userFunction.buscarProfesor();
-         String profesores[] = new String[listaProfesores.size()];
-         
-         for(int i = 0; i < listaProfesores.size(); i++){
-             profesores[i] = listaProfesores.get(i).getRut() + "," + listaProfesores.get(i).getNombre() + " " + listaProfesores.get(i).getApellidoPat() + " " + listaProfesores.get(i).getApellidoMat();
-         }
-         
-         return profesores;
-     }
-     
-     public String[] alumnos() throws RemoteException{
-         List<Usuario> listaAlumnos;
-         listaAlumnos = userFunction.buscarAlumnos();
-         String alumnos[] = new String[listaAlumnos.size()];
-         
-         for(int i = 0; i < listaAlumnos.size(); i++){
-             alumnos[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + " " + listaAlumnos.get(i).getApellidoMat();
-         }
-         
-         return alumnos;
-     }
+
+    public String[] profesores() throws RemoteException {
+        List<Usuario> listaProfesores;
+        listaProfesores = userFunction.buscarProfesor();
+        String profesores[] = new String[listaProfesores.size()];
+
+        for (int i = 0; i < listaProfesores.size(); i++) {
+            profesores[i] = listaProfesores.get(i).getRut() + "," + listaProfesores.get(i).getNombre() + " " + listaProfesores.get(i).getApellidoPat() + " " + listaProfesores.get(i).getApellidoMat();
+        }
+
+        return profesores;
+    }
+
+    public String[] alumnos() throws RemoteException {
+        List<Usuario> listaAlumnos;
+        listaAlumnos = userFunction.buscarAlumnos();
+        String alumnos[] = new String[listaAlumnos.size()];
+
+        for (int i = 0; i < listaAlumnos.size(); i++) {
+            alumnos[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + " " + listaAlumnos.get(i).getApellidoMat();
+        }
+
+        return alumnos;
+    }
+    
+    public String[] asignaturas() throws RemoteException{
+        List<Asignatura> listaAsignaturas;
+        listaAsignaturas = asignaturaController.listaAsignaturas();
+        String asignaturas[] = new String[listaAsignaturas.size()];
+
+        for (int i = 0; i < listaAsignaturas.size(); i++) {
+            asignaturas[i] = listaAsignaturas.get(i).getNombre();
+        }
+
+        return asignaturas;
+    }
+
+    public boolean profesorMateria(String rutProfesor, String materia) throws RemoteException {
+        List<Asignatura> asignaturaBuscada;
+        asignaturaBuscada = asignaturaController.idAsignatura(materia);
+        int idAsignatura = asignaturaBuscada.get(0).getIdAsignatura();
+
+        UsuarioAsignatura nuevoUsuarioAsignatura = new UsuarioAsignatura();
+        nuevoUsuarioAsignatura.setIdAsignatura(idAsignatura);
+        nuevoUsuarioAsignatura.setRut(rutProfesor);
+
+        try {
+            usuarioAsignaturaController.create(nuevoUsuarioAsignatura);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
 
     //Funcionalidades del administrador
     public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {

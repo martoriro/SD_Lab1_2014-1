@@ -58,7 +58,7 @@ public class MainJoel {
         UsuarioJpaController usuarioController = new UsuarioJpaController(factory);
 
         Usuario nuevoUsuario = new Usuario("d", passwordEncriptada, "Gustavo", 40, "alumno", "Consolador", "Salvo");
-        usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
+        //usuarioController.create(nuevoUsuario); //Comentado para no meter al mismo wn
         //Eliminar usuario
         //usuarioController.destroy("17409487k");
 
@@ -297,6 +297,19 @@ public class MainJoel {
         for (int i = 0; i < listaAlumnos.length; i++) {
             System.out.println(listaAlumnos[i]);
         }
-        
+
+        System.out.println("alumnos");
+        List<Usuario> listaProfesores4;
+        listaProfesores4 = usuarioController.buscarProfesor();
+        String profesores[] = new String[listaProfesores4.size()];
+
+        for (int i = 0; i < listaProfesores4.size(); i++) {
+            profesores[i] = listaProfesores4.get(i).getRut() + "," + listaProfesores4.get(i).getNombre() + " " + listaProfesores4.get(i).getApellidoPat() + " " + listaProfesores4.get(i).getApellidoMat();
+        }
+
+        for (int i = 0; i < listaProfesores4.size(); i++) {
+            System.out.println(profesores[i]);
+        }
+
     }
 }
