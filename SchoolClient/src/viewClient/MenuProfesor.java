@@ -1025,7 +1025,7 @@ public class MenuProfesor extends javax.swing.JFrame {
             jtNotas.setModel(model);
             
         } catch (RemoteException ex) {
-            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
@@ -1049,7 +1049,7 @@ public class MenuProfesor extends javax.swing.JFrame {
             txtProm1.setText(connection.getServer().calculaPromedioAsignatura(asignatura, rutAlumnos[cbAsignaturas2.getSelectedIndex()])+"");
             
         } catch (RemoteException ex) {
-            Logger.getLogger(alumnoMisNotas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "El alumno no registra notas", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
         }
