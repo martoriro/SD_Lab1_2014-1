@@ -62,7 +62,7 @@ public class AsignaturaJpaController implements Serializable {
         return query.getResultList();
     }
     
-    public void create(Asignatura asignatura) {
+    public void create(Asignatura asignatura) throws Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();

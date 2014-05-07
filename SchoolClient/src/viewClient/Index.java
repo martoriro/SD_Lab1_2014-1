@@ -138,7 +138,7 @@ public class Index extends javax.swing.JFrame {
                         this.hide();
                         break;
                     case "administrador":
-                        MenuAdmin menuAdmin = new MenuAdmin();
+                        MenuAdmin menuAdmin = new MenuAdmin(user);
                         menuAdmin.setExtendedState(MAXIMIZED_BOTH);
                         menuAdmin.setVisible(true);                        
                         this.hide();

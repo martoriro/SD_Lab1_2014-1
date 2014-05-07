@@ -31,7 +31,8 @@ public class MenuAdmin extends javax.swing.JFrame {
     /**
      * Creates new form MenuAdmin
      */
-    public MenuAdmin() {
+    public MenuAdmin(String rut) {
+        rutUser = rut;
         initComponents();
         ocultaVentanas();
     }

@@ -349,6 +349,19 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
 
         mensajeController.create(nuevoMensaje);
     }
+    
+    public boolean crearAsignatura(String nombre) throws RemoteException {
+        Asignatura nuevaAsignatura;
+        nuevaAsignatura = new Asignatura();
+        nuevaAsignatura.setNombre(nombre);
+        
+        try{
+            asignaturaController.create(nuevaAsignatura);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
 
     public String[] profesores() throws RemoteException {
         List<Usuario> listaProfesores;
