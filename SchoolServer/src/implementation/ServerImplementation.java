@@ -336,6 +336,19 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         }
         return listaAlumnos2;
     }
+    
+     public void crearMensaje(String asunto, String contenido, String tipo) throws RemoteException{
+        Date fecha = new Date();
+        
+        Mensaje nuevoMensaje;
+        nuevoMensaje = new Mensaje();
+        nuevoMensaje.setAsunto(asunto);
+        nuevoMensaje.setContenido(contenido);
+        nuevoMensaje.setTipo(tipo);
+        nuevoMensaje.setFecha(fecha);
+        
+        mensajeController.create(nuevoMensaje);
+    }
 
     //Funcionalidades del administrador
     public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {
