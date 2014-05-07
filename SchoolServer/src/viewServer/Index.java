@@ -42,7 +42,7 @@ public class Index extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
 
-        btnRun.setText("Strart");
+        btnRun.setText("Start");
         btnRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRunActionPerformed(evt);

@@ -1151,10 +1151,19 @@ public class MenuProfesor extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAsignaturas8ActionPerformed
 
     private void btnVerNotas7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerNotas7ActionPerformed
-        try {
-            connection.getServer().crearAnotacion(anotame.getText(),rut, tipoAnotacion.getSelectedItem()+"", rutAlumnos[cbAsignaturas8.getSelectedIndex()]);
-        } catch (RemoteException ex) {
-            Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
+        if(anotame.getText().length()== 0){
+            JOptionPane.showMessageDialog(null, "Debe ingresar una anotación", "ADVERTENCIA", JOptionPane.WARNING_MESSAGE);
+        }else{
+            try {
+                connection.getServer().crearAnotacion(anotame.getText(),rut, tipoAnotacion.getSelectedItem()+"", rutAlumnos[cbAsignaturas8.getSelectedIndex()]);
+            } catch (RemoteException ex) {
+                Logger.getLogger(MenuProfesor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Anotación registrada exitosamente.", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
+            tipoAnotacion.setSelectedIndex(0);
+            cbAsignaturas8.setSelectedIndex(0);
+            anotame.setText("");
+            
         }
     }//GEN-LAST:event_btnVerNotas7ActionPerformed
 
