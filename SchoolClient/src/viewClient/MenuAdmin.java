@@ -152,7 +152,9 @@ public class MenuAdmin extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
         mantencion = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        bntVerMensaje3 = new javax.swing.JButton();
+        bntVerMensaje4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -307,17 +309,15 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Nombre");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("A. Paterno");
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("A. Materno");
-            jTable1.getColumnModel().getColumn(5).setHeaderValue("Edad");
-            jTable1.getColumnModel().getColumn(6).setHeaderValue("Tipo");
-            jTable1.getColumnModel().getColumn(7).setHeaderValue("Alumno");
-        }
+        jTable1.getColumnModel().getColumn(0).setMinWidth(50);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(0).setMaxWidth(50);
+        jTable1.getColumnModel().getColumn(2).setHeaderValue("Nombre");
+        jTable1.getColumnModel().getColumn(3).setHeaderValue("A. Paterno");
+        jTable1.getColumnModel().getColumn(4).setHeaderValue("A. Materno");
+        jTable1.getColumnModel().getColumn(5).setHeaderValue("Edad");
+        jTable1.getColumnModel().getColumn(6).setHeaderValue("Tipo");
+        jTable1.getColumnModel().getColumn(7).setHeaderValue("Alumno");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -506,11 +506,9 @@ public class MenuAdmin extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setMinWidth(50);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
-            jTable2.getColumnModel().getColumn(0).setMaxWidth(50);
-        }
+        jTable2.getColumnModel().getColumn(0).setMinWidth(50);
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(0).setMaxWidth(50);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -758,23 +756,47 @@ public class MenuAdmin extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
-        jLabel31.setText("Mantención");
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel30.setText("MANTENCIÓN");
+
+        bntVerMensaje3.setText("DESCONECTAR");
+        bntVerMensaje3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVerMensaje3ActionPerformed(evt);
+            }
+        });
+
+        bntVerMensaje4.setText("CONECTAR");
+        bntVerMensaje4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntVerMensaje4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout mantencionLayout = new javax.swing.GroupLayout(mantencion);
         mantencion.setLayout(mantencionLayout);
         mantencionLayout.setHorizontalGroup(
             mantencionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mantencionLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jLabel31)
-                .addContainerGap(463, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(mantencionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel30)
+                    .addGroup(mantencionLayout.createSequentialGroup()
+                        .addComponent(bntVerMensaje3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntVerMensaje4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         mantencionLayout.setVerticalGroup(
             mantencionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mantencionLayout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jLabel31)
-                .addGap(173, 173, 173))
+            .addGroup(mantencionLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel30)
+                .addGap(18, 18, 18)
+                .addGroup(mantencionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bntVerMensaje3)
+                    .addComponent(bntVerMensaje4))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Usuarios");
@@ -1054,11 +1076,21 @@ public class MenuAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_initChatActionPerformed
 
+    private void bntVerMensaje3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVerMensaje3ActionPerformed
+        
+    }//GEN-LAST:event_bntVerMensaje3ActionPerformed
+
+    private void bntVerMensaje4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntVerMensaje4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntVerMensaje4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox alumno;
     private javax.swing.JPanel alumnosAsignaturas;
     private javax.swing.JButton bntVerMensaje2;
+    private javax.swing.JButton bntVerMensaje3;
+    private javax.swing.JButton bntVerMensaje4;
     private javax.swing.JTextArea contMensaje2;
     private javax.swing.JTabbedPane crudAsignatura;
     private javax.swing.JTabbedPane crudUsuario;
@@ -1103,7 +1135,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
