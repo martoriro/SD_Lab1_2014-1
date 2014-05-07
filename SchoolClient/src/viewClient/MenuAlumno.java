@@ -95,6 +95,9 @@ public class MenuAlumno extends javax.swing.JFrame {
         menuMisAnotaciones = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         menuMensajes = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        initChat = new javax.swing.JMenuItem();
+        stopChat = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -129,9 +132,11 @@ public class MenuAlumno extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jtNotas);
-        jtNotas.getColumnModel().getColumn(1).setMinWidth(50);
-        jtNotas.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jtNotas.getColumnModel().getColumn(1).setMaxWidth(50);
+        if (jtNotas.getColumnModel().getColumnCount() > 0) {
+            jtNotas.getColumnModel().getColumn(1).setMinWidth(50);
+            jtNotas.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jtNotas.getColumnModel().getColumn(1).setMaxWidth(50);
+        }
 
         txtProm.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtProm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -218,9 +223,11 @@ public class MenuAlumno extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(jtPromedios);
-        jtPromedios.getColumnModel().getColumn(1).setMinWidth(70);
-        jtPromedios.getColumnModel().getColumn(1).setPreferredWidth(70);
-        jtPromedios.getColumnModel().getColumn(1).setMaxWidth(70);
+        if (jtPromedios.getColumnModel().getColumnCount() > 0) {
+            jtPromedios.getColumnModel().getColumn(1).setMinWidth(70);
+            jtPromedios.getColumnModel().getColumn(1).setPreferredWidth(70);
+            jtPromedios.getColumnModel().getColumn(1).setMaxWidth(70);
+        }
 
         txtPromGeneral.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtPromGeneral.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -521,6 +528,26 @@ public class MenuAlumno extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu5.setText("Chat");
+
+        initChat.setText("Iniciar Chat");
+        initChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                initChatActionPerformed(evt);
+            }
+        });
+        jMenu5.add(initChat);
+
+        stopChat.setText("Detener Chat");
+        stopChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopChatActionPerformed(evt);
+            }
+        });
+        jMenu5.add(stopChat);
+
+        jMenuBar1.add(jMenu5);
+
         jMenu4.setText("Salir");
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -560,7 +587,7 @@ public class MenuAlumno extends javax.swing.JFrame {
                 .addComponent(JpAnotaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JpMensajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -747,6 +774,20 @@ public class MenuAlumno extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenu4MousePressed
 
+    private void initChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_initChatActionPerformed
+        ChatView chat;
+        try {
+            chat = new ChatView(rut);
+            chat.setVisible(true);
+        } catch (RemoteException ex) {
+            Logger.getLogger(MenuAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_initChatActionPerformed
+
+    private void stopChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopChatActionPerformed
+        
+    }//GEN-LAST:event_stopChatActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpAnotaciones;
@@ -759,6 +800,7 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JComboBox cbTipoAnotacion;
     private javax.swing.JTextArea contAnotacion;
     private javax.swing.JTextArea contMensaje;
+    private javax.swing.JMenuItem initChat;
     private javax.swing.JList jLMensajes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -778,6 +820,7 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPAsignatura;
@@ -795,6 +838,7 @@ public class MenuAlumno extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMisAnotaciones;
     private javax.swing.JMenuItem menuMisNotas;
     private javax.swing.JMenuItem menuPromedioGeneral;
+    private javax.swing.JMenuItem stopChat;
     private javax.swing.JTextField txtAsunto;
     private javax.swing.JLabel txtBv;
     private javax.swing.JTextField txtFecha;

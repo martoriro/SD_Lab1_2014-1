@@ -4,6 +4,7 @@
  */
 package rmiClient;
 
+import interfaceServer.ChatInterface;
 import interfaceServer.InterfaceS;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -16,6 +17,7 @@ import java.rmi.registry.Registry;
 public class RmiConnection {
     private static Registry registry;
     private static InterfaceS server;
+    private static ChatInterface chat;
     
     public boolean rmiRegistry() throws RemoteException{
         try{
@@ -25,6 +27,7 @@ public class RmiConnection {
             //Se indica la dirección y el puerto
             startRegistry("127.0.0.1",1098);
             server = (InterfaceS)registry.lookup("IMP");
+            chat = (ChatInterface) registry.lookup("CHAT");
             return true;
         }catch(Exception e){
             e.printStackTrace();
@@ -41,6 +44,10 @@ public class RmiConnection {
     }
     public InterfaceS getServer(){
         return server;
+    }
+    
+    public ChatInterface getChat(){
+        return chat;
     }
     
 }

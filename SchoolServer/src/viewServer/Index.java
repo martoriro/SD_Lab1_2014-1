@@ -4,6 +4,7 @@
  */
 package viewServer;
 
+import implementation.Chat;
 import implementation.ServerImplementation;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
@@ -88,6 +89,9 @@ public class Index extends javax.swing.JFrame {
             registro.rebind("IMP", objeto);
             this.btnRun.setEnabled(false);
             this.btnStop.setEnabled(true);
+            registro = conexion.getRegistry();
+            Chat server = new Chat("server");	
+            registro.rebind("CHAT", server);
         } catch (RemoteException ex) {
             Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
         }
