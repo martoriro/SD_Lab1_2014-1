@@ -361,6 +361,18 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
          
          return profesores;
      }
+     
+     public String[] alumnos() throws RemoteException{
+         List<Usuario> listaAlumnos;
+         listaAlumnos = userFunction.buscarAlumnos();
+         String alumnos[] = new String[listaAlumnos.size()];
+         
+         for(int i = 0; i < listaAlumnos.size(); i++){
+             alumnos[i] = listaAlumnos.get(i).getRut() + "," + listaAlumnos.get(i).getNombre() + " " + listaAlumnos.get(i).getApellidoPat() + " " + listaAlumnos.get(i).getApellidoMat();
+         }
+         
+         return alumnos;
+     }
 
     //Funcionalidades del administrador
     public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {

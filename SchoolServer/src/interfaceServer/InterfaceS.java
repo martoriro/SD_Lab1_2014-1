@@ -36,4 +36,5 @@ public interface InterfaceS extends Remote{
     public String[] todosAlumnos() throws RemoteException;
     public void crearMensaje(String asunto, String contenido, String tipo) throws RemoteException;
     public String[] profesores() throws RemoteException;
+    public String[] alumnos() throws RemoteException;
 }
