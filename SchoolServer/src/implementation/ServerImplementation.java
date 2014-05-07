@@ -373,8 +373,8 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
 
         return alumnos;
     }
-    
-    public String[] asignaturas() throws RemoteException{
+
+    public String[] asignaturas() throws RemoteException {
         List<Asignatura> listaAsignaturas;
         listaAsignaturas = asignaturaController.listaAsignaturas();
         String asignaturas[] = new String[listaAsignaturas.size()];
@@ -394,6 +394,24 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         UsuarioAsignatura nuevoUsuarioAsignatura = new UsuarioAsignatura();
         nuevoUsuarioAsignatura.setIdAsignatura(idAsignatura);
         nuevoUsuarioAsignatura.setRut(rutProfesor);
+
+        try {
+            usuarioAsignaturaController.create(nuevoUsuarioAsignatura);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public boolean alumnoMateria(String rutAlumno, String materia) throws RemoteException {
+        List<Asignatura> asignaturaBuscada;
+        asignaturaBuscada = asignaturaController.idAsignatura(materia);
+        int idAsignatura = asignaturaBuscada.get(0).getIdAsignatura();
+
+        UsuarioAsignatura nuevoUsuarioAsignatura = new UsuarioAsignatura();
+        nuevoUsuarioAsignatura.setIdAsignatura(idAsignatura);
+        nuevoUsuarioAsignatura.setRut(rutAlumno);
 
         try {
             usuarioAsignaturaController.create(nuevoUsuarioAsignatura);
