@@ -349,6 +349,18 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         
         mensajeController.create(nuevoMensaje);
     }
+     
+     public String[] profesores() throws RemoteException{
+         List<Usuario> listaProfesores;
+         listaProfesores = userFunction.buscarProfesor();
+         String profesores[] = new String[listaProfesores.size()];
+         
+         for(int i = 0; i < listaProfesores.size(); i++){
+             profesores[i] = listaProfesores.get(i).getRut() + "," + listaProfesores.get(i).getNombre() + " " + listaProfesores.get(i).getApellidoPat() + " " + listaProfesores.get(i).getApellidoMat();
+         }
+         
+         return profesores;
+     }
 
     //Funcionalidades del administrador
     public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {
