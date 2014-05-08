@@ -4,6 +4,7 @@
  */
 package implementation;
 
+import encriptador.MD5;
 import entityClass.Anotacion;
 import entityClass.Asignatura;
 import entityClass.Mensaje;
@@ -486,7 +487,13 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
 
 //Funcionalidades del administrador
     public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {
-        Usuario nuevoUsuario = new Usuario(rut, password, nombre, edad, tipo, apellidoPat, apellidoMat);
+        
+        String password2 = password;
+        String passwordEncriptada;
+        MD5 instancia = new MD5();
+        passwordEncriptada = instancia.encriptar(password2);
+        
+        Usuario nuevoUsuario = new Usuario(rut, passwordEncriptada, nombre, edad, tipo, apellidoPat, apellidoMat);
         nuevoUsuario.setRutApoderado(rutApoderado);
         userFunction.create(nuevoUsuario);
     }

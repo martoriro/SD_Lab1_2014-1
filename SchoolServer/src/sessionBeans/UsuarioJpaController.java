@@ -36,10 +36,11 @@ public class UsuarioJpaController implements Serializable {
     }
     
     public List<Usuario> sinApoderados(){
+        String probar = null;
         EntityManager em = getEntityManager();
         Query query;
         query = em.createNamedQuery("Usuario.findByRutApoderado").
-                setParameter("rutApoderado", "NULL");
+                setParameter("rutApoderado", null);
         
         return query.getResultList();
     }

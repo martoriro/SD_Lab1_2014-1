@@ -39,4 +39,6 @@ public interface InterfaceS extends Remote {
     public String[] asignaturas() throws RemoteException;
     public boolean profesorMateria(String rutProfesor, String materia) throws RemoteException;
     public boolean alumnoMateria(String rutAlumno, String materia) throws RemoteException;
+    public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception;
+    public boolean validarRut(String rut) throws RemoteException;
 }

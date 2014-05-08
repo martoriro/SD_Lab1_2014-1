@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entityClass;
 
 import java.io.Serializable;
@@ -33,8 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuario.findByTipo", query = "SELECT u FROM Usuario u WHERE u.tipo = :tipo"),
     @NamedQuery(name = "Usuario.findByApellidoMat", query = "SELECT u FROM Usuario u WHERE u.apellidoMat = :apellidoMat"),
     @NamedQuery(name = "Usuario.findByApellidoPat", query = "SELECT u FROM Usuario u WHERE u.apellidoPat = :apellidoPat"),
-    @NamedQuery(name = "Usuario.findByRutApoderado", query = "SELECT u FROM Usuario u WHERE u.rutApoderado = :rutApoderado")})
+    @NamedQuery(name = "Usuario.findByRutApoderado", query = "SELECT u FROM Usuario u WHERE u.rutApoderado = :rutApoderado"),
+    @NamedQuery(name = "Usuario.findByRutApoderadoNULL", query = "SELECT u FROM Usuario u WHERE u.rutApoderado = :null")})
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -166,5 +167,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "entityClass.Usuario[ rut=" + rut + " ]";
     }
-    
+
 }
