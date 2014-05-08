@@ -486,7 +486,7 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
     
 
 //Funcionalidades del administrador
-    public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {
+    public boolean nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {
         
         String password2 = password;
         String passwordEncriptada;
@@ -495,7 +495,24 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         
         Usuario nuevoUsuario = new Usuario(rut, passwordEncriptada, nombre, edad, tipo, apellidoPat, apellidoMat);
         nuevoUsuario.setRutApoderado(rutApoderado);
-        userFunction.create(nuevoUsuario);
+        
+        List<Usuario> usuarioBuscado;
+        usuarioBuscado = userFunction.buscarUsuario(rut);
+        
+        if(usuarioBuscado.size() == 0){
+            userFunction.create(nuevoUsuario);
+            return true;
+        }
+        else{
+            return false;
+            
+        }
+        
+    }
+    
+    public void modificarPassword(String rut, String newPassword){
+        List<Usuario> usuarioBuscado;
+        usuarioBuscado = userFunction.buscarUsuario(rut);
     }
 
     public void eliminarUsuario(String rut) throws NonexistentEntityException {
