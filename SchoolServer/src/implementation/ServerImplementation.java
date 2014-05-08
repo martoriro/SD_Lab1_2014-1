@@ -510,9 +510,29 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         
     }
     
-    public void modificarPassword(String rut, String newPassword){
+    public void modificarPassword(String rut, String newPassword) throws RemoteException, NoSuchAlgorithmException, Exception{
         List<Usuario> usuarioBuscado;
         usuarioBuscado = userFunction.buscarUsuario(rut);
+        
+        String passwordEncriptada;
+        MD5 instancia = new MD5();
+        passwordEncriptada = instancia.encriptar(newPassword);
+        
+        usuarioBuscado.get(0).setPassword(passwordEncriptada);
+        
+        userFunction.edit(usuarioBuscado.get(0));
+    }
+    
+    public String[] ruts() throws RemoteException{
+        List<Usuario> todosLosRuts;
+        todosLosRuts = userFunction.todos();
+        String alumnos[] = new String[todosLosRuts.size()];
+        
+        for(int i = 0; i < alumnos.length; i++){
+            alumnos[i] = todosLosRuts.get(i).getRut();
+        }
+        
+        return alumnos;
     }
 
     public void eliminarUsuario(String rut) throws NonexistentEntityException {
