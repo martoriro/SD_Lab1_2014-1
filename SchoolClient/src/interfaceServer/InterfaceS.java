@@ -42,4 +42,6 @@ public interface InterfaceS extends Remote {
     public boolean nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception;
     public boolean validarRut(String rut) throws RemoteException;
     public String[] ruts() throws RemoteException;
+
+    public void modificarPassword(String rut, String pass);
 }
