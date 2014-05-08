@@ -937,7 +937,8 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
        ocultaVentanas();
-       crudAsignatura.setVisible(rootPaneCheckingEnabled);
+       JOptionPane.showMessageDialog(null, "Módulo en construcción, disculpe las molestias", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+       //crudAsignatura.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
@@ -1012,7 +1013,8 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         ocultaVentanas();
-        crudUsuario.setVisible(rootPaneCheckingEnabled);
+        JOptionPane.showMessageDialog(null, "Módulo en construcción, disculpe las molestias", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+        //crudUsuario.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
@@ -1034,8 +1036,9 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if(jList1.getSelectedValue()!=null){
         try {
-            if(connection.getServer().profesorMateria(jList1.getSelectedValue()+"",jComboBox8.getSelectedItem()+"")){
+            if(connection.getServer().profesorMateria(rutProfesor[jList1.getSelectedIndex()]+"",jComboBox8.getSelectedItem()+"")){
                 JOptionPane.showMessageDialog(null, "Asignación realizada correctamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
                 jComboBox8.setSelectedIndex(0);
                 jList1.setSelectedIndices(null);
@@ -1045,15 +1048,17 @@ public class MenuAdmin extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un profesor de la lista", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        jComboBox9.setSelectedIndex(0);
-        jList1.setSelectedIndices(null);
+         if(jList2.getSelectedValue()!= null){
         try {
             
-            if(connection.getServer().profesorMateria(jList2.getSelectedValue()+"",jComboBox9.getSelectedItem()+"")){
+            if(connection.getServer().profesorMateria(rutAlumno[jList2.getSelectedIndex()],jComboBox9.getSelectedItem()+"")){
                 JOptionPane.showMessageDialog(null, "Asignación realizada correctamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
                 jComboBox8.setSelectedIndex(0);
                 jList2.setSelectedIndices(null);
@@ -1063,7 +1068,9 @@ public class MenuAdmin extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+         }else{
+             JOptionPane.showMessageDialog(null, "Seleccione un alumno de la lista", "ERROR", JOptionPane.ERROR_MESSAGE);
+         }
         
     }//GEN-LAST:event_jButton8ActionPerformed
 
