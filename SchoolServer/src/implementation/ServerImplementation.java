@@ -10,6 +10,9 @@ import entityClass.Mensaje;
 import entityClass.Prueba;
 import entityClass.Usuario;
 import entityClass.UsuarioAsignatura;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.NoSuchAlgorithmException;
@@ -349,16 +352,16 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
 
         mensajeController.create(nuevoMensaje);
     }
-    
+
     public boolean crearAsignatura(String nombre) throws RemoteException {
         Asignatura nuevaAsignatura;
         nuevaAsignatura = new Asignatura();
         nuevaAsignatura.setNombre(nombre);
-        
-        try{
+
+        try {
             asignaturaController.create(nuevaAsignatura);
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -410,12 +413,11 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
 
         List<UsuarioAsignatura> revision;
         revision = usuarioAsignaturaController.buscarRegistro(rutProfesor, idAsignatura);
-        
-        if(revision.size() == 0){
+
+        if (revision.size() == 0) {
             usuarioAsignaturaController.create(nuevoUsuarioAsignatura);
             return true;
-        }
-        else{
+        } else {
             //No se puede crear
             return false;
         }
@@ -431,16 +433,58 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         nuevoUsuarioAsignatura.setIdAsignatura(idAsignatura);
         nuevoUsuarioAsignatura.setRut(rutAlumno);
 
-        try {
+        List<UsuarioAsignatura> revision;
+        revision = usuarioAsignaturaController.buscarRegistro(rutAlumno, idAsignatura);
+
+        if (revision.size() == 0) {
             usuarioAsignaturaController.create(nuevoUsuarioAsignatura);
             return true;
-        } catch (Exception e) {
+        } else {
+            //No se puede crear
             return false;
         }
-
     }
 
-    //Funcionalidades del administrador
+    public boolean validarRut(String rut) throws RemoteException{
+
+        boolean validacion = false;
+        try {
+            rut = rut.toUpperCase();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
+
+            char dv = rut.charAt(rut.length() - 1);
+
+            int m = 0, s = 1;
+            for (; rutAux != 0; rutAux /= 10) {
+                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+            }
+            if (dv == (char) (s != 0 ? s + 47 : 75)) {
+                validacion = true;
+            }
+
+        } catch (java.lang.NumberFormatException e) {
+        } catch (Exception e) {
+        }
+        return validacion;
+    }
+    
+    public String[] alumnosSinApoderado(){
+        List<Usuario> sinApoderados;
+        sinApoderados = userFunction.sinApoderados();
+        String alumnosSinApoderado[] = new String[sinApoderados.size()];
+        
+        for(int i = 0; i < alumnosSinApoderado.length; i++){
+            alumnosSinApoderado[i] = sinApoderados.get(i).getRut();
+        }
+        
+        return alumnosSinApoderado;
+    }
+    
+    
+
+//Funcionalidades del administrador
     public void nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception {
         Usuario nuevoUsuario = new Usuario(rut, password, nombre, edad, tipo, apellidoPat, apellidoMat);
         nuevoUsuario.setRutApoderado(rutApoderado);

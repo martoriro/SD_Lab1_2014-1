@@ -249,7 +249,6 @@ public class MainJoel {
         }
         System.out.println("Nombre: " + nombre2);
 
-
         //Aca empieza la funcion que saca promedios por alumnos
         List<Asignatura> listaAsignatura;
         listaAsignatura = asignaturaController.idAsignatura("matematicas");
@@ -292,8 +291,6 @@ public class MainJoel {
             }
         }
 
-
-
         for (int i = 0; i < listaAlumnos.length; i++) {
             System.out.println(listaAlumnos[i]);
         }
@@ -311,5 +308,37 @@ public class MainJoel {
             System.out.println(profesores[i]);
         }
 
+        System.out.println("agregar");
+
+        List<Asignatura> asignaturaBuscada;
+        asignaturaBuscada = asignaturaController.idAsignatura("lenguaje");
+        int idAsignatura4 = asignaturaBuscada.get(0).getIdAsignatura();
+
+        UsuarioAsignatura nuevoUsuarioAsignatura = new UsuarioAsignatura();
+        nuevoUsuarioAsignatura.setIdAsignatura(idAsignatura4);
+        nuevoUsuarioAsignatura.setRut("b");
+
+        List<UsuarioAsignatura> revision;
+        revision = UsuarioAsignaturaController.buscarRegistro("b", idAsignatura4);
+
+        if (revision.size() == 0) {
+            UsuarioAsignaturaController.create(nuevoUsuarioAsignatura);
+            System.out.println("se pudo");
+        } else {
+            //No se puede crear
+            System.out.println("no se pudo");
+        }
+
+        List<Usuario> sinApoderados;
+        sinApoderados = usuarioController.sinApoderados();
+        String alumnosSinApoderado[] = new String[sinApoderados.size()];
+
+        for (int i = 0; i < alumnosSinApoderado.length; i++) {
+            alumnosSinApoderado[i] = sinApoderados.get(i).getRut();
+        }
+
+        for (int i = 0; i < alumnosSinApoderado.length; i++) {
+            System.out.println(alumnosSinApoderado[i]);
+        }
     }
 }

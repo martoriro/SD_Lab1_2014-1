@@ -7,6 +7,12 @@
             <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/META-INF/persistence.xml</file>
         </group>
         <group/>
-        <group name="Lab SD 1"/>
+        <group name="Lab SD 1">
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/sessionBeans/UsuarioAsignaturaJpaController.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/implementation/ServerImplementation.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/rmiServer/MainJoel.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/interfaceServer/InterfaceS.java</file>
+            <file>file:/C:/Users/Joel/Documents/NetBeansProjects/SD_Lab1_2014-1/SchoolServer/src/entityClass/UsuarioAsignatura.java</file>
+        </group>
     </open-files>
 </project-private>
