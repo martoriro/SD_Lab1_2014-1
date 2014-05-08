@@ -408,10 +408,15 @@ public class ServerImplementation extends UnicastRemoteObject implements interfa
         nuevoUsuarioAsignatura.setIdAsignatura(idAsignatura);
         nuevoUsuarioAsignatura.setRut(rutProfesor);
 
-        try {
+        List<UsuarioAsignatura> revision;
+        revision = usuarioAsignaturaController.buscarRegistro(rutProfesor, idAsignatura);
+        
+        if(revision.size() == 0){
             usuarioAsignaturaController.create(nuevoUsuarioAsignatura);
             return true;
-        } catch (Exception e) {
+        }
+        else{
+            //No se puede crear
             return false;
         }
 

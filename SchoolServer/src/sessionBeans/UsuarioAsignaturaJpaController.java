@@ -51,6 +51,17 @@ public class UsuarioAsignaturaJpaController implements Serializable {
         return query.getResultList();
     }
     
+    public List<UsuarioAsignatura> buscarRegistro(String rut, int idAsignatura){
+        EntityManager em = getEntityManager();
+        Query query;
+        
+        query = em.createNamedQuery("UsuarioAsignatura.findByRutIdAsignatura").
+                setParameter("rut", rut).
+                setParameter("idAsignatura", idAsignatura);
+               
+        return query.getResultList();
+    }
+    
     public void create(UsuarioAsignatura usuarioAsignatura) {
         EntityManager em = null;
         try {

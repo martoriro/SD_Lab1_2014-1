@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package entityClass;
 
 import java.io.Serializable;
@@ -29,9 +28,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UsuarioAsignatura.findAll", query = "SELECT u FROM UsuarioAsignatura u"),
     @NamedQuery(name = "UsuarioAsignatura.findByIdUsuarioAsignatura", query = "SELECT u FROM UsuarioAsignatura u WHERE u.idUsuarioAsignatura = :idUsuarioAsignatura"),
     @NamedQuery(name = "UsuarioAsignatura.findByIdAsignatura", query = "SELECT u FROM UsuarioAsignatura u WHERE u.idAsignatura = :idAsignatura"),
-    @NamedQuery(name = "UsuarioAsignatura.findByRut", query = "SELECT u FROM UsuarioAsignatura u WHERE u.rut = :rut")})
-    
+    @NamedQuery(name = "UsuarioAsignatura.findByRut", query = "SELECT u FROM UsuarioAsignatura u WHERE u.rut = :rut"),
+    @NamedQuery(name = "UsuarioAsignatura.findByRutIdAsignatura", query = "SELECT u FROM UsuarioAsignatura u WHERE u.rut = :rut and u.idAsignatura = :idAsignatura")})
+
 public class UsuarioAsignatura implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,5 +99,5 @@ public class UsuarioAsignatura implements Serializable {
     public String toString() {
         return "entityClass.UsuarioAsignatura[ idUsuarioAsignatura=" + idUsuarioAsignatura + " ]";
     }
-    
+
 }
