@@ -31,10 +31,11 @@ public class MenuAdmin extends javax.swing.JFrame {
     /**
      * Creates new form MenuAdmin
      */
-    public MenuAdmin(String rut) {
+    public MenuAdmin(String rut) throws RemoteException {
         rutUser = rut;
         initComponents();
         ocultaVentanas();
+        txtBv.setText("BIENVENIDO(A) ALUMNO(A): " + connection.getServer().nombreApellido(rutUser).toUpperCase());
     }
     
     public void ocultaVentanas(){
@@ -804,7 +805,8 @@ public class MenuAdmin extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         ocultaVentanas();
-        mantencion.setVisible(rootPaneCheckingEnabled);
+        JOptionPane.showMessageDialog(null, "Módulo en construcción, disculpe las molestias", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+        //mantencion.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
@@ -876,6 +878,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         ocultaVentanas();        
         crudUsuario.setVisible(rootPaneCheckingEnabled);
         try {
+            jComboBox5.removeAllItems();
+            String usuarios[] = connection.getServer().ruts();
+            for(int j = 0; j< usuarios.length; j++){
+                jComboBox5.addItem(usuarios[j]);
+            }
             alumno.removeAllItems();
             String aux[] = connection.getServer().alumnos();
             int cant  = aux.length;
@@ -978,6 +985,7 @@ public class MenuAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe ingresar un password", "MENSAJE", JOptionPane.ERROR_MESSAGE);
         }else{
             connection.getServer().modificarPassword(rut,pass);
+            JOptionPane.showMessageDialog(null, "contraseña cambiada exitosamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
             jTextField8.setText("");
             jComboBox5.setSelectedIndex(0);
         }
@@ -989,6 +997,14 @@ public class MenuAdmin extends javax.swing.JFrame {
                 try {
                     if(connection.getServer().nuevoUsuario(rut.getText(), pass.getText(), nombre.getText(), Integer.parseInt(edad.getText()), tipo.getSelectedItem()+"",  tipo.getSelectedItem()+"",  pat.getText(), mat.getText())){
                         JOptionPane.showMessageDialog(null, "usuario agregado correctamente", "MENSAJE", JOptionPane.INFORMATION_MESSAGE);
+                        rut.setText("");
+                        nombre.setText("");
+                        pat.setText("");
+                        mat.setText("");
+                        edad.setText("");
+                        pass.setText("");
+                        alumno.setSelectedIndex(0);
+                        tipo.setSelectedIndex(0);
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
@@ -998,14 +1014,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(MenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        rut.getText();
-        nombre.getText();
-        pat.getText();
-        mat.getText();
-        edad.getText();
-        pass.getText();
-        alumno.getSelectedItem();
-        tipo.getSelectedItem();
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
