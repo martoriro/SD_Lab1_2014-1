@@ -7,6 +7,7 @@ package interfaceServer;
 import entityClass.Anotacion;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 
@@ -43,4 +44,5 @@ public interface InterfaceS extends Remote{
     public boolean nuevoUsuario(String rut, String password, String nombre, int edad, String tipo, String apellidoPat, String apellidoMat, String rutApoderado) throws Exception;
     public boolean validarRut(String rut) throws RemoteException;
     public String[] ruts() throws RemoteException;
+    public void modificarPassword(String rut, String newPassword) throws RemoteException, NoSuchAlgorithmException, Exception;
 }
