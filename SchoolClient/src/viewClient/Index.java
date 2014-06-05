@@ -26,11 +26,6 @@ public class Index extends javax.swing.JFrame {
      */
     public Index() throws RemoteException {
         initComponents();
-        connection.setIp(ipserver.getText());
-        if(!connection.rmiRegistry()){
-            JOptionPane.showMessageDialog(null, "Error el servidor no se encuentra en linea o está en mantención", "ERROR", JOptionPane.WARNING_MESSAGE);
-            System.exit(0); 
-        }
     }
 
     /**
@@ -137,6 +132,14 @@ public class Index extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        connection.setIp(ipserver.getText());
+        try {
+            if(!connection.rmiRegistry()){
+                JOptionPane.showMessageDialog(null, "Error el servidor no se encuentra en linea o está en mantención", "ERROR", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
+        }
         user = inputUser.getText();
         password = inputPass.getText();
         try {
