@@ -18,6 +18,7 @@ public class RmiConnection {
     private static Registry registry;
     private static InterfaceS server;
     private static ChatInterface chat;
+    private String ipservidor;
     
     public boolean rmiRegistry() throws RemoteException{
         try{
@@ -42,6 +43,11 @@ public class RmiConnection {
             e.printStackTrace();
         }
     }
+    
+    public void setIp(String ip){
+        ipservidor = ip;
+    }
+    
     public InterfaceS getServer(){
         return server;
     }
