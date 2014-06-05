@@ -26,7 +26,7 @@ public class RmiConnection {
             java.security.AllPermission permission = new java.security.AllPermission();
             System.setProperty("java.security.policy", "rmi.policy");
             //Se indica la dirección y el puerto
-            startRegistry("127.0.0.1",1098);
+            startRegistry(ipservidor,1098);
             server = (InterfaceS)registry.lookup("IMP");
             chat = (ChatInterface) registry.lookup("CHAT");
             return true;
